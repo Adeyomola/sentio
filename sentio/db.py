@@ -7,11 +7,11 @@ load_dotenv()
 
 db_password=os.environ.get('DB_PASSWORD')
 db_user=os.environ.get('DB_USER')
-db_ip=os.environ.get('REMOTE_IP')
+host=os.environ.get('HOST')
 db_name=os.environ.get('DATABASE')
 
 def get_db():
-    engine = db.create_engine(f"mysql://{db_user}:{db_password}@{db_ip}/{db_name}")
+    engine = db.create_engine(f"mysql://{db_user}:{db_password}@{host}/{db_name}")
     connection = engine.connect()
     md = MetaData()
 
