@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin-Slab|Nunito|Quicksand">
+    <link rel="stylesheet" href="{{ url_for('blog.static', filename='style.css') }}">
+    <title>Write</title>
+</head>
+
+<body>
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% extends 'loggedin.html' %}
+    {% block content %} <form method="post">
+        <input type="text" id="article-title-1" placeholder="Title:" name="title" required>
+        <textarea name="body" id="body" cols="30" rows="10" placeholder="Scribble..." required></textarea>
+        <button type="submit"> Submit </button>
+    </form>
+    {% endblock %}
+</body>
+
+</html>

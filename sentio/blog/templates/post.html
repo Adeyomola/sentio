@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin-Slab|Nunito|Quicksand">
+    <link rel="stylesheet" href="{{ url_for('blog.static', filename='style.css') }}">
+    <title>All Posts</title>
+</head>
+
+<body>
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% if session %}
+    {% extends 'loggedin.html' %}
+    {% endif %}
+    {% if not session %}
+    {% extends 'loggedout.html' %}
+    {% endif %}
+    {% block content %}
+    <div id="link-container">
+        <section>
+            {% for post in posts %}
+            <summary>
+                <a href="http://127.0.0.1:5000/post/{{ post['id']}}" id="article-title">{{ post['title']}}</a>
+                <p id="preview">{{ post['body'] }}</p>
+            </summary>
+            {% endfor %}
+        </section>
+    </div>
+    {% endblock %}
+</body>
+
+</html>
