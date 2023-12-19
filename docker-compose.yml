@@ -6,24 +6,19 @@ networks:
 services:
   app:
     build:
-      context: .
+      context: ./app
       dockerfile: Dockerfile
       network: host
     container_name: sentio
-    volumes:
-      - ./app.conf:/etc/apache2/sites-enabled/000-default.conf
-      - ./logs/apache/:/var/log/apache2/
-      - ./logs/php:/var/log/php/
     working_dir: /var/www/html/sentio
     ports:
-      - "8090:80"
+      - "80:80"
     environment:
       TZ: UTC+1
-      db_name: ${DATABASE}
-      db_user: ${DB_USER}
-      db_password: ${DB_PASSWORD}
-      host: ${HOST}
-      # DB_PORT: ${DB_PORT}
+      DATABASE: ${DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      HOST: ${HOST}
     networks:
       - sentio
     depends_on:
@@ -42,10 +37,9 @@ services:
       - ./logs/mysql/.mysqlsh.log:/root/.mysqlsh/.mysqlsh.log
       - ./data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-      SERVICE_TAGS: dev-env
     networks:
       - sentio
