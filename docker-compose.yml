@@ -6,13 +6,11 @@ networks:
 services:
   app:
     build:
-      context: ./app
       dockerfile: Dockerfile
       network: host
     container_name: sentio
-    working_dir: /var/www/html/sentio
     ports:
-      - "80:80"
+      - "8090:80"
     environment:
       TZ: UTC+1
       DATABASE: ${DATABASE}
@@ -32,10 +30,6 @@ services:
     container_name: mysql
     restart: unless-stopped
     tty: true
-    volumes:
-      - ./logs/mysql:/var/log
-      - ./logs/mysql/.mysqlsh.log:/root/.mysqlsh/.mysqlsh.log
-      - ./data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DATABASE}
