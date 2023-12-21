@@ -69,6 +69,7 @@ def register():
         error = None
         username = request.form['username']
         password = request.form['password']
+        confirm_password=request.form['confirm_password']
         firstname = request.form['firstname']
         lastname = request.form['lastname']
         email = request.form['email']
@@ -78,12 +79,16 @@ def register():
             error = "Username required"
         elif not password:
             error = "Password required"
+        elif not confirm_password:
+            error = "Enter your password again"
         elif not firstname:
             error = "This field is required"
         elif not lastname:
             error = "This field is required"
         elif not email:
             error = "This field is required"
+        if password != confirm_password:
+            error = "Password does not match"
         if error is None:
             try:
                 statement = (insert(table).values(username=username, password=generate_password_hash(password), firstname=firstname, lastname=lastname, email=email))
