@@ -11,7 +11,7 @@ host=os.environ.get('HOST')
 db_name=os.environ.get('DATABASE')
 
 def get_db():
-    engine = db.create_engine(f"mysql://{db_user}:{db_password}@192.168.56.11/{db_name}")
+    engine = db.create_engine(f"mysql://{db_user}:{db_password}@{host}/{db_name}")
     connection = engine.connect()
     md = MetaData()
 
