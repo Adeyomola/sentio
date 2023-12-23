@@ -9,8 +9,8 @@
 html,
 body {
     font-family: sans-serif;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     scroll-behavior: smooth;
 }
 
@@ -20,9 +20,8 @@ body {
 }
 
 header {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    height: 7%;
+    display: flex;
+    height: 7vh;
     background-color: black;
     padding: 0.5rem 0.3rem;
 }
@@ -31,14 +30,13 @@ header {
 /* index.html styling */
 #title {
     display: flex;
-    font: 1.6rem 'Quicksand';
+    font: 3.5vh 'Quicksand';
     font-weight: 600;
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    max-height: 100%;
+    width: 40%;
+    max-width: 40%;
     color: yellowgreen;
     text-decoration: none;
+    border: 1px solid red;
 }
 
 #title:hover {
@@ -48,6 +46,13 @@ header {
 #decagon {
     animation: spin 8s ease-in-out -2s infinite;
     transform-origin: center center;
+    width: 20%;
+}
+
+#svg-div {
+    display: flex;
+    justify-content: center;
+    transform: translateY(15vh);
 }
 
 @keyframes spin {
@@ -82,9 +87,9 @@ nav a:hover {
 }
 
 p {
-    font: 600 2.5rem 'Nunito';
+    font: 600 2.6vw 'Nunito';
     text-align: center;
-    transform: translateY(300%);
+    transform: translateY(20vh);
 }
 
 
@@ -95,18 +100,6 @@ p {
     text-align: center;
     font: 600 1.5rem 'Nunito';
     margin-top: 2rem;
-}
-
-@media (min-width: 768px) {
-    #title {
-        width: 20%;
-    }
-}
-
-@media (min-width: 481px) and (max-width: 767px) {
-    #title {
-        width: 25%;
-    }
 }
 
 /* home content styling */
@@ -158,11 +151,16 @@ section>summary {
     color: yellowgreen;
 }
 
-@media (min-width: 768px) {
-    #title {
-        width: 20%;
-    }
+@media (min-width: 360px) and (max-width: 767px) {
 
+    section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+    }
+}
+
+@media (min-width: 768px) {
     button {
         width: 8%;
     }
@@ -170,18 +168,6 @@ section>summary {
     section {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        justify-items: center;
-    }
-}
-
-@media (min-width: 481px) and (max-width: 767px) {
-    #title {
-        width: 25%;
-    }
-
-    section {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
         justify-items: center;
     }
 }
