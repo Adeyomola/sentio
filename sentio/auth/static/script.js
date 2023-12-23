@@ -1,9 +1,11 @@
-var password = document.getElementsByName("password"),
-  confirm_password = document.getElementsByName("confirm_password");
+const password = document.getElementById("password");
+const confirm_password = document.getElementById("confirm_password");
 
-function validatePassword() {
+function validatePassword(e) {
   if (password.value != confirm_password.value) {
     confirm_password.setCustomValidity("Passwords do not match");
+    confirm_password.reportValidity();
+    e.preventDefault();
   } else {
     confirm_password.setCustomValidity("");
   }
