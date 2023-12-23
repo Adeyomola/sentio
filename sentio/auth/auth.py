@@ -88,7 +88,7 @@ def register():
         elif not email:
             error = "This field is required"
         if password != confirm_password:
-            error = "Password does not match"
+            error = "Passwords do not match"
         if error is None:
             try:
                 statement = (insert(table).values(username=username, password=generate_password_hash(password), firstname=firstname, lastname=lastname, email=email))
