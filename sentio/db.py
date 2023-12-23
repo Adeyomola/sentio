@@ -8,6 +8,7 @@ load_dotenv()
 db_password=os.environ.get('DB_PASSWORD')
 db_user=os.environ.get('DB_USER')
 host=os.environ.get('HOST')
+# host='192.168.56.11'
 db_name=os.environ.get('DATABASE')
 
 def get_db():
