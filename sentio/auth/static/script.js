@@ -11,5 +11,5 @@ function validatePassword(e) {
   }
 }
 
-// password.onchange = validatePassword;
+password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;

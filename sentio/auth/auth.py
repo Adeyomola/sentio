@@ -59,6 +59,7 @@ def login():
             session['firstname'] = user[1]
             return redirect("/")
         flash(error)
+        sqlsession.close()
     return render_template('login.html')
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -105,5 +106,6 @@ def register():
                     flash(error)
             finally:
                 return redirect("/login")
+        sqlsession.close()
         flash(error)
     return render_template('register.html')

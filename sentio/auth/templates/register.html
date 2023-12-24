@@ -16,7 +16,7 @@
     {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
     {% endfor %}
-    <form method="post">
+    <form method="post" id="register">
         <label for="username">Username:</label>
         <input type="text" name="username" required>
         <label for="password">Password:</label>

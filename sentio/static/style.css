@@ -21,7 +21,7 @@ body {
 
 header {
     display: flex;
-    height: 7vh;
+    height: fit-content;
     background-color: black;
     padding: 0.5rem 0.3rem;
 }
@@ -30,13 +30,12 @@ header {
 /* index.html styling */
 #title {
     display: flex;
-    font: 3.5vh 'Quicksand';
+    font: 1.5rem 'Quicksand';
     font-weight: 600;
     width: 40%;
     max-width: 40%;
     color: yellowgreen;
     text-decoration: none;
-    /* border: 1px solid red; */
 }
 
 #title:hover {
@@ -70,12 +69,10 @@ nav {
     justify-content: flex-end;
     width: 100%;
     max-width: 100%;
-    height: 100%;
-    max-height: 100%;
 }
 
 nav a {
-    margin-right: 0.5rem;
+    margin: 0 0.5rem;
     font: 0.7rem 'Nunito';
     font-weight: 100;
     color: yellowgreen;
@@ -92,8 +89,6 @@ p {
     transform: translateY(20vh);
 }
 
-
-
 /* home.html styling */
 
 #welcome {
@@ -104,20 +99,19 @@ p {
 
 /* home content styling */
 #link-container {
-    max-width: 100%;
-    margin-top: 2.5rem;
-    width: 100%;
+    max-width: auto;
+    width: auto;
     height: 100%;
 }
 
 section {
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 section>summary {
     display: flex;
+    width: 40vw;
     flex-direction: column;
     padding: 0rem 0.7rem;
     border-radius: 0.9rem;
@@ -151,12 +145,9 @@ section>summary {
     color: yellowgreen;
 }
 
-@media (min-width: 360px) and (max-width: 767px) {
-
-    section {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        justify-items: center;
+@media (max-width: 360px) {
+    nav a {
+        margin: 0;
     }
 }
 
@@ -165,9 +156,7 @@ section>summary {
         width: 8%;
     }
 
-    section {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        justify-items: center;
+    section>summary {
+        width: 20vw;
     }
 }

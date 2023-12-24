@@ -27,9 +27,8 @@ body {
 }
 
 header {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    height: 7%;
+    display: flex;
+    height: fit-content;
     background-color: black;
     padding: 0.5rem 0.3rem;
 }
@@ -37,12 +36,10 @@ header {
 /* index.html styling */
 #title {
     display: flex;
-    font: 1.6rem 'Quicksand';
+    font: 1.5rem 'Quicksand';
     font-weight: 600;
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    max-height: 100%;
+    width: 40%;
+    max-width: 40%;
     color: yellowgreen;
     text-decoration: none;
 }
@@ -56,13 +53,11 @@ nav {
     justify-content: flex-end;
     width: 100%;
     max-width: 100%;
-    height: 100%;
-    max-height: 100%;
 }
 
 nav a {
-    margin-right: 0.5rem;
-    font: 0.7rem 'Nunito';
+    margin: 0 0.5rem;
+    font: 1.8vh 'Nunito';
     font-weight: 100;
     color: yellowgreen;
     text-decoration: none;
@@ -75,19 +70,18 @@ nav a:hover {
 /* content styling */
 #link-container {
     max-width: 100%;
-    margin-top: 2.5rem;
-    width: 100%;
+    width: auto;
     height: 100%;
 }
 
 section {
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 section>summary {
     display: flex;
+    width: 38vw;
     flex-direction: column;
     padding: 0rem 0.7rem;
     border-radius: 0.9rem;
@@ -120,7 +114,6 @@ section>summary {
 
 /* styling for write */
 form {
-    /* border: 1px solid red; */
     max-width: 100%;
     width: 100%;
     height: 100%;
@@ -162,7 +155,7 @@ form>input {
 }
 
 button {
-    width: 20%;
+    width: 20vw;
     margin: 0.5rem;
     padding: 0.5rem;
     font: 400 0.9rem 'Nunito';
@@ -174,13 +167,12 @@ button {
 
 button:hover {
     transform: translate(0.3rem, 0.1rem);
-    /* box-shadow: 1px 1px 3px 1px yellowgreen; */
 }
 
 /* styling for get post */
 article {
     display: grid;
-    grid-template-columns: 1.2fr 0.1fr;
+    grid-template-columns: 2.3fr 0.1fr;
 }
 
 #body-1 {
@@ -193,34 +185,36 @@ article {
 
 #author-name {
     border-bottom: 0.1rem solid #6b6969ee;
+    width: max-content;
     text-align: right;
-    font: bold 1rem 'Josefin Slab';
+    font: bold 2vh 'Josefin Slab';
     align-self: self-end;
     padding-right: 0.2rem;
 }
 
 #article-title-2 {
-    text-align: center;
-    font: 1.8rem 'Quicksand';
+    text-align: left;
+    font: 3vh 'Quicksand';
     font-weight: 600;
     border-bottom: 0.1rem solid #6b6969ee;
     color: yellowgreen;
+    padding-left: 0.2rem;
 }
 
 /* edit delete styling */
 #edit-delete-wrapper {
     display: grid;
-    width: 50%;
+    width: 25vw;
     grid-template-columns: 1fr 1fr;
     align-self: flex-end;
-    margin: 0.5rem;
+    margin: 0.5vw 2vw;
 }
 
 #edit-delete {
     font: 400 0.8rem 'Nunito';
     color: white;
-    width: 80%;
-    max-width: 80%;
+    width: 90%;
+    max-width: 90%;
     margin: 0.3rem;
     padding: 0.3rem;
     background-color: black;
@@ -230,41 +224,42 @@ article {
 
 #edit-delete:hover {
     transform: translate(0.3rem, 0.1rem);
-    /* box-shadow: 1px 1px 3px 1px yellowgreen; */
+}
+
+@media (max-width: 360px) {
+    nav a {
+        margin: 0;
+    }
 }
 
 @media (min-width: 768px) {
-    #title {
-        width: 20%;
+    nav a {
+        font-size: 1.8vh;
     }
 
     button {
         width: 8%;
     }
 
-    section {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        justify-items: center;
+    section>summary {
+        width: 20vw;
     }
 
     #edit-delete-wrapper {
-        width: 15%;
+        width: 10vw;
     }
 }
 
-@media (min-width: 481px) and (max-width: 767px) {
-    #title {
-        width: 25%;
+@media (min-width: 500px) and (max-width: 950px) and (orientation: landscape) {
+    nav a {
+        font-size: 4vh;
     }
 
-    section {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        justify-items: center;
+    #article-title-2 {
+        font-size: 5.5vh;
     }
 
-    #edit-delete-wrapper {
-        width: 20%;
+    #author-name {
+        font-size: 4vh;
     }
 }
