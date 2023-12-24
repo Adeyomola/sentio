@@ -109,7 +109,7 @@ section {
     flex-wrap: wrap;
 }
 
-section>summary {
+section summary {
     display: flex;
     width: 38vw;
     flex-direction: column;
@@ -128,14 +128,14 @@ section>summary {
     transform: none;
     font-weight: 100;
 
-    @supports (-webkit-line-clamp: 3) {
+    /* @supports (-webkit-line-clamp: 3) {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: initial;
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
-    }
+    } */
 }
 
 #article-title {
