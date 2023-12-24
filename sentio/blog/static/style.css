@@ -79,7 +79,7 @@ section {
     flex-wrap: wrap;
 }
 
-section>summary {
+summary {
     display: flex;
     width: 38vw;
     flex-direction: column;

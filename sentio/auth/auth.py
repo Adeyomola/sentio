@@ -23,7 +23,8 @@ def current_user():
         g.user= None
     else:
         g.user = ResultProxy.fetchone(connection.execute(select(table).where(table.c.id == user_id)))
-
+    connection.rollback()
+    
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
