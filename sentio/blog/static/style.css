@@ -171,8 +171,9 @@ button:hover {
 
 /* styling for get post */
 article {
-    display: grid;
-    grid-template-columns: 2.3fr 0.1fr;
+    display: flex;
+    flex-direction: column;
+    /* grid-template-columns: 2.8fr 0.01fr; */
 }
 
 #body-1 {
@@ -181,10 +182,10 @@ article {
     padding: 0.5rem;
     font: 1.2rem 'Quicksand';
     font-weight: 500;
+    border-top: 0.1rem solid #6b6969ee;
 }
 
 #author-name {
-    border-bottom: 0.1rem solid #6b6969ee;
     width: max-content;
     text-align: right;
     font: bold 2vh 'Josefin Slab';
@@ -193,10 +194,9 @@ article {
 }
 
 #article-title-2 {
-    text-align: left;
+    text-align: center;
     font: 3vh 'Quicksand';
     font-weight: 600;
-    border-bottom: 0.1rem solid #6b6969ee;
     color: yellowgreen;
     padding-left: 0.2rem;
 }
