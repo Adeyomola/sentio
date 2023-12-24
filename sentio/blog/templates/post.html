@@ -24,7 +24,7 @@
         <section>
             {% for post in posts %}
             <summary>
-                <a href="http://127.0.0.1:5000/post/{{ post['id']}}" id="article-title">{{ post['title']}}</a>
+                <a href="/post/{{ post['id']}}" id="article-title">{{ post['title']}}</a>
                 <p id="preview">{{ post['body'] }}</p>
             </summary>
             {% endfor %}
