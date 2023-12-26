@@ -49,12 +49,6 @@ header {
     padding: 0.5vh;
 }
 
-#decagon {
-    animation: spin 8s ease-in-out -2s infinite;
-    transform-origin: center center;
-    width: 40%;
-}
-
 #svg-div {
     display: flex;
     flex-direction: column;
@@ -62,6 +56,18 @@ header {
     justify-content: center;
     padding: 2vh 2vw;
     background-color: skyblue;
+}
+
+#svg-div>p {
+    font: 600 4vw 'Nunito';
+    text-align: center;
+    color: #1d242c;
+}
+
+#decagon {
+    animation: spin 8s ease-in-out -2s infinite;
+    transform-origin: center center;
+    width: 40%;
 }
 
 @keyframes spin {
@@ -91,12 +97,6 @@ nav a {
 
 nav a:hover {
     scale: 1.1;
-}
-
-section>p {
-    font: 600 2.6vw 'Nunito';
-    text-align: center;
-    color: #1d242c;
 }
 
 /* home.html styling */
@@ -164,16 +164,16 @@ summary {
 }
 
 @media screen and (min-width: 768px) {
-    section>p {
-        font-size: 2.6vw;
-    }
-
     #ourtoppicks {
-        font-size: 2vw;
+        font-size: 1.8vw;
     }
 
     #decagon {
         width: 30%;
+    }
+
+    #svg-div>p {
+        font-size: 1.8vw;
     }
 
     button {
