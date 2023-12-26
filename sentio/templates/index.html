@@ -24,8 +24,8 @@
     </div>
     <div id="link-container">
         <section>
-            {% for post in posts %}
             <p style="text-align: center; font-size: 2vw; width: 100%; padding: 0.5vh;">Our Top Picks</p>
+            {% for post in posts %}
             <summary>
                 <a href="/post/{{ post['id']}}" id="article-title">{{ post['title']}}</a>
                 <p id="preview">{{ post['body'] }}</p>
