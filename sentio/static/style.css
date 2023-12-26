@@ -42,6 +42,13 @@ header {
     text-decoration: underline skyblue;
 }
 
+#ourtoppicks {
+    text-align: center;
+    font-size: 3vw;
+    width: 100%;
+    padding: 0.5vh;
+}
+
 #decagon {
     animation: spin 8s ease-in-out -2s infinite;
     transform-origin: center center;
@@ -157,6 +164,10 @@ summary {
 }
 
 @media screen and (min-width: 768px) {
+    #ourtoppicks {
+        font-size: 2vw;
+    }
+
     #decagon {
         width: 30%;
     }
