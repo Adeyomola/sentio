@@ -20,16 +20,17 @@ body {
 }
 
 .flash {
-    position: absolute;
-    transform: translateX(50%);
-    width: 100%;
-    z-index: -1000;
+    z-index: 1;
+    color: #33404e;
+    text-align: center;
+    transform: translateY(50%);
+    font-family: 'Nunito';
 }
 
 header {
     display: flex;
     height: fit-content;
-    background-color: black;
+    background-color: #33404e;
     padding: 0.5rem 0.3rem;
 }
 
@@ -160,7 +161,7 @@ button {
     padding: 0.5rem;
     font: 400 0.9rem 'Nunito';
     color: white;
-    background-color: black;
+    background-color: #33404e;
     border-radius: 0.2rem;
     border: none;
 }
@@ -217,7 +218,7 @@ article {
     max-width: 90%;
     margin: 0.3rem;
     padding: 0.3rem;
-    background-color: black;
+    background-color: #33404e;
     border-radius: 0.2rem;
     border: none;
 }

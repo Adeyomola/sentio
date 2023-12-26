@@ -22,13 +22,13 @@ body {
 header {
     display: flex;
     height: fit-content;
-    background-color: black;
+    background-color: #33404e;
     padding: 0.5rem 0.3rem;
 }
 
 .flash {
     z-index: 1;
-    color: black;
+    color: #33404e;
     text-align: center;
     transform: translateY(50%);
     font-family: 'Nunito';
@@ -99,7 +99,7 @@ button {
     padding: 0.5rem;
     font: 500 1rem 'Nunito';
     color: white;
-    background-color: black;
+    background-color: #33404e;
     border-radius: 0.2rem;
     border: none;
 }
