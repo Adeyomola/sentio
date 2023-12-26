@@ -26,6 +26,13 @@
         </form>
     </div>
     {% endif %}
+    {% if session['user_id'] == 'Adeyomola' %}
+    <div id="edit-delete-wrapper">
+        <form id="delete-form" action="{{ url_for ('blog.delete_post', post_id=post_row['id']) }}" method="post">
+            <input id="edit-delete" type="submit" onclick="return confirm ('Are you sure?')" value="Delete">
+        </form>
+    </div>
+    {% endif %}
     <article>
         <div id="article-title-2"> {{ post_row['title'] }} </div>
         <div id="author-name">By {{ post_row['firstname'] }}</div>
