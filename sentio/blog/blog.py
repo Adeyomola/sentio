@@ -15,6 +15,7 @@ engine = get_db()[0]
 connection = get_db()[1]
 md = get_db()[2]
 table = md.tables['post']
+admin='Adeyomola'
 
 class Verify:
     def __init__(self, post_id) -> None:
@@ -27,7 +28,7 @@ class Verify:
             abort(404, f'Post does not exist')
         if not session:
             redirect(url_for('auth.login'))
-        elif session['user_id'] != row[1]:
+        elif session['user_id'] != row[1] and session['firstname'] != admin:
             abort(401, f'Unauthorized')
         sqlsession.rollback()
     
@@ -86,7 +87,7 @@ def get_post(post_id):
     post_row = connection.execute(statement)
     post_row = ResultProxy.fetchone(post_row)
     sqlsession.close()
-    return render_template('get_post.html', post_row=post_row)
+    return render_template('get_post.html', post_row=post_row, admin=admin)
 
 @bp.route('/post/update/<post_id>',  methods=['GET', 'POST'])
 @login_required
