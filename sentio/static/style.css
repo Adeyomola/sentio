@@ -22,7 +22,7 @@ body {
 header {
     display: flex;
     height: fit-content;
-    background-color: #33404e;
+    background-color: #1d242c;
     padding: 0.5rem 0.3rem;
 }
 
@@ -34,24 +34,27 @@ header {
     font-weight: 600;
     width: 40%;
     max-width: 40%;
-    color: yellowgreen;
+    color: skyblue;
     text-decoration: none;
 }
 
 #title:hover {
-    text-decoration: underline yellowgreen;
+    text-decoration: underline skyblue;
 }
 
 #decagon {
     animation: spin 8s ease-in-out -2s infinite;
     transform-origin: center center;
-    width: 20%;
+    width: 50%;
 }
 
 #svg-div {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    transform: translateY(15vh);
+    padding: 2vh 2vw;
+    background-color: skyblue;
 }
 
 @keyframes spin {
@@ -75,7 +78,7 @@ nav a {
     margin: 0 0.5rem;
     font: 0.7rem 'Nunito';
     font-weight: 100;
-    color: yellowgreen;
+    color: skyblue;
     text-decoration: none;
 }
 
@@ -86,7 +89,7 @@ nav a:hover {
 p {
     font: 600 2.6vw 'Nunito';
     text-align: center;
-    transform: translateY(20vh);
+    color: #1d242c;
 }
 
 /* home.html styling */
@@ -95,6 +98,7 @@ p {
     text-align: center;
     font: 600 1.5rem 'Nunito';
     margin-top: 2rem;
+    color: #1d242c;
 }
 
 /* home content styling */
@@ -118,14 +122,13 @@ summary {
     text-align: center;
     font-family: 'Nunito';
     margin: 1rem;
+    color: #1d242c;
 }
 
 #preview {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-
-
 
     @supports (-webkit-line-clamp: 3) {
         display: -webkit-box;
@@ -144,21 +147,31 @@ summary {
     font: 1.35rem 'Quicksand';
     font-weight: 600;
     text-decoration: none;
-    color: yellowgreen;
+    color: rgb(52, 113, 138);
 }
 
-@media (max-width: 360px) {
+@media screen and (max-width: 360px) {
     nav a {
         margin: 0;
     }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
+    #decagon {
+        width: 30%;
+    }
+
     button {
         width: 8%;
     }
 
     section>summary {
         width: 20vw;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #decagon {
+        width: 20%;
     }
 }

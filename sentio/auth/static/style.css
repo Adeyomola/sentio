@@ -22,13 +22,13 @@ body {
 header {
     display: flex;
     height: fit-content;
-    background-color: #33404e;
+    background-color: #1d242c;
     padding: 0.5rem 0.3rem;
 }
 
 .flash {
     z-index: 1;
-    color: #33404e;
+    color: #1d242c;
     text-align: center;
     transform: translateY(50%);
     font-family: 'Nunito';
@@ -41,12 +41,12 @@ header {
     font-weight: 600;
     width: 40%;
     max-width: 40%;
-    color: yellowgreen;
+    color: skyblue;
     text-decoration: none;
 }
 
 #title:hover {
-    text-decoration: underline yellowgreen;
+    text-decoration: underline skyblue;
 }
 
 nav {
@@ -60,7 +60,7 @@ nav a {
     margin: 0 0.5rem;
     font: 0.7rem 'Nunito';
     font-weight: 100;
-    color: yellowgreen;
+    color: skyblue;
     text-decoration: none;
 }
 
@@ -89,7 +89,7 @@ label {
 
 input {
     border: none;
-    border-bottom: 1px solid yellowgreen;
+    border-bottom: 1px solid skyblue;
     outline: none;
 }
 
@@ -99,7 +99,7 @@ button {
     padding: 0.5rem;
     font: 500 1rem 'Nunito';
     color: white;
-    background-color: #33404e;
+    background-color: rgb(90, 143, 164);
     border-radius: 0.2rem;
     border: none;
 }

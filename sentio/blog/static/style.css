@@ -21,7 +21,7 @@ body {
 
 .flash {
     z-index: 1;
-    color: #33404e;
+    color: #1d242c;
     text-align: center;
     transform: translateY(50%);
     font-family: 'Nunito';
@@ -30,7 +30,7 @@ body {
 header {
     display: flex;
     height: fit-content;
-    background-color: #33404e;
+    background-color: #1d242c;
     padding: 0.5rem 0.3rem;
 }
 
@@ -41,12 +41,12 @@ header {
     font-weight: 600;
     width: 40%;
     max-width: 40%;
-    color: yellowgreen;
+    color: skyblue;
     text-decoration: none;
 }
 
 #title:hover {
-    text-decoration: underline yellowgreen;
+    text-decoration: underline skyblue;
 }
 
 nav {
@@ -60,7 +60,7 @@ nav a {
     margin: 0 0.5rem;
     font: 1.5vh 'Nunito';
     font-weight: 100;
-    color: yellowgreen;
+    color: skyblue;
     text-decoration: none;
 }
 
@@ -89,6 +89,7 @@ summary {
     text-align: center;
     font-family: 'Nunito';
     margin: 1rem;
+    color: #1d242c;
 }
 
 #preview {
@@ -110,7 +111,7 @@ summary {
     font: 1.35rem 'Quicksand';
     font-weight: 600;
     text-decoration: none;
-    color: yellowgreen;
+    color: rgb(52, 113, 138);
 }
 
 /* styling for write */
@@ -136,6 +137,7 @@ form>input {
     border: none;
     outline: none;
     border-bottom: 1px solid #6b6969ee;
+    color: rgb(52, 113, 138);
 }
 
 #body {
@@ -161,7 +163,7 @@ button {
     padding: 0.5rem;
     font: 400 0.9rem 'Nunito';
     color: white;
-    background-color: #33404e;
+    background-color: rgb(90, 143, 164);
     border-radius: 0.2rem;
     border: none;
 }
@@ -192,13 +194,14 @@ article {
     font: bold 2vh 'Josefin Slab';
     align-self: self-end;
     padding-right: 0.2rem;
+    color: #1d242c;
 }
 
 #article-title-2 {
     text-align: center;
     font: 3vh 'Quicksand';
     font-weight: 600;
-    color: yellowgreen;
+    color: rgb(52, 113, 138);
     padding-left: 0.2rem;
 }
 
@@ -218,7 +221,7 @@ article {
     max-width: 90%;
     margin: 0.3rem;
     padding: 0.3rem;
-    background-color: #33404e;
+    background-color: rgb(90, 143, 164);
     border-radius: 0.2rem;
     border: none;
 }

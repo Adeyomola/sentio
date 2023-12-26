@@ -45,6 +45,11 @@ def author_posts():
     sqlsession.close()
     return posts
 
+def front_posts():
+    statement = (select(table))
+    posts = connection.execute(statement).fetchmany(8)
+    sqlsession.close()
+    return posts
 
 @bp.route('/write', methods=['GET', 'POST'])
 @login_required

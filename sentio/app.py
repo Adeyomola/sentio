@@ -13,11 +13,11 @@ def create_app():
     from sentio.auth import auth
     app.register_blueprint(auth.bp)
 
-    from sentio.blog.blog import author_posts
+    from sentio.blog.blog import author_posts, front_posts
     @app.route('/', methods=['GET', 'POST'])
     def home():
         if not session:
-            return render_template('index.html')
+            return render_template('index.html', posts=front_posts())
         elif 'firstname' in session:
             firstname = session['firstname']
         return render_template('home.html', firstname=firstname, posts=author_posts())
