@@ -44,7 +44,7 @@ header {
 
 #ourtoppicks {
     text-align: center;
-    font-size: 4vw;
+    font: 600 4vw 'Nunito';
     width: 100%;
     padding: 0.5vh;
 }
