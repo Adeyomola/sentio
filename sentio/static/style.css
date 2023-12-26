@@ -146,12 +146,12 @@ summary {
         -webkit-box-orient: vertical;
         transform: none;
         font-weight: 100;
-        font-size: 2vw;
+        font-size: 2.5vw;
     }
 }
 
 #article-title {
-    font: 3vw 'Quicksand';
+    font: 3.5vw 'Quicksand';
     font-weight: 600;
     text-decoration: none;
     color: rgb(52, 113, 138);
