@@ -44,7 +44,7 @@ header {
 
 #ourtoppicks {
     text-align: center;
-    font-size: 3vw;
+    font-size: 4vw;
     width: 100%;
     padding: 0.5vh;
 }
@@ -52,7 +52,7 @@ header {
 #decagon {
     animation: spin 8s ease-in-out -2s infinite;
     transform-origin: center center;
-    width: 50%;
+    width: 40%;
 }
 
 #svg-div {
@@ -146,12 +146,12 @@ summary {
         -webkit-box-orient: vertical;
         transform: none;
         font-weight: 100;
-        font-size: 1rem;
+        font-size: 2vw;
     }
 }
 
 #article-title {
-    font: 1.35rem 'Quicksand';
+    font: 3vw 'Quicksand';
     font-weight: 600;
     text-decoration: none;
     color: rgb(52, 113, 138);
@@ -178,6 +178,20 @@ summary {
 
     section>summary {
         width: 20vw;
+    }
+
+    summary {
+        font-size: initial;
+    }
+
+    #article-title {
+        font-size: 1.5vw;
+    }
+
+    #preview {
+        @supports (-webkit-line-clamp: 3) {
+            font-size: 1.2vw;
+        }
     }
 }
 
