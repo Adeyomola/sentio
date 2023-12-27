@@ -13,3 +13,19 @@ function validatePassword(e) {
 
 password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
+
+const email = document.getElementById("email");
+const confirm_email = document.getElementById("confirm_email");
+
+function validateEmail(e) {
+  if (email.value != confirm_email.value) {
+    confirm_email.setCustomValidity("Emails do not match");
+    confirm_email.reportValidity();
+    e.preventDefault();
+  } else {
+    confirm_email.setCustomValidity("");
+  }
+}
+
+email.onchange = validateEmail;
+confirm_email.onkeyup = validateEmail;
