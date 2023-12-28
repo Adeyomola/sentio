@@ -176,8 +176,10 @@ button:hover {
 /* styling for get post */
 article {
     display: flex;
+    height: 100vh;
+    max-height: max-content;
     flex-direction: column;
-    /* grid-template-columns: 2.8fr 0.01fr; */
+    align-items: center;
 }
 
 #body-1 {
@@ -190,20 +192,22 @@ article {
 }
 
 #author-name {
+    display: inline;
     width: max-content;
     text-align: right;
     font: bold 2vh 'Josefin Slab';
-    align-self: self-end;
-    padding-right: 0.2rem;
+    margin: 0.5vh;
     color: #1d242c;
+    /* border: 1px solid blue; */
 }
 
 #article-title-2 {
+    width: max-content;
     text-align: center;
     font: 3vh 'Quicksand';
     font-weight: 600;
     color: rgb(52, 113, 138);
-    padding-left: 0.2rem;
+    margin: 0.5vh;
 }
 
 /* edit delete styling */
@@ -211,7 +215,7 @@ article {
     display: grid;
     width: 25vw;
     grid-template-columns: 1fr 1fr;
-    align-self: flex-end;
+    align-self: center;
     margin: 0.5vw 2vw;
 }
 

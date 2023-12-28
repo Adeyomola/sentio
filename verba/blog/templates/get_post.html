@@ -17,6 +17,11 @@
     {% extends 'loggedout.html' %}
     {% endif %}
     {% block content %}
+    <article>
+        <div id="article-title-2"> {{ post_row['title'] }} </div>
+        <div id="author-name">By {{ post_row['firstname'] }}</div>
+        <div id="body-1"> {{ post_row['body'] }} </div>
+    </article>
     {% if session['user_id'] == post_row['author_id'] %}
     <div id="edit-delete-wrapper">
         <a id="edit-anchor" href="{{ url_for ('blog.update_post', post_id=post_row['id']) }}">
@@ -32,11 +37,6 @@
         </form>
     </div>
     {% endif %}
-    <article>
-        <div id="article-title-2"> {{ post_row['title'] }} </div>
-        <div id="author-name">By {{ post_row['firstname'] }}</div>
-        <div id="body-1"> {{ post_row['body'] }} </div>
-    </article>
     {% endblock %}
 </body>
 

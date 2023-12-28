@@ -12,6 +12,7 @@ body {
     width: 100vw;
     height: 100vh;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -45,7 +46,8 @@ header {
 #ourtoppicks {
     text-align: center;
     font: 600 4vw 'Nunito';
-    width: 100%;
+    width: 100vw;
+    margin: 0.5vw;
     padding: 0.5vh;
 }
 
@@ -111,7 +113,7 @@ nav a:hover {
 /* home content styling */
 #link-container {
     max-width: auto;
-    width: auto;
+    width: 100vw;
     height: 100%;
 }
 
