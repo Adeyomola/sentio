@@ -63,8 +63,8 @@ def write():
                 statement = (insert(table).values(title=title, author_id=g.get('user')[0], firstname=g.get('user')[1], body=body))
                 connection.execute(statement)
                 connection.commit()
-                message='Published!!!'
-                flash(message)
+                # message='Published!!!'
+                # flash(message)
                 return redirect('/')
             except IntegrityError as ie:
                 error = ie._message()

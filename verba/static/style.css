@@ -27,6 +27,13 @@ header {
     padding: 0.5rem 0.3rem;
 }
 
+.flash {
+    z-index: 1;
+    color: #1d242c;
+    text-align: center;
+    transform: translateY(50%);
+    font-family: 'Nunito';
+}
 
 /* index.html styling */
 #title {
