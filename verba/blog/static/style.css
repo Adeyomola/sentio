@@ -176,7 +176,6 @@ button:hover {
 /* styling for get post */
 article {
     display: flex;
-    height: 100vh;
     max-height: max-content;
     flex-direction: column;
     align-items: center;
@@ -186,9 +185,10 @@ article {
     width: 100%;
     height: 100%;
     padding: 0.5rem;
-    font: 1.2rem 'Quicksand';
+    font: 3vw 'Quicksand';
     font-weight: 500;
     border-top: 0.1rem solid #6b6969ee;
+    overflow-y: scroll;
 }
 
 #author-name {
@@ -198,7 +198,6 @@ article {
     font: bold 2vh 'Josefin Slab';
     margin: 0.5vh;
     color: #1d242c;
-    /* border: 1px solid blue; */
 }
 
 #article-title-2 {
@@ -212,6 +211,8 @@ article {
 
 /* edit delete styling */
 #edit-delete-wrapper {
+    position: fixed;
+    bottom: 0;
     display: grid;
     width: 25vw;
     grid-template-columns: 1fr 1fr;
@@ -235,13 +236,13 @@ article {
     transform: translate(0.3rem, 0.1rem);
 }
 
-@media (max-width: 360px) {
+@media screen and (max-width: 360px) {
     nav a {
         margin: 0;
     }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
     nav a {
         font-size: 1.8vh;
     }
@@ -267,6 +268,16 @@ article {
             font-size: 1.2vw;
         }
     }
+
+    #body-1 {
+        font-size: 1.5vw;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #body-1 {
+        font-size: 1.2vw;
+    }
 }
 
 @media (min-width: 500px) and (max-width: 950px) and (orientation: landscape) {
@@ -279,6 +290,10 @@ article {
     }
 
     #author-name {
-        font-size: 4vh;
+        font-size: 3vh;
+    }
+
+    #body-1 {
+        font-size: 2.2vw;
     }
 }
