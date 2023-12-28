@@ -13,4 +13,4 @@ WORKDIR /sentio/sentio
 RUN ["/bin/bash", "-c", "pip install -r requirements.txt && chmod +x /usr/local/bin/conf_editor.sh"]
 
 WORKDIR /sentio
-ENTRYPOINT ["/bin/bash", "-c", "conf_editor.sh && flask db-init && mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --envvars .env && tail -f /dev/null"]
+ENTRYPOINT ["/bin/bash", "-c", "conf_editor.sh && flask db-init && mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env && tail -f /dev/null"]
