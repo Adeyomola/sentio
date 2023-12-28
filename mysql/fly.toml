@@ -7,7 +7,7 @@ primary_region = "sea"
 [processes]
   app = "--datadir /data/mysql --default-authentication-plugin caching_sha2_password --performance-schema=OFF --innodb-buffer-pool-size 64M"
 
-[vm]
+[[vm]]
   cpu_kind = "shared"
   cpus = 1
   memory_mb = 1024
