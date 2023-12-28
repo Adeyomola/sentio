@@ -1,8 +1,8 @@
 import os
 import tempfile
 import pytest
-from sentio.app import create_app
-from sentio.db import get_db, init_db
+from verba.app import create_app
+from verba.db import get_db, init_db
 import sqlalchemy as db
 
 

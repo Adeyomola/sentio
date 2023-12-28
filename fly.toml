@@ -1,8 +1,8 @@
-app = "sentio"
+app = "verba"
 primary_region = "sea"
 
 [build]
-  image = "adeyomola/sentio"
+  image = "adeyomola/verba"
 
 [http_service]
   internal_port = 80

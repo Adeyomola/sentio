@@ -1,10 +1,10 @@
-from sentio.db import get_db
+from verba.db import get_db
 from flask import request, render_template, flash, redirect, session, Blueprint, g, url_for
 from sqlalchemy import insert, select, delete, update
 # from sqlalchemy.orm import Session
 from sqlalchemy.engine import ResultProxy
 from sqlalchemy.exc import IntegrityError
-from sentio.auth.auth import login_required
+from verba.auth.auth import login_required
 from werkzeug.exceptions import abort
 import re
 from sqlalchemy.orm import Session
@@ -15,7 +15,6 @@ engine = get_db()[0]
 connection = get_db()[1]
 md = get_db()[2]
 table = md.tables['post']
-admin='Adeyomola'
 
 class Verify:
     def __init__(self, post_id) -> None:
@@ -28,7 +27,7 @@ class Verify:
             abort(404, f'Post does not exist')
         if not session:
             redirect(url_for('auth.login'))
-        elif session['user_id'] != row[1] and session['firstname'] != admin:
+        elif session['user_id'] != row[1] or session['user_id'] != 1:
             abort(401, f'Unauthorized')
         sqlsession.rollback()
     
@@ -92,7 +91,7 @@ def get_post(post_id):
     post_row = connection.execute(statement)
     post_row = ResultProxy.fetchone(post_row)
     sqlsession.close()
-    return render_template('get_post.html', post_row=post_row, admin=admin)
+    return render_template('get_post.html', post_row=post_row)
 
 @bp.route('/post/update/<post_id>',  methods=['GET', 'POST'])
 @login_required

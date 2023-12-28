@@ -1,8 +1,8 @@
-app = "sentio-mysql"
+app = "verba-mysql"
 primary_region = "sea"
 
 [build]
-  image = "adeyomola/sentio-mysql"
+  image = "adeyomola/verba-mysql"
 
 [processes]
   app = "--datadir /data/mysql --default-authentication-plugin caching_sha2_password --performance-schema=OFF --innodb-buffer-pool-size 64M"

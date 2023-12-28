@@ -1,4 +1,4 @@
-from sentio.db import get_db
+from verba.db import get_db
 from flask import request, session, render_template, flash, redirect, Blueprint, g, url_for
 from sqlalchemy.sql import select, insert
 from sqlalchemy.engine import ResultProxy

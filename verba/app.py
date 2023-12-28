@@ -7,13 +7,13 @@ def create_app():
         SECRET_KEY='dev'
     )
 
-    from sentio.blog import blog
+    from verba.blog import blog
     app.register_blueprint(blog.bp)
 
-    from sentio.auth import auth
+    from verba.auth import auth
     app.register_blueprint(auth.bp)
 
-    from sentio.blog.blog import author_posts, front_posts
+    from verba.blog.blog import author_posts, front_posts
     @app.route('/', methods=['GET', 'POST'])
     def home():
         if not session:
@@ -27,7 +27,7 @@ def create_app():
         session.clear()
         return redirect('/login')
 
-    import sentio.db as db
+    import verba.db as db
     db.init_app(app)
     return app
 app = create_app()
