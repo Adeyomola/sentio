@@ -1,10 +1,14 @@
 from flask import Flask, render_template, session, redirect
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
+secret_key=os.environ.get('SECRET_KEY')
 
 def create_app():
     app = Flask(__name__)
     app.config.from_mapping(
-        SECRET_KEY='dev'
+        SECRET_KEY=secret_key
     )
 
     from verba.blog import blog
