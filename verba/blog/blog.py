@@ -27,7 +27,7 @@ class Verify:
             abort(404, f'Post does not exist')
         if not session:
             redirect(url_for('auth.login'))
-        elif session['user_id'] != row[1] or session['user_id'] != 1:
+        elif session['user_id'] != row[1] and session['user_id'] != 1:
             abort(401, f'Unauthorized')
         sqlsession.rollback()
     
