@@ -16,8 +16,9 @@
     {% endfor %}
     {% extends 'loggedin.html' %}
     {% block content %} <form method="post">
-        <input type="text" id="article-title-1" placeholder="Title:" name="title" required>
-        <textarea name="body" id="body" cols="30" rows="10" placeholder="Scribble..." required></textarea>
+        <input type="text" id="article-title-1" placeholder="Title:" name="title" autocomplete="off" required>
+        <textarea name="body" id="body" cols="30" rows="10" placeholder="Scribble..." autocomplete="off"
+            required></textarea>
         <button type="submit"> Submit </button>
     </form>
     {% endblock %}
