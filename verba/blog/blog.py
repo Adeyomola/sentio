@@ -104,7 +104,6 @@ def update_post(post_id):
         body = request.form['body']
         connection.execute((update(table).where(table.c.id == post_id).values(title=title, body=body)))
         connection.commit()
-    elif request.method == 'GET':
         return redirect(url_for('blog.get_post', post_id=post_row[0]))
     sqlsession.close()
     return render_template('update.html', post_row=post_row)
