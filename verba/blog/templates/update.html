@@ -16,7 +16,7 @@
     {% endfor %}
     {% extends 'loggedin.html' %}
     {% block content %}
-    <form method="post">
+    <form method="put">
         <input type="text" id="article-title-1" placeholder="Title:" name="title" value="{{ post_row['title'] }}"
             autocomplete="off" required>
         <textarea name="body" id="body" cols="30" rows="10" placeholder="Scribble..." autocomplete="off"
