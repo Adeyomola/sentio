@@ -93,13 +93,13 @@ def get_post(post_id):
     sqlsession.close()
     return render_template('get_post.html', post_row=post_row)
 
-@bp.route('/post/update/<post_id>',  methods=['GET', 'PUT'])
+@bp.route('/post/update/<post_id>',  methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
     Verify.verify_author(post_id)
     table = md.tables['post']
     post_row = ResultProxy.fetchone(connection.execute(select(table).where(table.c.id == post_id)))
-    if request.method == 'PUT':
+    if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
         connection.execute((update(table).where(table.c.id == post_id).values(title=title, body=body)))
@@ -109,7 +109,7 @@ def update_post(post_id):
         sqlsession.close()
         return render_template('update.html', post_row=post_row)
 
-@bp.route('/post/delete/<post_id>',  methods=['DELETE'])
+@bp.route('/post/delete/<post_id>',  methods=['POST'])
 @login_required
 def delete_post(post_id):
     Verify.verify_author(post_id)
