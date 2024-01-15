@@ -34,40 +34,6 @@ header {
     padding: 0.5rem 0.3rem;
 }
 
-/* index.html styling */
-#title {
-    display: flex;
-    font: 1.5rem 'Quicksand';
-    font-weight: 600;
-    width: 40%;
-    max-width: 40%;
-    color: skyblue;
-    text-decoration: none;
-}
-
-#title:hover {
-    text-decoration: underline skyblue;
-}
-
-nav {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    max-width: 100%;
-}
-
-nav a {
-    margin: 0 0.5rem;
-    font: 1.5vh 'Nunito';
-    font-weight: 100;
-    color: skyblue;
-    text-decoration: none;
-}
-
-nav a:hover {
-    scale: 1.1;
-}
-
 /* content styling */
 #link-container {
     max-width: 100%;
