@@ -37,7 +37,7 @@ def get_db():
     return [engine, md]
 
 def init_db():
-    md = get_db()[2]
+    md = get_db()[1]
     engine = get_db()[0]
     md.create_all(engine)
 
