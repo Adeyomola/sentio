@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
+<script src="{{ url_for('static', filename='nav.js')}}" defer></script>
 <header>
     <a id="title" title="home" href="{{ url_for ('home') }}">
         <svg width="30" height="30" viewBox="0 0 30 30">
@@ -64,79 +66,14 @@
                     <path d="M 2 15 l 5 3.5" stroke="skyblue" stroke-width="2" fill="none" stroke-linecap="round" />
                 </svg> -->
                     Log Out</a>
-                <a>Change Password</a>
+                <a href="{{ url_for ('profile.changepassword') }}" title="change password">Change Password</a>
                 <a>Account</a>
             </div>
         </div>
     </nav>
 </header>
-<script>
-    const profile = document.getElementById("profile");
-    const list = document.getElementById("profile-list");
-
-    profile.addEventListener("click", (e) => {
-        e.stopPropagation();
-        list.classList.add("show");
-    });
-
-    window.addEventListener("click", () => {
-        list.classList.remove("show");
-    });
-</script>
 <style>
-    /* header */
-    #title {
-        display: flex;
-        font: 1.5rem 'Quicksand';
-        font-weight: 600;
-        width: 40%;
-        max-width: 40%;
-        color: skyblue;
-        text-decoration: none;
-    }
 
-    #title:hover {
-        text-decoration: underline skyblue;
-    }
-
-    /* nav */
-    nav {
-        display: flex;
-        justify-content: flex-end;
-        width: 100%;
-        max-width: 100%;
-    }
-
-    nav a {
-        margin: 0 0.5rem;
-        font: 0.7rem 'Nunito';
-        font-weight: 100;
-        color: skyblue;
-        text-decoration: none;
-    }
-
-    nav a:hover {
-        scale: 1.1;
-    }
-
-    .noshow {
-        display: none;
-    }
-
-    .show {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        right: 0;
-        background-color: #1d242c;
-        padding: 0.5rem 0.5rem;
-        border-radius: 0 0 0 0.2rem;
-    }
-
-    #profile>div>a {
-        font-size: 0.7rem;
-        padding: 0.3rem 0;
-    }
 </style>
 {% block content %}
 {% endblock %}

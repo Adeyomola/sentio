@@ -1,7 +1,6 @@
 from verba.db import get_db
 from flask import request, render_template, flash, redirect, session, Blueprint, g, url_for
 from sqlalchemy import insert, select, delete, update
-# from sqlalchemy.orm import Session
 from sqlalchemy.engine import ResultProxy
 from sqlalchemy.exc import IntegrityError
 from verba.auth.auth import login_required
@@ -12,9 +11,10 @@ from sqlalchemy.orm import Session
 sqlsession = Session(get_db()[0])
 bp = Blueprint('blog', __name__, template_folder='templates', static_folder='static', static_url_path='/blog/static')
 engine = get_db()[0]
-connection = get_db()[1]
-md = get_db()[2]
+md = get_db()[1]
 table = md.tables['post']
+
+connection = engine.connect()
 
 class Verify:
     def __init__(self, post_id) -> None:
@@ -63,8 +63,6 @@ def write():
                 statement = (insert(table).values(title=title, author_id=g.get('user')[0], firstname=g.get('user')[1], body=body))
                 connection.execute(statement)
                 connection.commit()
-                # message='Published!!!'
-                # flash(message)
                 return redirect('/')
             except IntegrityError as ie:
                 error = ie._message()

@@ -1,7 +1,7 @@
 from verba.db import get_db
 from flask import request, session, render_template, flash, redirect, Blueprint, g, url_for
 from sqlalchemy.sql import select, insert
-from sqlalchemy.engine import ResultProxy
+from sqlalchemy.engine import Result
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -11,44 +11,47 @@ import functools
 sqlsession = Session(get_db()[0])
 
 bp = Blueprint('auth', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
-connection = get_db()[1]
-md = get_db()[2]
-
+engine = get_db()[0]
+md = get_db()[1]
 
 @bp.before_app_request
 def current_user():
-    table = md.tables['users']
     user_id = session.get('user_id')
-    if user_id is None:
-        g.user= None
-    else:
-        g.user = ResultProxy.fetchone(connection.execute(select(table).where(table.c.id == user_id)))
-    connection.rollback()
     
+    if user_id is None:
+        g.user = None
+    else:
+        table = md.tables['users']
+        connection = engine.connect()
+        statement = select(table).where(table.c.id == user_id)
+        user = connection.execute(statement)
+        user = Result.one(user)
+        g.user = user
+
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if g.user is None:
+        if g.get('user') is None:
             return redirect(url_for("auth.login"))
         return view(**kwargs)
     return wrapped_view
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
-    if g.user is not None:
+    if g.get('user') is not None:
         return redirect('/')
     if request.method == 'POST':
         error = None
+        connection = engine.connect()
+
         email = request.form['email']
         password = request.form['password']
         table = md.tables['users']
         statement = (
             select(table).where(table.c.email == email)
         )
-
-        rp = ResultProxy
         user = connection.execute(statement)
-        user = rp.fetchone(user)
+        user = Result.fetchone(user)
 
         if user is None:
             error = 'Incorrect email address or password'
@@ -69,6 +72,8 @@ def register():
         return redirect('/')
     if request.method == 'POST':
         error = None
+        connection = engine.connect()
+
         username = request.form['username']
         password = request.form['password']
         confirm_password=request.form['confirm_password']
@@ -105,7 +110,7 @@ def register():
                 elif re.search('username', error):
                     error = 'username has already been taken'
                     flash(error)
-            finally:
+            else:
                 return redirect("/login")
         sqlsession.close()
         flash(error)
