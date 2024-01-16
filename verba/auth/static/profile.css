@@ -37,6 +37,9 @@ header {
 
 aside {
     width: 30%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
     max-width: 30%;
     border-right: 1px solid rgba(135, 207, 235, 0.704);
 }
@@ -53,6 +56,7 @@ p>a:hover {
 section {
     width: 60%;
     max-width: 60%;
+    height: 92.5vh;
     display: flex;
     flex-direction: column;
     margin-left: 5%;
@@ -64,6 +68,11 @@ form {
     display: flex;
     flex-direction: column;
     margin: 1rem 0;
+}
+
+#changepasswordForm {
+    display: none;
+    align-self: center;
 }
 
 form>input,

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin-Slab|Nunito|Quicksand">
     <link rel="stylesheet" href="{{ url_for('auth.static', filename='profile.css') }}">
     <script src="{{ url_for('auth.static', filename='script.js')}}" defer></script>
+    <script src="{{ url_for('auth.static', filename='profile.js')}}" defer></script>
     <title>Change Password</title>
 </head>
 
@@ -19,11 +20,11 @@
     {% endfor %}
     <main style="display: flex;">
         <aside>
-            <p><a href="#changedetails">Change Details</a></p>
-            <p><a href="#changepassword">Change Password</a></p>
+            <p><a id="changedetails">Change Details</a></p>
+            <p><a id="changepassword">Change Password</a></p>
         </aside>
-        <section>
-            <form method="post" id="changedetails">
+        <section id="section">
+            <form method="post" id="changedetailsForm">
                 <label for="username">Username </label>
                 <input type="text" name="username" value="{{ username }}" autocomplete="off">
                 <label for="firstname">Firstname</label>
@@ -36,7 +37,7 @@
                 <input type="email" name="confirm_email" id="confirm_email" value="{{email}}" autocomplete="off">
                 <button type="submit" name="changedetails">Save </button>
             </form>
-            <form method="post" id="changepassword">
+            <form method="post" id="changepasswordForm">
                 <label for="password">Enter Your New Password</label>
                 <input type="password" name="password" id="password" required>
                 <label for="confirm_password">Confirm Your New Password</label>
