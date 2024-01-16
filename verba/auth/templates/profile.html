@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('auth.static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin-Slab|Nunito|Quicksand">
+    <link rel="stylesheet" href="{{ url_for('auth.static', filename='profile.css') }}">
+    <script src="{{ url_for('auth.static', filename='script.js')}}" defer></script>
+    <title>Change Password</title>
+</head>
+
+<body>
+    {% extends 'loggedin.html' %}
+    {% block content %}
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+    <main style="display: flex;">
+        <aside>
+            <p><a href="#changedetails">Change Details</a></p>
+            <p><a href="#changepassword">Change Password</a></p>
+        </aside>
+        <section>
+            <form method="post" id="changedetails">
+                <label for="username">Username </label>
+                <input type="text" name="username" value="{{ username }}" autocomplete="off">
+                <label for="firstname">Firstname</label>
+                <input type="text" name="firstname" value="{{ firstname }}" autocomplete="off">
+                <label for="lastname">Lastname</label>
+                <input type="text" name="lastname" value="{{ lastname }}" autocomplete="off">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="email" value="{{email}}" autocomplete="off">
+                <label for="confirm_email">Confirm Email Address</label>
+                <input type="email" name="confirm_email" id="confirm_email" value="{{email}}" autocomplete="off">
+                <button type="submit" name="changedetails">Save </button>
+            </form>
+            <form method="post" id="changepassword">
+                <label for="password">Enter Your New Password</label>
+                <input type="password" name="password" id="password" required>
+                <label for="confirm_password">Confirm Your New Password</label>
+                <input type="password" name="confirm_password" id="confirm_password" required>
+                <button type="submit" name="changepassword">Save </button>
+            </form>
+        </section>
+    </main>
+
+
+    {% endblock %}
+</body>
+
+</html>

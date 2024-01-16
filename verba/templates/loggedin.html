@@ -57,6 +57,7 @@
                 </g>
             </svg>
             <div id="profile-list" class="noshow">
+                <a href="{{ url_for ('profile.profile') }}" title="profile">Profile</a>
                 <a href="{{ url_for ('logout') }}" title="log out">
                     <!-- <svg width="30" height="30" viewBox="0 0 30 30">
                     <polygon points="26,26 10,26, 10,4 26,4" stroke="skyblue" fill="none" stroke-width="2"
@@ -66,8 +67,7 @@
                     <path d="M 2 15 l 5 3.5" stroke="skyblue" stroke-width="2" fill="none" stroke-linecap="round" />
                 </svg> -->
                     Log Out</a>
-                <a href="{{ url_for ('profile.changepassword') }}" title="change password">Change Password</a>
-                <a>Account</a>
+                <!-- <a >Change Password</a> -->
             </div>
         </div>
     </nav>
