@@ -1,7 +1,19 @@
-const changedetails = document.getElementById("changedetails");
-const changepassword = document.getElementById("changepassword");
-const changedetailsForm = document.getElementById("changedetailsForm");
-const changepasswordForm = document.getElementById("changepasswordForm");
+const elementStrings = [
+  "changedetails",
+  "changepassword",
+  "changedetailsForm",
+  "changepasswordForm",
+];
+
+const elements = elementStrings.map((element) => {
+  element = document.getElementById(element);
+  return element;
+});
+
+const changedetails = elements[0];
+const changepassword = elements[1];
+const changedetailsForm = elements[2];
+const changepasswordForm = elements[3];
 
 changedetails.addEventListener("click", () => {
   changedetailsForm.style.display = "flex";
