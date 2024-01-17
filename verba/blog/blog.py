@@ -14,13 +14,12 @@ engine = get_db()[0]
 md = get_db()[1]
 table = md.tables['post']
 
-connection = engine.connect()
-
 class Verify:
     def __init__(self, post_id) -> None:
         self.post_id = post_id
 
     def verify_author(post_id):
+        connection = engine.connect()
         row = connection.execute((select(table).where(table.c.id == post_id))) 
         row = ResultProxy.fetchone(row)
         if row is None:
@@ -29,25 +28,28 @@ class Verify:
             redirect(url_for('auth.login'))
         elif session['user_id'] != row[1] and session['user_id'] != 1:
             abort(401, f'Unauthorized')
-        sqlsession.rollback()
+        connection.rollback()
     
     def verify_post(post_id):
+        connection = engine.connect()
         row = connection.execute((select(table).where(table.c.id == post_id))) 
         row = ResultProxy.fetchone(row)
         if row is None:
             abort(404, f'Post does not exist')
-        sqlsession.rollback()
+        connection.rollback()
 
 def author_posts():
+    connection = engine.connect()
     statement = (select(table).where(table.c.author_id == session['user_id']))
     posts = connection.execute(statement).fetchall()
-    sqlsession.close()
+    connection.close()
     return posts
 
 def front_posts():
+    connection = engine.connect()
     statement = (select(table))
     posts = connection.execute(statement).fetchmany(8)
-    sqlsession.close()
+    connection.close()
     return posts
 
 @bp.route('/write', methods=['GET', 'POST'])
@@ -57,6 +59,7 @@ def write():
         error = None
         title = request.form['title']
         body = request.form['body']
+        connection = engine.connect()
 
         if error is None:
             try:
@@ -72,29 +75,32 @@ def write():
                 elif re.search('body', error):
                     error = "This article might be a duplicate"
         flash(error)
-        sqlsession.close()
+        connection.close()
     return render_template('write.html')
 
 @bp.route('/post', strict_slashes=False)
 def post():
+    connection = engine.connect()
     statement = (select(table))
     posts = connection.execute(statement).fetchall()
-    sqlsession.close()
+    connection.close()
     return render_template('post.html', posts=posts)
 
 @bp.route('/post/<post_id>')
 def get_post(post_id):
     Verify.verify_post(post_id)
+    connection = engine.connect()
     statement = (select(table).where(table.c.id == post_id))
     post_row = connection.execute(statement)
     post_row = ResultProxy.fetchone(post_row)
-    sqlsession.close()
+    connection.close()
     return render_template('get_post.html', post_row=post_row)
 
 @bp.route('/post/update/<post_id>',  methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
     Verify.verify_author(post_id)
+    connection = engine.connect()
     table = md.tables['post']
     post_row = ResultProxy.fetchone(connection.execute(select(table).where(table.c.id == post_id)))
     if request.method == 'POST':
@@ -104,16 +110,17 @@ def update_post(post_id):
         connection.commit()
         return redirect(url_for('blog.get_post', post_id=post_row[0]))
     else:
-        sqlsession.close()
+        connection.close()
         return render_template('update.html', post_row=post_row)
 
 @bp.route('/post/delete/<post_id>',  methods=['POST'])
 @login_required
 def delete_post(post_id):
     Verify.verify_author(post_id)
+    connection = engine.connect()
     table = md.tables['post']
     connection.execute((delete(table).where(table.c.id == post_id)))
     connection.commit()
-    sqlsession.close()
+    connection.close()
     return redirect(url_for('blog.post'))
     # return redirect(request.referrer)
