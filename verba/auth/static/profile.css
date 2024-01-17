@@ -10,7 +10,6 @@ html,
 body {
     font-family: sans-serif;
     width: 100vw;
-    height: 100vh;
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
