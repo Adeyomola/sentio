@@ -31,7 +31,7 @@ def current_user():
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if g.get('user') is None:
+        if g.user is None:
             return redirect(url_for("auth.login"))
         return view(**kwargs)
     return wrapped_view
@@ -58,12 +58,14 @@ def login():
         elif not check_password_hash(user[4], password):
             error = 'Incorrect email address or password'
         if error is None:
-            session.clear()
-            session['user_id'] = user[0]
-            session['firstname'] = user[1]
-            return redirect("/")
+            try:
+                session.clear()
+                session['user_id'] = user[0]
+                session['firstname'] = user[1]
+                return redirect("/")
+            finally:
+                connection.close()
         flash(error)
-        connection.close()
     return render_template('login.html')
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -111,7 +113,7 @@ def register():
                     error = 'username has already been taken'
                     flash(error)
             else:
+                connection.close()
                 return redirect("/login")
-        connection.close()
         flash(error)
     return render_template('register.html')
