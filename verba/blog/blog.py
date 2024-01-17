@@ -123,4 +123,3 @@ def delete_post(post_id):
     connection.commit()
     connection.close()
     return redirect(url_for('blog.post'))
-    # return redirect(request.referrer)

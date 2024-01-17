@@ -17,12 +17,12 @@ md = get_db()[1]
 @bp.before_app_request
 def current_user():
     user_id = session.get('user_id')
-    
+    table = md.tables['users']
+    connection = engine.connect()
+
     if user_id is None:
         g.user = None
     else:
-        table = md.tables['users']
-        connection = engine.connect()
         statement = select(table).where(table.c.id == user_id)
         user = connection.execute(statement)
         user = Result.one(user)
@@ -31,7 +31,7 @@ def current_user():
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if g.user is None:
+        if g.get('user') is None:
             return redirect(url_for("auth.login"))
         return view(**kwargs)
     return wrapped_view
@@ -63,7 +63,7 @@ def login():
             session['firstname'] = user[1]
             return redirect("/")
         flash(error)
-        sqlsession.close()
+        connection.close()
     return render_template('login.html')
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -112,6 +112,6 @@ def register():
                     flash(error)
             else:
                 return redirect("/login")
-        sqlsession.close()
+        connection.close()
         flash(error)
     return render_template('register.html')
