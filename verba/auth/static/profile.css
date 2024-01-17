@@ -70,6 +70,10 @@ form {
     margin: 1rem 0;
 }
 
+#changedetails {
+    color: lightskyblue;
+}
+
 #changepasswordForm {
     display: none;
 }

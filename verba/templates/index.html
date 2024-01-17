@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin-Slab|Nunito|Quicksand">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Quicksand">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>Verba</title>
@@ -14,18 +14,9 @@
 <body>
     {% extends 'loggedout.html' %}
     {% block content %}
-    <div id="svg-div">
-        <svg id="decagon" viewBox="0 0 220 220">
-            <polygon points="80,215 20,175 2,110 20,50 70,5 150,5 200,50 220,110 200,170 150,215" stroke="skyblue"
-                fill="#1d242c" stroke-width="2" stroke-linejoin="round" />
-            <circle cx="110" cy="110" r="100" stroke="skyblue" stroke-width="2" fill="#1d242c" />
-            <circle cx="110" cy="110" r="10" stroke="#1d242c" stroke-width="3" fill="skyblue" />
-        </svg>
-        <p>Don't fall off the wheel of words.</p>
-    </div>
     <div id="link-container">
+        <p id="ourtoppicks">Our Top Picks</p>
         <section>
-            <p id="ourtoppicks">Our Top Picks</p>
             {% for post in posts %}
             <summary>
                 <a href="/post/{{ post['id']}}" id="article-title">{{ post['title']}}</a>

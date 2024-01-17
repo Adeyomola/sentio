@@ -10,7 +10,6 @@ html,
 body {
     font-family: sans-serif;
     width: 100vw;
-    height: 100vh;
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
@@ -44,12 +43,13 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 3rem;
 }
 
 form>input,
 label {
     max-width: 80%;
-    width: 80%;
+    width: 60%;
     margin: 0.5rem;
     font: 400 1rem 'Nunito';
 }
@@ -75,17 +75,19 @@ button:hover {
     transform: translate(0.3rem, 0.1rem);
 }
 
-@media (max-width: 360px) {
-    nav a {
-        margin: 0;
+@media (min-width: 640px) {
+
+    form>input,
+    label {
+        width: 35vw;
     }
 
-    #register {
-        transform: translateY(15vh);
+    button {
+        width: 10vw;
     }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 1024px) {
 
     form>input,
     label {
@@ -93,7 +95,13 @@ button:hover {
     }
 
     button {
-        width: 10vw;
+        width: 7vw;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    button {
+        width: 5vw;
     }
 }
 
@@ -105,6 +113,6 @@ button:hover {
     }
 
     #register {
-        transform: translateY(50vh);
+        /* transform: translateY(50vh); */
     }
 }

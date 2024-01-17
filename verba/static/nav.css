@@ -1,36 +1,64 @@
     /* header */
+    header {
+        display: flex;
+        flex-direction: column;
+        height: 40vh;
+        background: linear-gradient(rgba(36, 39, 38, 0.521), rgba(36, 39, 38, 0.74)),
+            rgba(36, 39, 38, 0.87) url('./hero.jpeg') no-repeat center 30%;
+        background-size: cover;
+        padding: 0.5rem 0.3rem;
+        align-items: center;
+    }
+
     #title {
         display: flex;
-        font: 1.5rem 'Quicksand';
+        font: 5rem 'Quicksand';
         font-weight: 600;
         width: 40%;
         max-width: 40%;
-        color: skyblue;
+        color: white;
         text-decoration: none;
+        justify-content: center;
     }
 
     #title:hover {
-        text-decoration: underline skyblue;
+        scale: 1.05;
+    }
+
+    #tagline {
+        font: italic 0.9rem 'Montserrat';
+        color: whitesmoke;
+        margin-bottom: 3rem;
     }
 
     /* nav */
     nav {
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         width: 100%;
         max-width: 100%;
     }
 
     nav a {
         margin: 0 0.5rem;
-        font: 0.7rem 'Nunito';
+        font: 0.9rem 'Nunito';
         font-weight: 100;
-        color: skyblue;
+        color: white;
         text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     nav a:hover {
         scale: 1.1;
+    }
+
+    #profile {
+        position: fixed;
+        right: 0;
+        top: 0;
+        padding: 0.5rem 1.2vw;
     }
 
     .noshow {
@@ -40,14 +68,58 @@
     .show {
         display: flex;
         flex-direction: column;
-        position: fixed;
+        position: inherit;
+        margin-top: -5px;
         right: 0;
-        background-color: #1d242c;
+        background-color: #1d242ccc;
         padding: 0.5rem 0.5rem;
-        border-radius: 0 0 0 0.2rem;
+        border-radius: 0.2rem 0 0 0.2rem;
     }
 
     #profile>div>a {
         font-size: 0.7rem;
         padding: 0.3rem 0;
+    }
+
+    @media screen and (min-width: 1280px) {
+        header {
+            background-size: 100% 200%;
+        }
+    }
+
+    @media screen and (min-width: 480px) and (max-width: 810px) and (orientation: landscape) {
+        header {
+            height: 60vh;
+        }
+
+        #title {
+            font-size: 3rem;
+        }
+
+        #tagline {
+            margin-bottom: 1rem;
+        }
+
+        nav a {
+            font-size: 0.5rem;
+        }
+    }
+
+    @media screen and (min-width: 812px) and (max-width: 1023px) and (orientation: landscape) {
+        header {
+            height: 55vh;
+        }
+
+        #title {
+            font-size: 3rem;
+        }
+
+        #tagline {
+            font-size: 0.7rem;
+            margin-bottom: 1.2rem;
+        }
+
+        nav a {
+            font-size: 0.7rem;
+        }
     }

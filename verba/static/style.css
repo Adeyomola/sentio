@@ -10,7 +10,6 @@ html,
 body {
     font-family: sans-serif;
     width: 100vw;
-    height: 100vh;
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
@@ -18,13 +17,6 @@ body {
 body {
     display: flex;
     flex-direction: column;
-}
-
-header {
-    display: flex;
-    height: fit-content;
-    background-color: #1d242c;
-    padding: 0.5rem 0.3rem;
 }
 
 .flash {
@@ -59,7 +51,7 @@ header {
     color: #1d242c;
 }
 
-#decagon {
+/* #decagon {
     animation: spin 8s ease-in-out -2s infinite;
     transform-origin: center center;
     width: 40%;
@@ -73,7 +65,7 @@ header {
     to {
         transform: rotate(360deg);
     }
-}
+} */
 
 
 
@@ -94,13 +86,13 @@ header {
 }
 
 section {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 2rem;
 }
 
 summary {
     display: flex;
-    width: 38vw;
     flex-direction: column;
     padding: 0rem 0.7rem;
     border-radius: 0.9rem;
@@ -129,10 +121,12 @@ summary {
 }
 
 #article-title {
-    font: 3.5vw 'Quicksand';
+    font: 3.5vw 'Montserrat';
     font-weight: 600;
     text-decoration: none;
-    color: rgb(52, 113, 138);
+    color: #1d242c;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
 }
 
 @media screen and (max-width: 360px) {
@@ -141,13 +135,9 @@ summary {
     }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 480px) {
     #ourtoppicks {
         font-size: 1.8vw;
-    }
-
-    #decagon {
-        width: 30%;
     }
 
     #svg-div>p {
@@ -158,8 +148,9 @@ summary {
         width: 8%;
     }
 
-    section>summary {
-        width: 20vw;
+    section {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
     }
 
     summary {
@@ -167,18 +158,41 @@ summary {
     }
 
     #article-title {
-        font-size: 1.5vw;
+        font-size: 1.8vw;
     }
 
     #preview {
         @supports (-webkit-line-clamp: 3) {
-            font-size: 1.2vw;
+            font-size: 1.5vw;
         }
     }
 }
 
-@media screen and (min-width: 1200px) {
-    #decagon {
-        width: 20%;
+@media screen and (min-width: 1024px) {
+    section {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    #article-title {
+        font-size: 1.6vw;
+    }
+
+    #preview {
+        @supports (-webkit-line-clamp: 3) {
+            font-size: 1.3vw;
+        }
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    #article-title {
+        font-size: 1.3vw;
+    }
+
+    #preview {
+        @supports (-webkit-line-clamp: 3) {
+            font-size: 1vw;
+        }
     }
 }
