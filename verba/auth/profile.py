@@ -8,7 +8,6 @@ from werkzeug.security import generate_password_hash
 from verba.auth.auth import login_required
 import re
 
-
 sqlsession = Session(get_db()[0])
 bp = Blueprint('profile', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
 engine = get_db()[0]

@@ -34,7 +34,7 @@ def get_db():
     Column('body', Text, nullable=False)
     )
 
-    return [engine, md]
+    return [engine, md, connection]
 
 def init_db():
     md = get_db()[1]
