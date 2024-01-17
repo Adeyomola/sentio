@@ -33,13 +33,17 @@ body {
     font-family: 'Nunito';
 }
 
+main {
+    display: flex;
+    justify-content: center;
+}
+
 aside {
     width: 30%;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     max-width: 30%;
-    border-right: 1px solid rgba(135, 207, 235, 0.704);
 }
 
 p>a {
@@ -54,10 +58,8 @@ p>a:hover {
 section {
     width: 60%;
     max-width: 60%;
-    height: 92.5vh;
     display: flex;
     flex-direction: column;
-    margin-left: 5%;
 }
 
 form {
@@ -66,6 +68,8 @@ form {
     display: flex;
     flex-direction: column;
     margin: 1rem 0;
+    padding: 0 1rem;
+    border-left: 0.8px solid #1d242c;
 }
 
 #changedetails {
@@ -76,55 +80,18 @@ form {
     display: none;
 }
 
-form>input,
-label,
-p {
-    margin: 0.5rem;
-    font: 400 2.5vw 'Nunito';
-}
-
-input {
-    border: none;
-    border-bottom: 1px solid skyblue;
-    outline: none;
-}
-
-button {
-    width: 10vw;
-    margin: 0 0.5rem;
-    padding: 0.4rem 0.4rem;
-    font: 500 1.8vw 'Nunito';
-    color: white;
-    background-color: rgb(90, 143, 164);
-    border-radius: 0.2rem;
-    border: none;
-    align-self: center;
-}
-
-button:hover {
-    transform: translate(0.3rem, 0.1rem);
-}
-
 @media screen and (min-width: 640px) {
     aside {
         width: 20%;
     }
 
-    section {
-        width: 50%;
-        max-width: 50%;
-        margin-left: 5%;
+    form>* {
+        width: 59%;
     }
 
-    form>input,
-    label,
-    p {
-        font-size: 1.5vw;
-    }
-
-    button {
-        width: 8vw;
-        font-size: 1.4vw;
+    hr {
+        width: 60%;
+        border: 1px solid #1d242c;
     }
 }
 
@@ -132,47 +99,11 @@ button:hover {
     aside {
         width: 15%;
     }
-
-    form>input,
-    label,
-    p {
-        font-size: 1.2vw;
-    }
-
-    button {
-        width: 6vw;
-        font-size: 1.2vw;
-    }
 }
 
 @media screen and (min-width: 1280px) {
-    aside {
-        width: 15%;
-    }
-
     section {
         width: 30%;
         max-width: 30%;
-        margin-left: 5%;
     }
-
-    form>input,
-    label,
-    p {
-        font: 400 1vw 'Nunito';
-    }
-
-    button {
-        width: 3vw;
-        font-size: 0.8vw;
-    }
-}
-
-@media (min-width: 500px) and (max-width: 950px) and (orientation: landscape) {
-
-    /* form>input,
-    label {
-        width: 50vw;
-    } */
-
 }

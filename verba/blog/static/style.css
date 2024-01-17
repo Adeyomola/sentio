@@ -108,10 +108,16 @@ form>input {
 #article-title-1 {
     font: 1.35rem 'Quicksand';
     font-weight: 600;
-    border: none;
+    border: transparent;
     outline: none;
-    border-bottom: 1px solid #6b6969ee;
-    color: rgb(52, 113, 138);
+    color: #1d242c;
+    text-transform: capitalize;
+}
+
+hr {
+    max-width: 80%;
+    width: 80%;
+    border: 0.5px solid #1d242c;
 }
 
 #body {
@@ -122,28 +128,13 @@ form>input {
     outline: none;
     resize: none;
     padding: 0.1rem;
-    font: 0.9rem 'Quicksand';
+    font: 0.9rem 'Montserrat';
     font-weight: 500;
 }
 
 #body::placeholder {
     font: 1.2rem 'Quicksand';
     font-weight: 600;
-}
-
-button {
-    width: 20vw;
-    margin: 0.5rem;
-    padding: 0.5rem;
-    font: 400 0.9rem 'Nunito';
-    color: white;
-    background-color: rgb(90, 143, 164);
-    border-radius: 0.2rem;
-    border: none;
-}
-
-button:hover {
-    transform: translate(0.3rem, 0.1rem);
 }
 
 /* styling for get post */
@@ -158,7 +149,7 @@ article {
     width: 100%;
     height: 100dvh;
     padding: 0.5rem;
-    font: 3vw 'Quicksand';
+    font: 3vw 'Montserrat';
     font-weight: 500;
     border-top: 0.1rem solid #6b6969ee;
     overflow-y: scroll;
@@ -183,31 +174,18 @@ article {
     margin: 0.5vh;
 }
 
-/* edit delete styling */
+/* edit delete, and update styling */
 #edit-delete-wrapper {
-    position: fixed;
+    position: sticky;
     bottom: 0;
-    display: grid;
-    width: 25vw;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     align-self: center;
-    margin: 0.5vw 2vw;
+    justify-content: center;
 }
 
-#edit-delete {
-    font: 400 0.8rem 'Nunito';
-    color: white;
-    width: 90%;
-    max-width: 90%;
-    margin: 0.3rem;
-    padding: 0.3rem;
-    background-color: rgb(90, 143, 164);
-    border-radius: 0.2rem;
-    border: none;
-}
-
-#edit-delete:hover {
-    transform: translate(0.3rem, 0.1rem);
+#update {
+    position: sticky;
+    bottom: 1rem;
 }
 
 @media screen and (max-width: 360px) {
@@ -218,11 +196,7 @@ article {
 
 @media screen and (min-width: 480px) {
     nav a {
-        font-size: 1.8vh;
-    }
-
-    button {
-        width: 11%;
+        /* font-size: 1.8vh; */
     }
 
     section {

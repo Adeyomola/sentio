@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('auth.static', filename='favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Quicksand">
-    <link rel="stylesheet" href="{{ url_for('auth.static', filename='style.css') }}">
-    <script src="{{ url_for('auth.static', filename='script.js')}}" defer></script>
+    <link rel="stylesheet" href="{{ url_for('auth.static', filename='styles/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('auth.static', filename='styles/inputs.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/buttons.css') }}">
+    <script src="{{ url_for('auth.static', filename='js/script.js')}}" defer></script>
     <title>Register</title>
 </head>
 
@@ -20,18 +22,25 @@
     <form method="post" id="register">
         <label for="username">Username:</label>
         <input type="text" name="username" autocomplete="off" required>
+        <hr>
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" required>
+        <hr>
         <label for="confirm_password">Confirm Password:</label>
         <input type="password" name="confirm_password" id="confirm_password" required>
+        <hr>
         <label for="firstname">Firstname:</label>
         <input type="text" name="firstname" autocomplete="off" required>
+        <hr>
         <label for="lastname">Lastname:</label>
         <input type="text" name="lastname" autocomplete="off" required>
+        <hr>
         <label for="email">Email Address:</label>
         <input type="email" name="email" id="email" autocomplete="off" required>
+        <hr>
         <label for="confirm_email">Confirm Email Address:</label>
         <input type="email" name="confirm_email" id="confirm_email" autocomplete="off" required>
+        <hr>
         <button type="submit"> Submit </button>
     </form>
     {% endblock %}

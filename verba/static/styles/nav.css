@@ -2,9 +2,9 @@
     header {
         display: flex;
         flex-direction: column;
-        height: 40vh;
+        height: 30vh;
         background: linear-gradient(rgba(36, 39, 38, 0.521), rgba(36, 39, 38, 0.74)),
-            rgba(36, 39, 38, 0.87) url('./hero.jpeg') no-repeat center 30%;
+            rgba(36, 39, 38, 0.87) url('../images/hero.webp') no-repeat center 30%;
         background-size: cover;
         padding: 0.5rem 0.3rem;
         align-items: center;
@@ -12,11 +12,11 @@
 
     #title {
         display: flex;
-        font: 5rem 'Quicksand';
+        font: 10vh 'Quicksand';
         font-weight: 600;
         width: 40%;
         max-width: 40%;
-        color: white;
+        color: #d4d4d4;
         text-decoration: none;
         justify-content: center;
     }
@@ -26,9 +26,9 @@
     }
 
     #tagline {
-        font: italic 0.9rem 'Montserrat';
-        color: whitesmoke;
-        margin-bottom: 3rem;
+        font: italic 2vh 'Montserrat';
+        color: #d4d4d4;
+        margin-bottom: 5vh;
     }
 
     /* nav */
@@ -41,9 +41,9 @@
 
     nav a {
         margin: 0 0.5rem;
-        font: 0.9rem 'Nunito';
+        font: 2.5vw 'Nunito';
         font-weight: 100;
-        color: white;
+        color: #d4d4d4;
         text-decoration: none;
         display: flex;
         flex-direction: column;
@@ -59,6 +59,11 @@
         right: 0;
         top: 0;
         padding: 0.5rem 1.2vw;
+    }
+
+    #profile>svg>g>g>circle {
+        background-color: linear-gradient(rgba(36, 39, 38, 0.521), rgba(36, 39, 38, 0.74)),
+            rgba(36, 39, 38, 0.87);
     }
 
     .noshow {
@@ -81,45 +86,49 @@
         padding: 0.3rem 0;
     }
 
+    @media screen and (max-width: 320px) {
+        header {
+            height: 33vh;
+        }
+    }
+
+    @media screen and (min-width: 640px) {
+        nav a {
+            font-size: 1.8vw;
+        }
+    }
+
+    @media screen and (min-width: 1024px) {
+        header {
+            height: 30vh;
+        }
+
+        nav a {
+            font-size: 1.3vw;
+        }
+    }
+
     @media screen and (min-width: 1280px) {
         header {
             background-size: 100% 200%;
         }
-    }
-
-    @media screen and (min-width: 480px) and (max-width: 810px) and (orientation: landscape) {
-        header {
-            height: 60vh;
-        }
-
-        #title {
-            font-size: 3rem;
-        }
-
-        #tagline {
-            margin-bottom: 1rem;
-        }
 
         nav a {
-            font-size: 0.5rem;
+            font-size: 1vw;
         }
     }
 
-    @media screen and (min-width: 812px) and (max-width: 1023px) and (orientation: landscape) {
+    @media screen and (min-width: 480px) and (max-width: 1023px) and (orientation: landscape) {
         header {
-            height: 55vh;
-        }
-
-        #title {
-            font-size: 3rem;
+            height: 48vh;
         }
 
         #tagline {
-            font-size: 0.7rem;
-            margin-bottom: 1.2rem;
+            font-size: 1.5vw;
+            margin-bottom: 8vh;
         }
 
         nav a {
-            font-size: 0.7rem;
+            font-size: 1.5vw;
         }
     }

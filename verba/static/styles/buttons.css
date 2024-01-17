@@ -1,0 +1,35 @@
+button {
+    width: 12vw;
+    margin: 2rem 0.5rem;
+    padding: 0.4rem 0.4rem;
+    font: 500 2.5vw 'Nunito';
+    color: #1d242c;
+    background-color: transparent;
+    border-radius: 0.2rem;
+    border: 1px solid #1d242c;
+}
+
+button:hover {
+    transform: translate(0.3rem, 0.1rem);
+}
+
+@media screen and (min-width: 640px) {
+    button {
+        width: 8vw;
+        font-size: 1.4vw;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    button {
+        width: 6vw;
+        font-size: 1.2vw;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    button {
+        width: 3.5vw;
+        font-size: 0.8vw;
+    }
+}
