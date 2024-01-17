@@ -20,13 +20,6 @@ body {
     flex-direction: column;
 }
 
-header {
-    display: flex;
-    height: fit-content;
-    background-color: #1d242c;
-    padding: 0.5rem 0.3rem;
-}
-
 .flash {
     z-index: 1;
     color: #1d242c;
