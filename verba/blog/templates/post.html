@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Quicksand">
     <link rel="stylesheet" href="{{ url_for('blog.static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/buttons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/content.css') }}">
     <title>All Posts</title>
 </head>
 
@@ -26,6 +27,7 @@
         <section>
             {% for post in posts %}
             <summary>
+                <img src="../static/images/placeholder.webp">
                 <a href="/post/{{ post['id']}}" id="article-title">{{ post['title']}}</a>
                 <p id="preview">{{ post['body'] }}</p>
             </summary>

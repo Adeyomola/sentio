@@ -1,0 +1,130 @@
+hr {
+    width: 20%;
+    border: 1.5px solid #1d242c;
+}
+
+#link-container {
+    max-width: auto;
+    width: 100vw;
+    height: 100%;
+}
+
+section {
+    display: grid;
+    margin: 0 3rem;
+}
+
+summary {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0.7rem;
+    font-family: 'Nunito';
+    margin: 0 1rem;
+    color: #1d242c;
+    border-bottom: 1px solid #1d242c;
+    overflow: hidden;
+}
+
+summary:hover {
+    background-color: #d4d4d424;
+}
+
+summary>img {
+    padding-bottom: 0.5rem;
+}
+
+#preview {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    @supports (-webkit-line-clamp: 3) {
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: initial;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        transform: none;
+        font-weight: 100;
+        font-size: 2.5vw;
+    }
+}
+
+#article-title {
+    font: 3.5vw 'Montserrat';
+    font-weight: 600;
+    text-decoration: none;
+    color: #1d242c;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+@media screen and (min-width: 480px) {
+    hr {
+        width: 10%;
+        margin: 0 auto;
+        border: 2px solid #1d242c;
+    }
+
+    #ourtoppicks {
+        font-size: 1.8vw;
+    }
+
+    #welcome {
+        text-align: center;
+    }
+
+    section {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin: 0 5rem;
+    }
+
+    summary {
+        font-size: initial;
+    }
+
+    #article-title {
+        font-size: 1.8vw;
+    }
+
+    #preview {
+        @supports (-webkit-line-clamp: 3) {
+            font-size: 1.5vw;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    hr {
+        width: 5%;
+    }
+
+    section {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    #article-title {
+        font-size: 1.6vw;
+    }
+
+    #preview {
+        @supports (-webkit-line-clamp: 3) {
+            font-size: 1.3vw;
+        }
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    #article-title {
+        font-size: 1.3vw;
+    }
+
+    #preview {
+        @supports (-webkit-line-clamp: 3) {
+            font-size: 1vw;
+        }
+    }
+}

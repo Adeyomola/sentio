@@ -39,55 +39,6 @@ header {
     padding: 0.5rem 0.3rem;
 }
 
-/* content styling */
-#link-container {
-    max-width: 100%;
-    width: auto;
-    height: 100%;
-}
-
-section {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin: 0 2rem;
-}
-
-summary {
-    display: flex;
-    flex-direction: column;
-    padding: 0rem 0.7rem;
-    border-radius: 0.9rem;
-    text-align: center;
-    font-family: 'Nunito';
-    margin: 1rem;
-    color: #1d242c;
-}
-
-#preview {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-
-    @supports (-webkit-line-clamp: 3) {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: initial;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        font-size: 2.5vw;
-    }
-}
-
-#article-title {
-    font: 3.5vw 'Montserrat';
-    font-weight: 600;
-    text-decoration: none;
-    color: #1d242c;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-}
-
 /* styling for write */
 form {
     max-width: 100%;
@@ -183,39 +134,14 @@ article {
     justify-content: center;
 }
 
-#update {
+button {
     position: sticky;
     bottom: 1rem;
 }
 
-@media screen and (max-width: 360px) {
-    nav a {
-        margin: 0;
-    }
-}
-
 @media screen and (min-width: 480px) {
-    nav a {
-        /* font-size: 1.8vh; */
-    }
-
-    section {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-    }
-
     #edit-delete-wrapper {
         width: 10vw;
-    }
-
-    #article-title {
-        font-size: 1.8vw;
-    }
-
-    #preview {
-        @supports (-webkit-line-clamp: 3) {
-            font-size: 1.5vw;
-        }
     }
 
     #body-1 {
@@ -223,39 +149,10 @@ article {
     }
 }
 
-
-@media screen and (min-width: 1024px) {
-    section {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    #article-title {
-        font-size: 1.6vw;
-    }
-
-    #preview {
-        @supports (-webkit-line-clamp: 3) {
-            font-size: 1.3vw;
-        }
-    }
-}
-
 @media screen and (min-width: 1280px) {
     #body-1 {
         font-size: 1.2vw;
     }
-
-    #article-title {
-        font-size: 1.3vw;
-    }
-
-    #preview {
-        @supports (-webkit-line-clamp: 3) {
-            font-size: 1vw;
-        }
-    }
-
 }
 
 @media (min-width: 500px) and (max-width: 950px) and (orientation: landscape) {

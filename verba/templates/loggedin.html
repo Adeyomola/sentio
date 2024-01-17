@@ -2,10 +2,6 @@
 <script src="{{ url_for('static', filename='js/nav.js')}}" defer></script>
 <header>
     <a id="title" title="home" href="{{ url_for ('home') }}">
-        <!-- <svg width="30" height="30" viewBox="0 0 30 30">
-            <polygon points="20,12 20,24, 15,24 15,16 9,16 9,24 4,24 4,12 12,4" stroke="#d4d4d4" fill="none"
-                stroke-width="2" stroke-linejoin="round" />
-        </svg> -->
         Verba
     </a>
     <p id="tagline">Don't fall off the wheel of words...</p>
@@ -60,15 +56,7 @@
             <div id="profile-list" class="noshow">
                 <a href="{{ url_for ('profile.profile') }}" title="profile">Profile</a>
                 <a href="{{ url_for ('logout') }}" title="log out">
-                    <!-- <svg width="30" height="30" viewBox="0 0 30 30">
-                    <polygon points="26,26 10,26, 10,4 26,4" stroke="white" fill="none" stroke-width="2"
-                        stroke-linejoin="round" />
-                    <path d="M 2 15 l 14 0" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" />
-                    <path d="M 2 15 l 5 -3.5" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" />
-                    <path d="M 2 15 l 5 3.5" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" />
-                </svg> -->
                     Log Out</a>
-                <!-- <a >Change Password</a> -->
             </div>
         </div>
     </nav>

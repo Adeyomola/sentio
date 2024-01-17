@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Quicksand">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/content.css') }}">
     <title>Home</title>
 </head>
 
@@ -17,13 +18,14 @@
     {% extends 'loggedin.html' %}
     {% block content %}
     <div id="welcome">
-        Hi {{ firstname }} <br>
-        <h5>Here's what you've written so far:</h5>
+        Hi! {{ firstname }} <br>
+        <hr>
     </div>
     <div id="link-container">
         <section>
             {% for post in posts %}
             <summary>
+                <img src="../static/images/placeholder.webp">
                 <a href="/post/{{ post['id']}}" id="article-title">{{ post['title']}}</a>
                 <p id="preview">{{ post['body'] }}</p>
             </summary>
