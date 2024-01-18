@@ -74,8 +74,9 @@ def write():
                     error = "An article with this title already exists"
                 elif re.search('body', error):
                     error = "This article might be a duplicate"
+            finally:
+                connection.close()
         flash(error)
-        connection.close()
     return render_template('write.html')
 
 @bp.route('/post', strict_slashes=False)
@@ -103,15 +104,17 @@ def update_post(post_id):
     connection = engine.connect()
     table = md.tables['post']
     post_row = ResultProxy.fetchone(connection.execute(select(table).where(table.c.id == post_id)))
+    connection.close()
     if request.method == 'POST':
-        title = request.form['title']
-        body = request.form['body']
-        connection.execute((update(table).where(table.c.id == post_id).values(title=title, body=body)))
-        connection.commit()
-        return redirect(url_for('blog.get_post', post_id=post_row[0]))
-    else:
-        connection.close()
-        return render_template('update.html', post_row=post_row)
+        try:
+            title = request.form['title']
+            body = request.form['body']
+            connection.execute((update(table).where(table.c.id == post_id).values(title=title, body=body)))
+            connection.commit()
+            return redirect(url_for('blog.get_post', post_id=post_row[0]))
+        finally:
+            connection.close()
+    return render_template('update.html', post_row=post_row)
 
 @bp.route('/post/delete/<post_id>',  methods=['POST'])
 @login_required

@@ -25,7 +25,7 @@ def create_app():
         if 'firstname' in session:
             firstname = session['firstname']
             return render_template('home.html', firstname=firstname, posts=blog.author_posts())
-        else:
+        elif not session:
             return render_template('index.html', posts=blog.front_posts())
     
 
