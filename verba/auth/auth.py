@@ -13,13 +13,12 @@ sqlsession = Session(get_db()[0])
 bp = Blueprint('auth', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
 engine = get_db()[0]
 md = get_db()[1]
-connection = get_db()[2]
 
 @bp.before_app_request
 def current_user():
     user_id = session.get('user_id')
     table = md.tables['users']
-    # connection = engine.connect()
+    connection = engine.connect()
 
     if user_id is None:
         g.user = None

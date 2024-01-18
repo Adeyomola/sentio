@@ -33,11 +33,13 @@ def profile():
 			elif password != confirm_password:
 				error = "Passwords do not match"
 			if error is None:
-				statement = (update(table).where(table.c.id == g.get('user')[0]).values(password=generate_password_hash(password)))
-				connection.execute(statement)
-				connection.commit()
-				error = "Your password has been updated"
-			connection.close()
+				try:
+					statement = (update(table).where(table.c.id == g.get('user')[0]).values(password=generate_password_hash(password)))
+					connection.execute(statement)
+					connection.commit()
+					error = "Your password has been updated"
+				finally:
+					connection.close()
 			flash(error)
 
 		if 'changedetails' in request.form:
@@ -68,9 +70,8 @@ def profile():
 					if re.search('username', error):
 						error = 'username has already been taken'
 					flash(error)
-				else:
+				finally:
 					connection.close()
-			sqlsession.close()
 			flash(error)
 	username=g.get('user')[3]
 	firstname=g.get('user')[1]
