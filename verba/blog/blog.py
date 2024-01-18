@@ -104,7 +104,6 @@ def update_post(post_id):
     connection = engine.connect()
     table = md.tables['post']
     post_row = ResultProxy.fetchone(connection.execute(select(table).where(table.c.id == post_id)))
-    connection.close()
     if request.method == 'POST':
         try:
             title = request.form['title']
@@ -114,6 +113,7 @@ def update_post(post_id):
             return redirect(url_for('blog.get_post', post_id=post_row[0]))
         finally:
             connection.close()
+    connection.close()
     return render_template('update.html', post_row=post_row)
 
 @bp.route('/post/delete/<post_id>',  methods=['POST'])
