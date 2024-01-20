@@ -59,7 +59,8 @@ form>input {
 #article-title-1 {
     font: 1.35rem 'Quicksand';
     font-weight: 600;
-    border: transparent;
+    border: 1px solid #d4d4d4;
+    padding: 0.3rem;
     outline: none;
     color: #1d242c;
     text-transform: capitalize;
@@ -75,10 +76,10 @@ hr {
     width: 80%;
     max-width: 80%;
     height: 100dvh;
-    border: none;
+    border: 1px solid #d4d4d4;
     outline: none;
     resize: none;
-    padding: 0.1rem;
+    padding: 0.3rem;
     font: 0.9rem 'Montserrat';
     font-weight: 500;
 }

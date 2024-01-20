@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Quicksand">
     <link rel="stylesheet" href="{{ url_for('blog.static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/buttons.css') }}">
+    <!-- <script src="{{ url_for('blog.static', filename='script.js')}}" defer></script> -->
     <title>Write</title>
 </head>
 
@@ -16,11 +17,18 @@
     <div class="flash">{{ message }}</div>
     {% endfor %}
     {% extends 'loggedin.html' %}
-    {% block content %} <form method="post">
-        <input type="text" id="article-title-1" placeholder="Title:" name="title" autocomplete="off" required>
-        <hr>
-        <textarea name="body" id="body" cols="30" rows="10" placeholder="Scribble..." autocomplete="off"
-            required></textarea>
+    {% block content %}
+    <div style="display: flex; justify-content: center;">
+        <button id="bold">B</button>
+        <button>I</button>
+        <button>Q</button>
+        <button>J</button>
+        <button>U</button>
+    </div>
+    <form method="post">
+        <input type="text" id="article-title-1" placeholder="Title:" name="title" autocomplete="off">
+        <textarea name="body" id="body" cols="30" rows="10" contenteditable="true" placeholder="Scribble..."
+            autocomplete="off" required></textarea>
         <button type="submit"> Submit </button>
     </form>
     {% endblock %}

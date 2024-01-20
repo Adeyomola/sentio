@@ -37,6 +37,8 @@ summary>img {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    text-decoration: none;
+    color: #1d242c;
 
     @supports (-webkit-line-clamp: 3) {
         display: -webkit-box;

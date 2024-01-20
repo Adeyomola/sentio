@@ -27,7 +27,7 @@
             <summary>
                 <img src="../static/images/placeholder.webp">
                 <a href="/post/{{ post['id']}}" id="article-title">{{ post['title']}}</a>
-                <p id="preview">{{ post['body'] }}</p>
+                <a href="/post/{{ post['id']}}" id="preview">{{ post['body'] }}</a>
             </summary>
             {% endfor %}
         </section>
