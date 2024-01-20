@@ -75,14 +75,16 @@ hr {
 #body {
     width: 80%;
     max-width: 80%;
-    height: 100dvh;
+    height: 63vh;
+    max-height: 80%;
     border: 1px solid #d4d4d4;
     outline: none;
     resize: none;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     font: 0.7rem 'Montserrat';
     font-weight: 500;
     overflow-y: scroll;
+    margin-bottom: 0.2rem;
 }
 
 /* styling for get post */
@@ -95,7 +97,7 @@ article {
 
 #body-1 {
     width: 90%;
-    height: 100dvh;
+    /* height: 100dvh; */
     padding: 0.5rem;
     font: 0.7rem 'Montserrat';
     font-weight: 500;
@@ -124,16 +126,11 @@ article {
 
 /* edit delete, and update styling */
 #edit-delete-wrapper {
-    position: sticky;
+    position: fixed;
     bottom: 0;
     display: flex;
     align-self: center;
     justify-content: center;
-}
-
-button {
-    position: sticky;
-    bottom: 1rem;
 }
 
 @media screen and (min-width: 640px) {
@@ -143,6 +140,11 @@ button {
 }
 
 @media screen and (min-width: 1024px) {
+    #body {
+        height: 65vh;
+        margin-bottom: 0.5rem;
+    }
+
     #body-1 {
         font-size: 1rem;
     }

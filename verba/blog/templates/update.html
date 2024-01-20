@@ -7,9 +7,9 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Quicksand">
     <link rel="stylesheet" href="{{ url_for('blog.static', filename='styles/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('blog.static', filename='styles/editor.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/buttons.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='fa/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('blog.static', filename='styles/editor.css') }}">
     <script src="{{ url_for('blog.static', filename='js/temp.js')}}" defer></script>
     <title>Update</title>
 </head>
@@ -18,9 +18,19 @@
     {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
     {% endfor %}
-    {% extends 'loggedin.html' %}
+    {% extends 'loggedin_mini.html' %}
     {% block content %}
     <div id="editorbuttoncontainer">
+        <select id="formatBlock">
+            <option value="">Headings</option>
+            <option value="p">Paragraph</option>
+            <option value="h1">Heading 1</option>
+            <option value="h2">Heading 2</option>
+            <option value="h3">Heading 3</option>
+            <option value="h4">Heading 4</option>
+            <option value="h5">Heading 5</option>
+            <option value="h6">Heading 6</option>
+        </select>
         <button class="editorbuttons" id="bold"><b>B</b></button>
         <button class="editorbuttons" id="italic"><em>I</em></button>
         <button class="editorbuttons" id="underline"><u>U</u></button>
@@ -36,6 +46,7 @@
         <button id="subscript" class="editorbuttons"><i class="fa fa-subscript"></i></button>
         <button id="superscript" class="editorbuttons"><i class="fa fa-superscript"></i></button>
         <button id="createLink" class="editorbuttons"><i class="fa fa-link"></i></button>
+        <button id="unlink" class="editorbuttons"><i class="fa fa-unlink"></i></button>
     </div>
     <form method="post">
         <input type="text" id="article-title-1" placeholder="Title:" name="title" value="{{ post_row['title'] }}"
@@ -46,13 +57,10 @@
         <div id="body" contenteditable="true">
             {{ post_row['body'] | safe }}
         </div>
-        <button id="update" type="submit" onclick="transfer()"> Update </button>
+        <button id="update" type="submit"
+            onclick="document.getElementById('hiddeninput').value = document.getElementById('body').innerHTML"> Update
+        </button>
     </form>
-    <script>
-        function transfer() {
-            document.getElementById("hiddeninput").value = document.getElementById("body").innerHTML
-        }
-    </script>
     {% endblock %}
 </body>
 

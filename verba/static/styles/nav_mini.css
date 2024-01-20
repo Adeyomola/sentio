@@ -1,0 +1,110 @@
+    /* header */
+    header {
+        display: flex;
+        flex-direction: column;
+        height: 10vh;
+        background: linear-gradient(rgba(36, 39, 38, 0.521), rgba(36, 39, 38, 0.74)),
+            rgba(36, 39, 38, 0.87) url('../images/hero.webp') no-repeat center 30%;
+        background-size: cover;
+        padding: 0.5rem 0.3rem;
+        align-items: flex-start;
+    }
+
+    #title {
+        display: flex;
+        font: 5vh 'Quicksand';
+        font-weight: 600;
+        width: 40%;
+        max-width: 40%;
+        color: #d4d4d4;
+        text-decoration: none;
+    }
+
+    #title:hover {
+        transform: translate(0.1rem, 0);
+    }
+
+    #tagline {
+        font: italic 1.5vh 'Montserrat';
+        color: #d4d4d4;
+        margin-bottom: 5vh;
+    }
+
+    /* nav */
+    nav {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    nav a {
+        margin: 0 0.5rem;
+        font: 2.5vw 'Nunito';
+        font-weight: 100;
+        color: #d4d4d4;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a:hover {
+        scale: 1.1;
+    }
+
+    #profile {
+        position: fixed;
+        right: 0;
+        top: 0;
+        padding: 0.5rem 1.2vw;
+    }
+
+    #profile>svg>g>g>circle {
+        background-color: linear-gradient(rgba(36, 39, 38, 0.521), rgba(36, 39, 38, 0.74)),
+            rgba(36, 39, 38, 0.87);
+    }
+
+    .noshow {
+        display: none;
+    }
+
+    .show {
+        display: flex;
+        flex-direction: column;
+        position: inherit;
+        margin-top: -5px;
+        right: 0;
+        background-color: #1d242ccc;
+        padding: 0.5rem 0.5rem;
+        border-radius: 0.2rem 0 0 0.2rem;
+    }
+
+    #profile>div>a {
+        font-size: 0.7rem;
+        padding: 0.3rem 0;
+    }
+
+    @media screen and (max-width: 320px) {
+        header {
+            height: 11vh;
+        }
+    }
+
+    @media screen and (min-width: 1024px) {
+        header {
+            height: 10vh;
+        }
+    }
+
+    @media screen and (min-width: 1280px) {
+        header {
+            background-size: 100% 200%;
+        }
+    }
+
+    @media screen and (min-width: 480px) and (max-width: 1023px) and (orientation: landscape) {
+        header {
+            height: 15vh;
+        }
+    }

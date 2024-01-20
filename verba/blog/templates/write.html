@@ -18,9 +18,19 @@
     {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
     {% endfor %}
-    {% extends 'loggedin.html' %}
+    {% extends 'loggedin_mini.html' %}
     {% block content %}
     <div id="editorbuttoncontainer">
+        <select id="formatBlock">
+            <option value="">Headings</option>
+            <option value="p">Paragraph</option>
+            <option value="h1">Heading 1</option>
+            <option value="h2">Heading 2</option>
+            <option value="h3">Heading 3</option>
+            <option value="h4">Heading 4</option>
+            <option value="h5">Heading 5</option>
+            <option value="h6">Heading 6</option>
+        </select>
         <button class="editorbuttons" id="bold"><b>B</b></button>
         <button class="editorbuttons" id="italic"><em>I</em></button>
         <button class="editorbuttons" id="underline"><u>U</u></button>
@@ -36,21 +46,19 @@
         <button id="subscript" class="editorbuttons"><i class="fa fa-subscript"></i></button>
         <button id="superscript" class="editorbuttons"><i class="fa fa-superscript"></i></button>
         <button id="createLink" class="editorbuttons"><i class="fa fa-link"></i></button>
+        <button id="unlink" class="editorbuttons"><i class="fa fa-unlink"></i></button>
     </div>
     <form method="post">
-        <input type="text" id="article-title-1" placeholder="Title:" name="title" autocomplete="off">
+        <input type="text" id="article-title-1" placeholder="Title:" name="title" autocomplete="off" required>
         <!-- <textarea name="body" id="body" contenteditable="true" placeholder="Scribble..." autocomplete="off"
             required></textarea> -->
         <input type="hidden" id="hiddeninput" name="body">
         <div id="body" contenteditable="true">
         </div>
-        <button type="submit" onclick="transfer()"> Submit </button>
+        <button type="submit"
+            onclick="document.getElementById('hiddeninput').value = document.getElementById('body').innerHTML"> Submit
+        </button>
     </form>
-    <script>
-        function transfer() {
-            document.getElementById("hiddeninput").value = document.getElementById("body").innerHTML
-        }
-    </script>
     {% endblock %}
 </body>
 

@@ -6,7 +6,8 @@
     margin: 2vh 2vh;
 }
 
-.editorbuttons {
+.editorbuttons,
+select {
     width: 9vw;
     margin: 0.1rem 0.1rem;
     padding: 0.4rem 0;
@@ -16,6 +17,10 @@
     border: none;
     text-align: center;
     background-color: #1d242c1a;
+}
+
+select {
+    width: 20vw;
 }
 
 .editorbuttons:hover {
@@ -28,22 +33,38 @@ button {
 }
 
 @media screen and (min-width: 640px) {
+
     .editorbuttons {
         width: 4vw;
+        font-size: 1.5vw;
+    }
+
+    select {
+        width: 9vw;
         font-size: 1.5vw;
     }
 }
 
 @media screen and (min-width: 1024px) {
+
     .editorbuttons {
         width: 3vw;
+        font-size: 1.2vw;
+    }
+
+    select {
         font-size: 1.2vw;
     }
 }
 
 @media screen and (min-width: 1280px) {
+
     .editorbuttons {
         width: 2.5vw;
         font-size: 0.8vw;
+    }
+
+    select {
+        font-size: 0.8vw
     }
 }
