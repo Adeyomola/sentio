@@ -50,6 +50,8 @@ summary>img {
         transform: none;
         font-weight: 100;
         font-size: 2.5vw;
+        text-decoration: none;
+        color: #1d242c;
     }
 }
 
