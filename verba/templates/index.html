@@ -21,8 +21,8 @@
             {% for post in posts %}
             <summary>
                 <img src="../static/images/placeholder.webp">
-                <a href="/post/{{ post['id']}}" id="article-title">{{ post['title']}}</a>
-                <a href="/post/{{ post['id']}}" id="preview">{{ post['body'] }}</a>
+                <a href="/post/{{ post['id']}}" id="article-title">{{ post['title'] | safe }}</a>
+                <a href="/post/{{ post['id']}}" id="preview">{{ post['body'] | safe }}</a>
             </summary>
             {% endfor %}
         </section>

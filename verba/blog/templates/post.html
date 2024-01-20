@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Quicksand">
-    <link rel="stylesheet" href="{{ url_for('blog.static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('blog.static', filename='styles/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/buttons.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/content.css') }}">
     <title>All Posts</title>
@@ -28,8 +28,8 @@
             {% for post in posts %}
             <summary>
                 <img src="../static/images/placeholder.webp">
-                <a href="/post/{{ post['id']}}" id="article-title">{{ post['title']}}</a>
-                <a href="/post/{{ post['id']}}" id="preview">{{ post['body'] }}</a>
+                <a href="/post/{{ post['id']}}" id="article-title">{{ post['title'] | safe }}</a>
+                <a href="/post/{{ post['id']}}" id="preview">{{ post['body'] | safe }}</a>
             </summary>
             {% endfor %}
         </section>

@@ -79,14 +79,10 @@ hr {
     border: 1px solid #d4d4d4;
     outline: none;
     resize: none;
-    padding: 0.3rem;
-    font: 0.9rem 'Montserrat';
+    padding: 0.5rem 1rem;
+    font: 0.7rem 'Montserrat';
     font-weight: 500;
-}
-
-#body::placeholder {
-    font: 1.2rem 'Quicksand';
-    font-weight: 600;
+    overflow-y: scroll;
 }
 
 /* styling for get post */
@@ -98,10 +94,10 @@ article {
 }
 
 #body-1 {
-    width: 100%;
+    width: 90%;
     height: 100dvh;
     padding: 0.5rem;
-    font: 3vw 'Montserrat';
+    font: 0.7rem 'Montserrat';
     font-weight: 500;
     border-top: 0.1rem solid #6b6969ee;
     overflow-y: scroll;
@@ -140,36 +136,14 @@ button {
     bottom: 1rem;
 }
 
-@media screen and (min-width: 480px) {
-    #edit-delete-wrapper {
-        width: 10vw;
-    }
-
+@media screen and (min-width: 640px) {
     #body-1 {
-        font-size: 1.5vw;
+        font-size: 0.75rem;
     }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1024px) {
     #body-1 {
-        font-size: 1.2vw;
-    }
-}
-
-@media (min-width: 500px) and (max-width: 950px) and (orientation: landscape) {
-    nav a {
-        font-size: 4vh;
-    }
-
-    #article-title-2 {
-        font-size: 5.5vh;
-    }
-
-    #author-name {
-        font-size: 3vh;
-    }
-
-    #body-1 {
-        font-size: 2.2vw;
+        font-size: 1rem;
     }
 }

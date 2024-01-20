@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Nunito|Quicksand">
-    <link rel="stylesheet" href="{{ url_for('blog.static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('blog.static', filename='styles/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/buttons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fa/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('blog.static', filename='styles/editor.css') }}">
+    <script src="{{ url_for('blog.static', filename='js/temp.js')}}" defer></script>
     <title>Update</title>
 </head>
 
@@ -17,13 +20,39 @@
     {% endfor %}
     {% extends 'loggedin.html' %}
     {% block content %}
+    <div id="editorbuttoncontainer">
+        <button class="editorbuttons" id="bold"><b>B</b></button>
+        <button class="editorbuttons" id="italic"><em>I</em></button>
+        <button class="editorbuttons" id="underline"><u>U</u></button>
+        <!-- <button class="editorbuttons" id="quotes"><i class="fa fa-quote-left"></i></button> -->
+        <button class="editorbuttons" id="justifyCenter"><i class="fa fa-align-justify"></i></button>
+        <button class="editorbuttons" id="justifyLeft"><i class="fa fa-align-left"></i></button>
+        <button class="editorbuttons" id="justifyRight"><i class="fa fa-align-right"></i></button>
+        <button class="editorbuttons" id="insertUnorderedList"><i class="fa fa-list-ul"></i></button>
+        <button class="editorbuttons" id="insertOrderedList"><i class="fa fa-list-ol"></i></button>
+        <button id="undo" class="editorbuttons">&#8630</button>
+        <button id="redo" class="editorbuttons">&#8631</button>
+        <button id="strikeThrough" class="editorbuttons"><i class="fa fa-strikethrough"></i></button>
+        <button id="subscript" class="editorbuttons"><i class="fa fa-subscript"></i></button>
+        <button id="superscript" class="editorbuttons"><i class="fa fa-superscript"></i></button>
+        <button id="createLink" class="editorbuttons"><i class="fa fa-link"></i></button>
+    </div>
     <form method="post">
         <input type="text" id="article-title-1" placeholder="Title:" name="title" value="{{ post_row['title'] }}"
             autocomplete="off" required>
-        <textarea name="body" id="body" cols="30" rows="10" placeholder="Scribble..." autocomplete="off"
-            required>{{ post_row['body'] }}</textarea>
-        <button id="update" type="submit"> Update </button>
+        <!-- <textarea name="body" id="body" cols="30" rows="10" placeholder="Scribble..." autocomplete="off"
+            required>{{ post_row['body'] }}</textarea> -->
+        <input type="hidden" id="hiddeninput" name="body">
+        <div id="body" contenteditable="true">
+            {{ post_row['body'] | safe }}
+        </div>
+        <button id="update" type="submit" onclick="transfer()"> Update </button>
     </form>
+    <script>
+        function transfer() {
+            document.getElementById("hiddeninput").value = document.getElementById("body").innerHTML
+        }
+    </script>
     {% endblock %}
 </body>
 

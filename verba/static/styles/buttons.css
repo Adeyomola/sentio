@@ -28,6 +28,7 @@ button:hover {
 }
 
 @media screen and (min-width: 1280px) {
+
     button {
         width: 3.5vw;
         font-size: 0.8vw;
