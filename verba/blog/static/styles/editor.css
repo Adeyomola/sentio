@@ -23,10 +23,6 @@ select {
     width: 20vw;
 }
 
-select>option {
-    padding: 0.5rem;
-}
-
 .editorbuttons:hover {
     transform: none;
     border: 1px solid #1d242c;
@@ -34,6 +30,12 @@ select>option {
 
 button {
     margin: 0;
+}
+
+@media screen and (max-with: 1023px) and(orientation: landscape) {
+    select {
+        -webkit-appearance: none;
+    }
 }
 
 @media screen and (min-width: 640px) {
