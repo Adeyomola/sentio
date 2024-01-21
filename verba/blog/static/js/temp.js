@@ -100,10 +100,6 @@ buttons.forEach((element) => {
       e.preventDefault();
       document.execCommand(command, false, element.value);
     };
-    // element.ontouchend = () => {
-    //   e.preventDefault();
-    //   document.execCommand(command, false, element.value);
-    // };
   } else {
     element = document.getElementById(element);
     element.onclick = () => document.execCommand(command);
