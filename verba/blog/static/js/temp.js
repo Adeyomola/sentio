@@ -57,18 +57,14 @@ function restoreSelection() {
 
 // function that saves link entered in popup
 function saveLink(command) {
-  link.addEventListener(
-    "keyup",
-    (e) => {
-      if (e.key === "Enter") {
-        restoreSelection();
-        document.execCommand(command, false, link.value);
-        link.value = "https://";
-        linkPopUp.style.display = "none";
-      }
-    },
-    { once: true }
-  );
+  link.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+      restoreSelection();
+      document.execCommand(command, false, link.value);
+      link.value = "https://";
+      linkPopUp.style.display = "none";
+    }
+  });
   linkButton.addEventListener(
     "click",
     () => {
