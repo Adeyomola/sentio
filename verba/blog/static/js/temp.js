@@ -1,15 +1,11 @@
 const body = document.getElementById("body");
 
-// create popup for hyperlink
-const linkPopUp = document.createElement("div");
-linkPopUp.style.cssText = `position: fixed; transform: translate(2.5rem, 15rem);
-  font: 0.7rem 'Nunito'; z-index: 5; 
-  background-color: #1d242c1a; 
-  padding: 0.5rem; border-radius: 0.1rem;`;
-linkPopUp.innerText = "Enter a URL: ";
-const link = document.createElement("input");
-linkPopUp.appendChild(link);
+// get popup elements
+const linkPopUp = document.getElementById("linkPopUp");
+const link = document.getElementById("link");
+const linkButton = document.getElementById("linkButton");
 
+// array for editor buttons
 const buttons = [
   "bold",
   "italic",
@@ -34,6 +30,7 @@ let start;
 let end;
 let selection;
 
+// gets selection offset be entering popup
 function preserveSelection() {
   selection = window.getSelection();
   if (selection.anchorOffset < selection.focusOffset) {
@@ -45,16 +42,35 @@ function preserveSelection() {
   }
 }
 
+// restores selection when we're leaving popup
 function restoreSelection() {
   let range = document.createRange();
 
   range.setStart(body.firstChild, start);
   range.setEnd(body.lastChild, end);
-
   selection.removeAllRanges();
   selection.addRange(range);
 }
 
+// function that saves link entered in popup
+function saveLink(command) {
+  link.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+      restoreSelection();
+      document.execCommand(command, false, link.value);
+      link.value = "https://";
+      linkPopUp.style.display = "none";
+    }
+  });
+  linkButton.addEventListener("click", () => {
+    restoreSelection();
+    document.execCommand(command, false, link.value);
+    link.value = "https://";
+    linkPopUp.style.display = "none";
+  });
+}
+
+// forEach loop that creates eventlisteners that execcommand for each editor button
 buttons.forEach((element) => {
   let command = element;
 
@@ -64,17 +80,10 @@ buttons.forEach((element) => {
     element = document.getElementById(element);
 
     element.onclick = () => {
-      if (window.getSelection().toString() == "" || link.value == null) return;
-      document.body.appendChild(linkPopUp);
+      if (window.getSelection().toString() == "") return;
+      linkPopUp.style.display = "flex";
       link.focus();
-      link.addEventListener("keyup", (e) => {
-        if (e.key === "Enter") {
-          restoreSelection();
-          document.execCommand(command, false, link.value);
-          link.value = "";
-          document.body.removeChild(linkPopUp);
-        }
-      });
+      saveLink(command);
     };
   } else if (
     element === "insertUnorderedList" ||
