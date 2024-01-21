@@ -22,8 +22,7 @@
     {% block content %}
     <div id="editorbuttoncontainer">
         <select id="formatBlock">
-            <option value="">Headings</option>
-            <option value="p">Paragraph</option>
+            <option value="p" selected>Paragraph</option>
             <option value="h1">Heading 1</option>
             <option value="h2">Heading 2</option>
             <option value="h3">Heading 3</option>
@@ -64,7 +63,7 @@
     <!-- PopUp -->
     <div id="linkPopUp"
         style="display: none; width: 100vw; height: 100vh; position: fixed; font: 0.8rem 'Nunito'; z-index: 100; background-color: #1d242c1a;  align-items: center; justify-content: center;">
-        <div style="background-color: #4a678a93; padding: 1rem; border-radius: 0.2rem;">Enter a URL: 
+        <div style="background-color: #4a678a93; padding: 1rem; border-radius: 0.2rem;">Enter a URL:
             <input id="link" type="text" value="https://" style="outline: none;">
             <button id="linkButton"
                 style="margin-top: 0; margin-bottom: 0; padding: 0.1rem; background-color: white;">Enter</button>

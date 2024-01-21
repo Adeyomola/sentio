@@ -96,14 +96,14 @@ buttons.forEach((element) => {
     };
   } else if (element === "formatBlock") {
     element = document.getElementById(element);
-    element.onmouseup = (e) => {
+    element.onchange = (e) => {
       e.preventDefault();
       document.execCommand(command, false, element.value);
     };
-    element.ontouchend = () => {
-      e.preventDefault();
-      document.execCommand(command, false, element.value);
-    };
+    // element.ontouchend = () => {
+    //   e.preventDefault();
+    //   document.execCommand(command, false, element.value);
+    // };
   } else {
     element = document.getElementById(element);
     element.onclick = () => document.execCommand(command);
