@@ -29,10 +29,11 @@ const buttons = [
 let start;
 let end;
 let selection;
+let selected;
 
 // gets selection offset be entering popup
 function preserveSelection() {
-  selection = window.getSelection();
+  selection = document.getSelection();
   if (selection.anchorOffset < selection.focusOffset) {
     start = selection.anchorOffset;
     end = selection.focusOffset;
@@ -40,34 +41,44 @@ function preserveSelection() {
     start = selection.focusOffset;
     end = selection.anchorOffset;
   }
+  selected = selection.focusNode;
 }
 
 // restores selection when we're leaving popup
 function restoreSelection() {
   let range = document.createRange();
 
-  range.setStart(body.firstChild, start);
-  range.setEnd(body.lastChild, end);
+  range.setStart(selected, start);
+  range.setEnd(selected, end);
+
   selection.removeAllRanges();
   selection.addRange(range);
 }
 
 // function that saves link entered in popup
 function saveLink(command) {
-  link.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
+  link.addEventListener(
+    "keyup",
+    (e) => {
+      if (e.key === "Enter") {
+        restoreSelection();
+        document.execCommand(command, false, link.value);
+        link.value = "https://";
+        linkPopUp.style.display = "none";
+      }
+    },
+    { once: true }
+  );
+  linkButton.addEventListener(
+    "click",
+    () => {
       restoreSelection();
       document.execCommand(command, false, link.value);
       link.value = "https://";
       linkPopUp.style.display = "none";
-    }
-  });
-  linkButton.addEventListener("click", () => {
-    restoreSelection();
-    document.execCommand(command, false, link.value);
-    link.value = "https://";
-    linkPopUp.style.display = "none";
-  });
+    },
+    { once: true }
+  );
 }
 
 // forEach loop that creates eventlisteners that execcommand for each editor button
@@ -75,7 +86,7 @@ buttons.forEach((element) => {
   let command = element;
 
   if (element === "createLink") {
-    body.addEventListener("mouseout", preserveSelection);
+    body.addEventListener("mouseup", preserveSelection);
     body.addEventListener("touchend", preserveSelection);
     element = document.getElementById(element);
 
