@@ -23,6 +23,10 @@ select {
     width: 20vw;
 }
 
+select>option {
+    padding: 0.5rem;
+}
+
 .editorbuttons:hover {
     transform: none;
     border: 1px solid #1d242c;
