@@ -1,4 +1,3 @@
-import sqlite3
 import pytest
 from verba.db import get_db, init_db, close_db
 from verba.metadata import metadata

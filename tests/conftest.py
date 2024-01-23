@@ -1,5 +1,4 @@
 import os
-import tempfile
 import pytest
 from verba.app import create_app
 from verba.db import get_db, init_db
@@ -9,9 +8,6 @@ import sqlalchemy
 
 @pytest.fixture
 def app():
-    db_fd, db_path = tempfile.mkstemp()
-    db_name=db_path
-
     app = create_app({
         'TESTING': True,
         'ENGINE':  sqlalchemy.create_engine("sqlite:///test"),
@@ -32,8 +28,7 @@ def app():
         get_db().execute(insert_post)
     yield app
 
-    os.close(db_fd)
-    os.unlink(db_path)
+    os.remove('test')
 
 
 @pytest.fixture
