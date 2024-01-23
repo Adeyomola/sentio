@@ -1,4 +1,4 @@
-from verba.db import get_db
+from verba.db import get_db, metadata, dbms
 from flask import request, render_template, flash, redirect, session, Blueprint, g, url_for
 from sqlalchemy import insert, select, delete, update
 from sqlalchemy.engine import ResultProxy
@@ -6,12 +6,10 @@ from sqlalchemy.exc import IntegrityError
 from verba.auth.auth import login_required
 from werkzeug.exceptions import abort
 import re
-from sqlalchemy.orm import Session
 
-sqlsession = Session(get_db()[0])
 bp = Blueprint('blog', __name__, template_folder='templates', static_folder='static', static_url_path='/blog/static')
-engine = get_db()[0]
-md = get_db()[1]
+
+md = metadata(dbms)[1]
 table = md.tables['post']
 
 class Verify:
@@ -19,7 +17,7 @@ class Verify:
         self.post_id = post_id
 
     def verify_author(post_id):
-        connection = engine.connect()
+        connection = get_db()
         row = connection.execute((select(table).where(table.c.id == post_id))) 
         row = ResultProxy.fetchone(row)
         if row is None:
@@ -31,7 +29,7 @@ class Verify:
         connection.rollback()
     
     def verify_post(post_id):
-        connection = engine.connect()
+        connection = get_db()
         row = connection.execute((select(table).where(table.c.id == post_id))) 
         row = ResultProxy.fetchone(row)
         if row is None:
@@ -39,14 +37,14 @@ class Verify:
         connection.rollback()
 
 def author_posts():
-    connection = engine.connect()
+    connection = get_db()
     statement = (select(table).where(table.c.author_id == session['user_id']))
     posts = connection.execute(statement).fetchall()
     connection.close()
     return posts
 
 def front_posts():
-    connection = engine.connect()
+    connection = get_db()
     statement = (select(table))
     posts = connection.execute(statement).fetchmany(8)
     connection.close()
@@ -59,7 +57,7 @@ def write():
         error = None
         title = request.form['title']
         body = request.form['body']
-        connection = engine.connect()
+        connection = get_db()
 
         if error is None:
             try:
@@ -81,7 +79,7 @@ def write():
 
 @bp.route('/post', strict_slashes=False)
 def post():
-    connection = engine.connect()
+    connection = get_db()
     statement = (select(table))
     posts = connection.execute(statement).fetchall()
     connection.close()
@@ -90,7 +88,7 @@ def post():
 @bp.route('/post/<post_id>')
 def get_post(post_id):
     Verify.verify_post(post_id)
-    connection = engine.connect()
+    connection = get_db()
     statement = (select(table).where(table.c.id == post_id))
     post_row = connection.execute(statement)
     post_row = ResultProxy.fetchone(post_row)
@@ -101,7 +99,7 @@ def get_post(post_id):
 @login_required
 def update_post(post_id):
     Verify.verify_author(post_id)
-    connection = engine.connect()
+    connection = get_db()
     table = md.tables['post']
     post_row = ResultProxy.fetchone(connection.execute(select(table).where(table.c.id == post_id)))
     if request.method == 'POST':
@@ -120,7 +118,7 @@ def update_post(post_id):
 @login_required
 def delete_post(post_id):
     Verify.verify_author(post_id)
-    connection = engine.connect()
+    connection = get_db()
     table = md.tables['post']
     connection.execute((delete(table).where(table.c.id == post_id)))
     connection.commit()

@@ -1,17 +1,15 @@
-from verba.db import get_db
+from verba.db import get_db, metadata, dbms
 from flask import request, session, render_template, flash, redirect, Blueprint, g, url_for, send_file
 from sqlalchemy.sql import update
 from sqlalchemy.engine import ResultProxy
-from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash
 from verba.auth.auth import login_required
 import re
 
-sqlsession = Session(get_db()[0])
+
 bp = Blueprint('profile', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
-engine = get_db()[0]
-md = get_db()[1]
+md = metadata(dbms)[1]
 
 
 @bp.route('/profile',  methods=['GET', 'POST'], strict_slashes = False)
@@ -20,7 +18,7 @@ def profile():
 	if request.method == 'POST':
 		if 'changepassword' in request.form:
 			error = None
-			connection = engine.connect()
+			connection = get_db()
 
 			password = request.form['password']
 			confirm_password=request.form['confirm_password']
@@ -44,7 +42,7 @@ def profile():
 
 		if 'changedetails' in request.form:
 			error = None
-			connection = engine.connect()
+			connection = get_db()
 
 			username = request.form['username']
 			firstname = request.form['firstname']

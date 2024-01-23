@@ -1,4 +1,4 @@
-from verba.db import get_db
+from verba.db import get_db, metadata, dbms
 from flask import request, session, render_template, flash, redirect, Blueprint, g, url_for
 from sqlalchemy.sql import select, insert
 from sqlalchemy.engine import Result
@@ -8,17 +8,15 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import re
 import functools
 
-sqlsession = Session(get_db()[0])
 
 bp = Blueprint('auth', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
-engine = get_db()[0]
-md = get_db()[1]
+md = metadata(dbms)[1]
 
 @bp.before_app_request
 def current_user():
     user_id = session.get('user_id')
     table = md.tables['users']
-    connection = engine.connect()
+    connection = get_db()
 
     if user_id is None:
         g.user = None
@@ -42,7 +40,7 @@ def login():
         return redirect('/')
     if request.method == 'POST':
         error = None
-        connection = engine.connect()
+        connection = get_db()
 
         email = request.form['email']
         password = request.form['password']
@@ -74,7 +72,7 @@ def register():
         return redirect('/')
     if request.method == 'POST':
         error = None
-        connection = engine.connect()
+        connection = get_db()
 
         username = request.form['username']
         password = request.form['password']

@@ -8,7 +8,8 @@ secret_key=os.environ.get('SECRET_KEY')
 def create_app():
     app = Flask(__name__)
     app.config.from_mapping(
-        SECRET_KEY=secret_key
+        SECRET_KEY=secret_key,
+        DBMS="mysql"
     )
 
     from verba.blog import blog

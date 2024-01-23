@@ -1,5 +1,6 @@
 import datetime
-import sqlalchemy as db
+from flask import current_app, g
+import sqlalchemy
 from sqlalchemy import MetaData, Table, Column, Integer, String, TIMESTAMP, Text, ForeignKey
 import os
 from dotenv import load_dotenv
@@ -9,10 +10,14 @@ db_password=os.environ.get('DB_PASSWORD')
 db_user=os.environ.get('DB_USER')
 host=os.environ.get('HOST')
 db_name=os.environ.get('DATABASE')
+dbms="mysql"
 
-def get_db():
-    engine = db.create_engine(f"mysql://{db_user}:{db_password}@{host}/{db_name}")
-    connection = engine.connect()
+def metadata(dbms):
+    if dbms == "sqlite3":
+        engine = sqlalchemy.create_engine(f"{dbms}:///{db_name}")
+    else:
+        engine = sqlalchemy.create_engine(f"{dbms}://{db_user}:{db_password}@{host}/{db_name}")
+
     md = MetaData()
 
     users = Table(
@@ -33,17 +38,28 @@ def get_db():
     Column('title', Text, nullable=False),
     Column('body', Text, nullable=False)
     )
-
     return [engine, md]
 
+def get_db():
+    if 'db' not in g:
+        if current_app.config['DBMS'] == "sqlite3":
+            engine = sqlalchemy.create_engine(f"{current_app.config['DBMS']}:///{db_name}")
+            g.db = engine.connect()
+        else:
+            engine = sqlalchemy.create_engine(f"mysql://{db_user}:{db_password}@{host}/{db_name}")
+            g.db = engine.connect()
+    return g.db
+
 def init_db():
-    md = get_db()[1]
-    engine = get_db()[0]
+    engine = metadata(dbms)[0]
+    md = metadata(dbms)[1]
     md.create_all(engine)
 
 def close_db(e=None):
-    engine = get_db()[0]
-    engine.dispose()
+    db = g.pop('db', None)
+
+    if db is not None:
+        db.close()
 
 import click
 @click.command('db-init')
