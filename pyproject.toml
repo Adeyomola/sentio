@@ -8,3 +8,10 @@ description = "content management system"
 version = "1.0.0"
 dependencies = ["flask==3.0.0", "mysqlclient", "SQLAlchemy==2.0.23", "python-dotenv==1.0.0"]
 requires-python = ">= 3.8"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["verba"]
