@@ -1,16 +1,16 @@
-from verba.db import get_db, metadata, dbms
+from verba.db import get_db
+from verba.metadata import metadata
 from flask import request, session, render_template, flash, redirect, Blueprint, g, url_for
 from sqlalchemy.sql import select, insert
 from sqlalchemy.engine import Result
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 import re
 import functools
 
 
 bp = Blueprint('auth', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
-md = metadata(dbms)[1]
+md = metadata()
 
 @bp.before_app_request
 def current_user():

@@ -1,4 +1,5 @@
-from verba.db import get_db, metadata, dbms
+from verba.db import get_db
+from verba.metadata import metadata
 from flask import request, render_template, flash, redirect, session, Blueprint, g, url_for
 from sqlalchemy import insert, select, delete, update
 from sqlalchemy.engine import ResultProxy
@@ -9,7 +10,7 @@ import re
 
 bp = Blueprint('blog', __name__, template_folder='templates', static_folder='static', static_url_path='/blog/static')
 
-md = metadata(dbms)[1]
+md = metadata()
 table = md.tables['post']
 
 class Verify:

@@ -1,4 +1,5 @@
-from verba.db import get_db, metadata, dbms
+from verba.db import get_db
+from verba.metadata import metadata
 from flask import request, session, render_template, flash, redirect, Blueprint, g, url_for, send_file
 from sqlalchemy.sql import update
 from sqlalchemy.engine import ResultProxy
@@ -9,7 +10,7 @@ import re
 
 
 bp = Blueprint('profile', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
-md = metadata(dbms)[1]
+md = metadata()
 
 
 @bp.route('/profile',  methods=['GET', 'POST'], strict_slashes = False)
