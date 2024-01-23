@@ -5,7 +5,6 @@ from verba.app import create_app
 from verba.db import get_db, init_db
 from verba.metadata import metadata
 from sqlalchemy import insert, create_engine
-import time
 
 @pytest.fixture
 def app():
