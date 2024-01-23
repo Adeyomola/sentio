@@ -16,5 +16,5 @@ jobs:
           python-version: "3.9"
           cache: "pip"
       - run: |
-          pip install -r ./verba/requirements.txt
+          pip install -r test_requirements.txt
           pytest
