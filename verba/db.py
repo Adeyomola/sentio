@@ -8,9 +8,8 @@ def get_db():
     return g.db
 
 def init_db():
-    with current_app.app_context():
-        engine = current_app.config['ENGINE']
-        metadata().create_all(engine)
+    engine = current_app.config['ENGINE']
+    metadata().create_all(engine)
 
 def close_db(e=None):
     db = g.pop('db', None)

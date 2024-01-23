@@ -14,7 +14,7 @@ def app():
 
     app = create_app({
         'TESTING': True,
-        'ENGINE':  sqlalchemy.create_engine(f"sqlite:///test_data"),
+        'ENGINE':  sqlalchemy.create_engine("sqlite:///test"),
     })
     md = metadata()
     users = md.tables['users']
