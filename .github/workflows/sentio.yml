@@ -6,7 +6,7 @@ on:
     branches:
       - "main"
 jobs:
-  deploy:
+  on-success:
     name: Deploy app
     runs-on: ubuntu-latest
     steps:
