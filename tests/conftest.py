@@ -32,12 +32,10 @@ def app():
     os.unlink(db_path)
 
     
-
-
 @pytest.fixture
 def client(app):
     return app.test_client()
 
 @pytest.fixture
-def runner(app):
+def cli_runner(app):
     return app.test_cli_runner()
