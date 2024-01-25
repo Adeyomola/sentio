@@ -18,8 +18,8 @@ def test_login(client, auth):
 
 @pytest.mark.parametrize(('email', 'password', 'message'), (('a', 'test', b'Incorrect email address or password'),('test', 'a', b'Incorrect email address or password'),))
 def test_login_validation(client, email, password, message):
-    response = client.post('/login', data={'email': email, 'password': password})
-    assert message in response.data
+    result = client.post('/login', data={'email': email, 'password': password})
+    assert message in result.data
 
 def test_register(client, app):
     assert client.get('/register').status_code == 200
@@ -42,9 +42,9 @@ def test_register(client, app):
     ('test', 'b', 'b', 'jon', 'did', 'tester@test.com', b'username has already been taken'),
 ))
 def test_register_validation(client, username, password, confirm_password, firstname, lastname, email, message):
-    response = client.post(
+    result = client.post(
         '/register',
         data={'username': username, 'password': password, 'confirm_password': confirm_password, 
               'firstname': firstname, 'lastname': lastname, 'email': email}
     )
-    assert message in response.data
+    assert message in result.data
