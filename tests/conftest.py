@@ -12,6 +12,7 @@ def app():
 
     app = create_app({
         'TESTING': True,
+        'SECRET_KEY': 'test',
         'ENGINE':  create_engine(f"sqlite:///{db_path}"),
     })
     md = metadata()
@@ -27,6 +28,7 @@ def app():
         get_db().execute(create_user)
         get_db().execute(create_user2)
         get_db().execute(insert_post)
+        get_db().commit()
     yield app
     os.close(db_fd)
     os.unlink(db_path)
@@ -39,3 +41,18 @@ def client(app):
 @pytest.fixture
 def cli_runner(app):
     return app.test_cli_runner()
+
+class AuthActions(object):
+    def __init__(self, client):
+        self._client = client
+
+    def login(self, email='test@test.com', password='test'):
+        return self._client.post('/login', data={'email': email, 'password': password})
+
+    def logout(self):
+        return self._client.get('/logout')
+
+
+@pytest.fixture
+def auth(client):
+    return AuthActions(client)

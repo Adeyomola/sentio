@@ -8,7 +8,7 @@ def test_get_db(app):
     with app.app_context():
         db = get_db()
         assert db is get_db()
-    with  pytest.raises(exc.ResourceClosedError) as e:
+    with pytest.raises(exc.ResourceClosedError) as e:
         post = metadata().tables['post']
         db.execute((select(post).where(post.c.id == 1)))
     assert 'closed' in str(e.value)
