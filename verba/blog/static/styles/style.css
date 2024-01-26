@@ -97,6 +97,7 @@ article {
 
 #body-1 {
     width: 90%;
+    max-width: 90%;
     /* height: 100dvh; */
     padding: 0.5rem;
     font: 0.7rem 'Montserrat';
