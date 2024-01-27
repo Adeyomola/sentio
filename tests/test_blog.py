@@ -1,5 +1,6 @@
 import pytest
 from verba.db import get_db
+from verba.blog.uploads import Upload
 import tempfile
 import os
 
@@ -22,8 +23,8 @@ def test_write(client, auth):
     result = client.get('/write')
     assert b'placeholder="Title:"' in result.data
     assert result.status_code == 200
-
-    post_result = client.post('/write', data={'title': 'Testing Write', 'body': 'This is a test', 'image_url': 'https://verba.fly.dev'})
+    
+    post_result = client.post('/write', data={'title': 'Testing Write', 'body': 'This is a test'})
     assert post_result.headers["Location"] == "/"
     assert b'Hi! test' in client.get('/').data
     assert b'Testing Write' in client.get('/').data
