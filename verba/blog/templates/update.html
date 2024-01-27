@@ -47,7 +47,7 @@
         <button id="createLink" class="editorbuttons"><i class="fa fa-link"></i></button>
         <button id="unlink" class="editorbuttons"><i class="fa fa-unlink"></i></button>
     </div>
-    <form method="post">
+    <form method="post" enctype=multipart/form-data>
         <input type="text" id="article-title-1" placeholder="Title:" name="title" value="{{ post_row['title'] }}"
             autocomplete="off" required>
         <!-- <textarea name="body" id="body" cols="30" rows="10" placeholder="Scribble..." autocomplete="off"
@@ -56,6 +56,7 @@
         <div id="body" contenteditable="true">
             {{ post_row['body'] | safe }}
         </div>
+        <input type="file" name="file">
         <button id="update" type="submit"
             onclick="document.getElementById('hiddeninput').value = document.getElementById('body').innerHTML"> Update
         </button>

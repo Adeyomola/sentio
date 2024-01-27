@@ -5,37 +5,14 @@ from sqlalchemy import insert, select, delete, update
 from sqlalchemy.engine import ResultProxy
 from sqlalchemy.exc import IntegrityError
 from verba.auth.auth import login_required
-from werkzeug.exceptions import abort
 import re
+from verba.blog.uploads import Upload
+from verba.blog.verify import Verify
 
 bp = Blueprint('blog', __name__, template_folder='templates', static_folder='static', static_url_path='/blog/static')
 
 md = metadata()
 table = md.tables['post']
-
-class Verify:
-    def __init__(self, post_id) -> None:
-        self.post_id = post_id
-
-    def verify_author(post_id):
-        connection = get_db()
-        row = connection.execute((select(table).where(table.c.id == post_id))) 
-        row = ResultProxy.fetchone(row)
-        if row is None:
-            abort(404, f'Post does not exist')
-        if not session:
-            redirect(url_for('auth.login'))
-        elif session['user_id'] != row[1] and session['user_id'] != 1:
-            abort(401, f'Unauthorized')
-        connection.rollback()
-    
-    def verify_post(post_id):
-        connection = get_db()
-        row = connection.execute((select(table).where(table.c.id == post_id))) 
-        row = ResultProxy.fetchone(row)
-        if row is None:
-            abort(404, f'Post does not exist')
-        connection.rollback()
 
 def author_posts():
     connection = get_db()
@@ -59,10 +36,10 @@ def write():
         title = request.form['title']
         body = request.form['body']
         connection = get_db()
-
         if error is None:
             try:
-                statement = (insert(table).values(title=title, author_id=g.get('user')[0], firstname=g.get('user')[1], body=body))
+                image_url = Upload.upload_file(Upload)
+                statement = (insert(table).values(title=title, author_id=g.get('user')[0], firstname=g.get('user')[1], body=body, image_url=image_url))
                 connection.execute(statement)
                 connection.commit()
                 return redirect('/')
@@ -88,8 +65,8 @@ def post():
 
 @bp.route('/post/<post_id>')
 def get_post(post_id):
-    Verify.verify_post(post_id)
     connection = get_db()
+    Verify.verify_post(post_id, table, connection)
     statement = (select(table).where(table.c.id == post_id))
     post_row = connection.execute(statement)
     post_row = ResultProxy.fetchone(post_row)
@@ -99,15 +76,15 @@ def get_post(post_id):
 @bp.route('/post/update/<post_id>',  methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
-    Verify.verify_author(post_id)
     connection = get_db()
-    table = md.tables['post']
+    Verify.verify_author(post_id, table, connection)
     post_row = ResultProxy.fetchone(connection.execute(select(table).where(table.c.id == post_id)))
     if request.method == 'POST':
         try:
             title = request.form['title']
             body = request.form['body']
-            connection.execute((update(table).where(table.c.id == post_id).values(title=title, body=body)))
+            image_url = Upload.upload_file(Upload)
+            connection.execute((update(table).where(table.c.id == post_id).values(title=title, body=body, image_url=image_url)))
             connection.commit()
             return redirect(url_for('blog.get_post', post_id=post_row[0]))
         finally:
@@ -118,9 +95,8 @@ def update_post(post_id):
 @bp.route('/post/delete/<post_id>',  methods=['POST'])
 @login_required
 def delete_post(post_id):
-    Verify.verify_author(post_id)
     connection = get_db()
-    table = md.tables['post']
+    Verify.verify_author(post_id, table, connection)
     connection.execute((delete(table).where(table.c.id == post_id)))
     connection.commit()
     connection.close()

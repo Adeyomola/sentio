@@ -47,13 +47,14 @@
         <button id="createLink" class="editorbuttons"><i class="fa fa-link"></i></button>
         <button id="unlink" class="editorbuttons"><i class="fa fa-unlink"></i></button>
     </div>
-    <form method="post">
+    <form method="post" enctype=multipart/form-data>
         <input type="text" id="article-title-1" placeholder="Title:" name="title" autocomplete="off" required>
         <!-- <textarea name="body" id="body" contenteditable="true" placeholder="Scribble..." autocomplete="off"
             required></textarea> -->
         <input type="hidden" id="hiddeninput" name="body">
         <div id="body" contenteditable="true">
         </div>
+        <input type="file" name="file">
         <button type="submit"
             onclick="document.getElementById('hiddeninput').value = document.getElementById('body').innerHTML"> Submit
         </button>

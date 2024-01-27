@@ -36,7 +36,8 @@
     {% elif session['user_id'] == 1 %}
     <div id="edit-delete-wrapper">
         <form id="delete-form" action="{{ url_for ('blog.delete_post', post_id=post_row['id']) }}" method="post">
-            <input id="edit-delete" type="submit" onclick="return confirm ('Are you sure?')" value="Delete">
+            <button id="edit-delete" type="submit" onclick="return confirm ('Are you sure?')"
+                value="Delete">Delete</button>
         </form>
     </div>
     {% endif %}
