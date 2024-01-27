@@ -67,11 +67,15 @@ def post():
 def get_post(post_id):
     connection = get_db()
     Verify.verify_post(post_id, table, connection)
+
     statement = (select(table).where(table.c.id == post_id))
     post_row = connection.execute(statement)
     post_row = ResultProxy.fetchone(post_row)
-    author_image = (select(md.tables['users'].c.image_url).where(md.tables['users'].c.id == post_row[1]))
-    author_image = ResultProxy.fetchone(author_image)
+
+    users = md.tables['users']
+    author_image = connection.execute((select(users.c.image_url).where(users.c.id == post_row[1])))
+    author_image = ResultProxy.fetchone(author_image)[0]
+    
     connection.close()
     return render_template('get_post.html', post_row=post_row, author_image=author_image)
 

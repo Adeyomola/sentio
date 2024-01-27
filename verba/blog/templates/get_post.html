@@ -21,8 +21,13 @@
     {% block content %}
     <article>
         <div id="article-title-2"> {{ post_row['title'] | safe }} </div>
-        <div id="author-name"><img src="{{ author_image }}" height="20" width="20" style="border-radius: 50%;">By {{
-            post_row['firstname'] }}</div>
+        <div id="author-name">
+            {% if author_image %}
+            <img src="{{ author_image }}" height="20" width="20" style="border-radius: 50%;">
+            {% endif %}
+            By {{
+            post_row['firstname'] }}
+        </div>
         <div id="body-1"> {{ post_row['body'] | safe }} </div>
     </article>
     {% if session['user_id'] == post_row['author_id'] %}
