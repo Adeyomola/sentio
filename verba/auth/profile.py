@@ -1,13 +1,13 @@
 from verba.db import get_db
 from verba.metadata import metadata
 from flask import request, session, render_template, flash, redirect, Blueprint, g, url_for, send_file
-from sqlalchemy.sql import update
+from sqlalchemy.sql import update, insert
 from sqlalchemy.engine import ResultProxy
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash
 from verba.auth.auth import login_required
 import re
-
+from verba.blog.uploads import Upload
 
 bp = Blueprint('profile', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
 md = metadata()
@@ -17,6 +17,22 @@ md = metadata()
 @login_required
 def profile():
 	if request.method == 'POST':
+		if 'uploadProfilePicture' in request.form:
+			error = None
+			connection = get_db()
+			table = md.tables['users']
+			image_url = Upload.upload_file(Upload)
+			if error is None:
+				try:
+					statement = (update(table).where(table.c.id == g.get('user')[0]).values(image_url=image_url))
+					connection.execute(statement)
+					connection.commit()
+					error = "Your profile picture has been uploaded"
+					session['profile_picture'] = image_url
+					redirect(url_for('profile.profile'))
+				finally:
+					connection.close()
+			flash(error)
 		if 'changepassword' in request.form:
 			error = None
 			connection = get_db()

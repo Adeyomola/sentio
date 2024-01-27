@@ -60,6 +60,7 @@ def login():
                 session.clear()
                 session['user_id'] = user[0]
                 session['firstname'] = user[1]
+                session['profile_picture'] = user[6]
                 return redirect("/")
             finally:
                 connection.close()

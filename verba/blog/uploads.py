@@ -20,8 +20,8 @@ class Upload:
 
     def upload_file(self):
         if 'file' not in request.files:
-            flash('No file part')
-            return
+            error = 'No file part'
+            return error
         file = request.files['file']
 
         if file.filename == "":

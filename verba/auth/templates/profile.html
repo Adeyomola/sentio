@@ -22,10 +22,15 @@
     {% endfor %}
     <main style="display: flex;">
         <aside>
+            <p><a id="uploadProfilePicture">Upload a Profile Picture</a></p>
             <p><a id="changedetails">Change Details</a></p>
             <p><a id="changepassword">Change Password</a></p>
         </aside>
         <section id="section">
+            <form method="post" id="uploadProfilePictureForm" enctype=multipart/form-data>
+                <input type="file" name="file" accept="image/png, image/jpeg, image/webp">
+                <button type="submit" name="uploadProfilePicture">Save </button>
+            </form>
             <form method="post" id="changedetailsForm">
                 <label for="username">Username </label>
                 <input type="text" name="username" id="username" value="{{ username }}" autocomplete="off">
