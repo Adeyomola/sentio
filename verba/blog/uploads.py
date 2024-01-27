@@ -1,4 +1,4 @@
-from flask import flash, request, redirect, url_for
+from flask import flash, request, redirect
 import boto3
 import random
 import string
@@ -21,7 +21,7 @@ class Upload:
     def upload_file(self):
         if 'file' not in request.files:
             flash('No file part')
-            return redirect(request.url)
+            return
         file = request.files['file']
 
         if file.filename == "":

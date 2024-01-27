@@ -36,9 +36,9 @@ def write():
         title = request.form['title']
         body = request.form['body']
         connection = get_db()
+        image_url = Upload.upload_file(Upload)
         if error is None:
             try:
-                image_url = Upload.upload_file(Upload)
                 statement = (insert(table).values(title=title, author_id=g.get('user')[0], firstname=g.get('user')[1], body=body, image_url=image_url))
                 connection.execute(statement)
                 connection.commit()
@@ -81,9 +81,9 @@ def update_post(post_id):
     post_row = ResultProxy.fetchone(connection.execute(select(table).where(table.c.id == post_id)))
     if request.method == 'POST':
         try:
+            image_url = Upload.upload_file(Upload) if Upload.upload_file(Upload) else post_row[6]
             title = request.form['title']
-            body = request.form['body']
-            image_url = Upload.upload_file(Upload)
+            body = request.form['body']          
             connection.execute((update(table).where(table.c.id == post_id).values(title=title, body=body, image_url=image_url)))
             connection.commit()
             return redirect(url_for('blog.get_post', post_id=post_row[0]))
