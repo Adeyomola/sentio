@@ -81,7 +81,13 @@ def update_post(post_id):
     post_row = ResultProxy.fetchone(connection.execute(select(table).where(table.c.id == post_id)))
     if request.method == 'POST':
         try:
-            image_url = Upload.upload_file(Upload) if Upload.upload_file(Upload) else post_row[6]
+            if request.files['file']:
+                Upload.delete_file(post_row[6])
+                image_url = Upload.upload_file(Upload)
+            elif post_row[6]:
+                image_url = post_row[6]
+            else:
+                image_url = None
             title = request.form['title']
             body = request.form['body']          
             connection.execute((update(table).where(table.c.id == post_id).values(title=title, body=body, image_url=image_url)))

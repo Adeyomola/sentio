@@ -1,4 +1,4 @@
-from flask import flash, request, redirect
+from flask import request
 import boto3
 import random
 import string
