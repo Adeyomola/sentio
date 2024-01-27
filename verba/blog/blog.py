@@ -87,8 +87,10 @@ def update_post(post_id):
     post_row = ResultProxy.fetchone(connection.execute(select(table).where(table.c.id == post_id)))
     if request.method == 'POST':
         try:
-            if request.files['file']:
+            if request.files['file'] and post_row[6]:
                 Upload.delete_file(post_row[6])
+                image_url = Upload.upload_file(Upload)
+            elif request.files['file'] and post_row[6] is None:
                 image_url = Upload.upload_file(Upload)
             elif post_row[6]:
                 image_url = post_row[6]
@@ -109,7 +111,7 @@ def update_post(post_id):
 def delete_post(post_id):
     connection = get_db()
     Verify.verify_author(post_id, table, connection)
-    
+
     post_image = connection.execute((select(table.c.image_url).where(table.c.id == post_id)))
     post_image = ResultProxy.fetchone(post_image)[0]
     Upload.delete_file(post_image)
