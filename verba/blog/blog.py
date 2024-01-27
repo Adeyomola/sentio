@@ -70,7 +70,8 @@ def get_post(post_id):
     statement = (select(table).where(table.c.id == post_id))
     post_row = connection.execute(statement)
     post_row = ResultProxy.fetchone(post_row)
-    author_image = (select(md.tables['users'].c.image_url).where(table.c.id == post_row[1]))
+    author_image = (select(md.tables['users'].c.image_url).where(md.tables['users'].c.id == post_row[1]))
+    author_image = ResultProxy.fetchone(author_image)
     connection.close()
     return render_template('get_post.html', post_row=post_row, author_image=author_image)
 
