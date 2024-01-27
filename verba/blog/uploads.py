@@ -33,3 +33,7 @@ class Upload:
             region = '' if location is None else f'{location}'
             image_url = f"https://verba-post-images.s3.{region}.amazonaws.com/{filename}"
         return image_url
+    
+    def delete_file(image_url):
+        image_url = image_url.split("://")[1].split("/")[1]
+        s3.delete_object(Bucket='verba-post-images', Key=image_url)

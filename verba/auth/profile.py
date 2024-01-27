@@ -1,7 +1,7 @@
 from verba.db import get_db
 from verba.metadata import metadata
 from flask import request, session, render_template, flash, redirect, Blueprint, g, url_for, send_file
-from sqlalchemy.sql import update, insert
+from sqlalchemy.sql import update
 from sqlalchemy.engine import ResultProxy
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash
@@ -21,13 +21,16 @@ def profile():
 			error = None
 			connection = get_db()
 			table = md.tables['users']
+			image_url = g.get('user')[6]
+			if image_url is not None:
+				Upload.delete_file(image_url=image_url)
 			image_url = Upload.upload_file(Upload)
 			if error is None:
 				try:
 					statement = (update(table).where(table.c.id == g.get('user')[0]).values(image_url=image_url))
 					connection.execute(statement)
 					connection.commit()
-					error = "Your profile picture has been uploaded"
+					error = "Profile Picture Updated"
 					session['profile_picture'] = image_url
 					redirect(url_for('profile.profile'))
 				finally:

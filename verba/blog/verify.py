@@ -4,9 +4,9 @@ from sqlalchemy.engine import ResultProxy
 from werkzeug.exceptions import abort
 
 class Verify:
-    def __init__(self, post_id) -> None:
-        self.post_id = post_id
-
+    def __init__(self) -> None:
+        pass
+    
     def verify_author(post_id, table, connection):
         row = connection.execute((select(table).where(table.c.id == post_id))) 
         row = ResultProxy.fetchone(row)
