@@ -1,6 +1,4 @@
-import os
 from flask import flash, request, redirect, url_for
-from werkzeug.utils import secure_filename
 import boto3
 import random
 import string
