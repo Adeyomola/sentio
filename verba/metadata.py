@@ -1,4 +1,4 @@
-from sqlalchemy import MetaData, Table, Column, Integer, String, TIMESTAMP, Text, ForeignKey
+from sqlalchemy import MetaData, Table, Column, Integer, String, TIMESTAMP, Text, ForeignKey, NVARCHAR
 import datetime
 
 def metadata():
@@ -12,6 +12,7 @@ def metadata():
     Column('username', String(255), unique=True),
     Column('password', String(255)),
     Column('email', String(255), unique=True),
+    Column('image_url', NVARCHAR),
         )
     post = Table(
     'post', md,
@@ -20,6 +21,7 @@ def metadata():
     Column('firstname', String(255)),
     Column('created', TIMESTAMP, default=datetime.datetime.utcnow),
     Column('title', Text, nullable=False),
-    Column('body', Text, nullable=False)
+    Column('body', Text, nullable=False),
+    Column('image_url', NVARCHAR)
     )
     return md

@@ -131,9 +131,3 @@ summary>img {
         }
     }
 }
-
-@media screen and (min-width: 1536px) {
-    #link-container {
-        max-width: 90%;
-    }
-}

@@ -20,7 +20,12 @@
         <section>
             {% for post in posts %}
             <summary>
+                {% if post['image_url'] %}
+                <img src="{{ post['image_url'] }}">
+                {% endif %}
+                {% if not post['image_url'] %}
                 <img src="../static/images/placeholder.webp">
+                {% endif %}
                 <a href="/post/{{ post['id']}}" id="article-title">{{ post['title'] | safe }}</a>
                 <a href="/post/{{ post['id']}}" id="preview">{{ post['body'] | safe }}</a>
             </summary>
