@@ -24,7 +24,7 @@ def profile():
 			image_url = g.get('user')[6]
 			if image_url is not None:
 				Upload.delete_file(image_url=image_url)
-			image_url = Upload.upload_file(Upload)
+			image_url = Upload.upload_file(Upload, 'profile')
 			if error is None:
 				try:
 					statement = (update(table).where(table.c.id == g.get('user')[0]).values(image_url=image_url))

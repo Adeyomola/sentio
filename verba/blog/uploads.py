@@ -2,6 +2,8 @@ from flask import request
 import boto3
 import random
 import string
+import io
+from PIL import Image
 
 
 s3 = boto3.client('s3')
@@ -18,7 +20,7 @@ class Upload:
         filename = ''.join(random.choice(chars) for i in range(8))
         return filename
 
-    def upload_file(self):
+    def upload_file(self, route=''):
         if 'file' not in request.files:
             error = 'No file part'
             return error
@@ -28,7 +30,10 @@ class Upload:
             return
         elif file and self.allowed_files(file.filename):
             filename = self.random_filename()
-            s3.put_object(Bucket='verba-post-images', Key=filename, Body=file.stream, ContentType=file.content_type)
+            image = self.convert_to_thumbnail(file.stream) if route == 'profile' else self.convert_to_webp(file.stream)
+
+            s3.put_object(Bucket='verba-post-images', Key=filename, Body=image, ContentType='image/webp')
+
             location = s3.get_bucket_location(Bucket='verba-post-images')['LocationConstraint']
             region = '' if location is None else f'{location}'
             image_url = f"https://verba-post-images.s3.{region}.amazonaws.com/{filename}"
@@ -37,3 +42,27 @@ class Upload:
     def delete_file(image_url):
         image_url = image_url.split("://")[1].split("/")[1]
         s3.delete_object(Bucket='verba-post-images', Key=image_url)
+
+    def convert_to_webp(stream):
+        image = Image.open(stream)
+        image = image.convert('RGB')
+        image = image.resize((428, 239))
+        image_byte = io.BytesIO()
+        image.save(image_byte, 'webp')
+        return image_byte.getvalue()
+    
+    def convert_to_thumbnail(stream):
+        image = Image.open(stream)
+        width, height = image.size
+
+        image = image.convert('RGB')
+
+        left = (width - (width * 0.5))/2
+        right = (width + (width * 0.5))/2
+        top = (height - (height * 0.6))/2
+        down = (height + (height * 0.3))/2
+
+        image = image.crop((left, top, right, down))
+        image_byte = io.BytesIO()
+        image.save(image_byte, 'webp')
+        return image_byte.getvalue()
