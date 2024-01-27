@@ -75,7 +75,7 @@ def get_post(post_id):
     users = md.tables['users']
     author_image = connection.execute((select(users.c.image_url).where(users.c.id == post_row[1])))
     author_image = ResultProxy.fetchone(author_image)[0]
-    
+
     connection.close()
     return render_template('get_post.html', post_row=post_row, author_image=author_image)
 
@@ -109,6 +109,11 @@ def update_post(post_id):
 def delete_post(post_id):
     connection = get_db()
     Verify.verify_author(post_id, table, connection)
+    
+    post_image = connection.execute((select(table.c.image_url).where(table.c.id == post_id)))
+    post_image = ResultProxy.fetchone(post_image)[0]
+    Upload.delete_file(post_image)
+
     connection.execute((delete(table).where(table.c.id == post_id)))
     connection.commit()
     connection.close()
