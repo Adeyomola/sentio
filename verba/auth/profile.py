@@ -32,7 +32,8 @@ def profile():
 					connection.execute(statement)
 					connection.commit()
 					error = "Profile Picture Updated"
-					session['profile_picture'] = g.get('user')[6]
+					session['profile_picture'] = image_url
+					g.get('user')[6] = image_url
 					return redirect(url_for('profile.profile'))
 				finally:
 					connection.close()
