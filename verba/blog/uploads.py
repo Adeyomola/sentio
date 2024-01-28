@@ -63,7 +63,7 @@ class Upload:
         down = (height + (height * 0.4))/2
         image = image.crop((left, top, right, down))
         
-        image = image.resize((625, 575))
+        image = image.resize((675, 575))
         image_byte = io.BytesIO()
         image.save(image_byte, 'webp')
         return image_byte.getvalue()
