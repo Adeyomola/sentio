@@ -25,6 +25,7 @@
             <p><a id="uploadProfilePicture">Upload a Profile Picture</a></p>
             <p><a id="changedetails">Change Details</a></p>
             <p><a id="changepassword">Change Password</a></p>
+            <p><a id="deleteaccount">Delete Account</a></p>
         </aside>
         <section id="section">
             <form method="post" id="uploadProfilePictureForm" enctype=multipart/form-data>
@@ -57,6 +58,10 @@
                 <input type="password" name="confirm_password" id="confirm_password" required>
                 <hr>
                 <button type="submit" name="changepassword">Save </button>
+            </form>
+            <form method="post" id="deleteAccountForm">
+                <button type="submit" name="deleteaccount" onclick="return confirm ('Are you sure?')">Delete
+                    Account</button>
             </form>
         </section>
     </main>

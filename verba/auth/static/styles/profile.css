@@ -79,7 +79,8 @@ form {
 }
 
 #changedetailsForm,
-#changepasswordForm {
+#changepasswordForm,
+#deleteAccountForm {
     display: none;
 }
 

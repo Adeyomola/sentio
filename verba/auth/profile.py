@@ -1,7 +1,7 @@
 from verba.db import get_db
 from verba.metadata import metadata
 from flask import request, session, render_template, flash, redirect, Blueprint, g, url_for, send_file
-from sqlalchemy.sql import update
+from sqlalchemy.sql import update, delete
 from sqlalchemy.engine import ResultProxy
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash
@@ -11,7 +11,7 @@ from verba.blog.uploads import Upload
 
 bp = Blueprint('profile', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
 md = metadata()
-
+table = md.tables['users']
 
 @bp.route('/profile',  methods=['GET', 'POST'], strict_slashes = False)
 @login_required
@@ -20,8 +20,9 @@ def profile():
 		if 'uploadProfilePicture' in request.form:
 			error = None
 			connection = get_db()
-			table = md.tables['users']
+
 			image_url = g.get('user')[6]
+
 			if image_url is not None:
 				Upload.delete_file(image_url=image_url)
 			image_url = Upload.upload_file(Upload, 'profile')
@@ -32,7 +33,7 @@ def profile():
 					connection.commit()
 					error = "Profile Picture Updated"
 					session['profile_picture'] = image_url
-					redirect(url_for('profile.profile'))
+					return redirect(url_for('profile.profile'))
 				finally:
 					connection.close()
 			flash(error)
@@ -42,7 +43,6 @@ def profile():
 
 			password = request.form['password']
 			confirm_password=request.form['confirm_password']
-			table = md.tables['users']
 
 			if not password:
 				error = "Password required"
@@ -69,7 +69,6 @@ def profile():
 			email = request.form['email']
 			confirm_email = request.form['confirm_email']
 			lastname = request.form['lastname']
-			table = md.tables['users']
 
 			if email != confirm_email:
 				error = "Email addresses do not match"
@@ -81,7 +80,7 @@ def profile():
 					connection.commit()
 					error = "Your details have been updated"
 					session['firstname'] = firstname
-					redirect(url_for('profile.profile'))
+					return redirect(url_for('profile.profile'))
 				except IntegrityError as ie:
 					error = ie._message()
 					connection.rollback()
@@ -91,6 +90,23 @@ def profile():
 				finally:
 					connection.close()
 			flash(error)
+
+		if 'deleteaccount' in request.form:
+			error = None
+			connection = get_db()
+
+			if error is None:
+				try:
+					statement = (delete(table).where(table.c.id == g.get('user')[0]))
+					connection.execute(statement)
+					connection.commit()
+					error = "Account Deleted"
+					session.clear()
+					return redirect('/')
+				finally:
+					connection.close()
+			flash(error)
+
 	username=g.get('user')[3]
 	firstname=g.get('user')[1]
 	lastname=g.get('user')[2]
