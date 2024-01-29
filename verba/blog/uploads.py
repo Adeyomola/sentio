@@ -3,7 +3,7 @@ import boto3
 import random
 import string
 import io
-from PIL import Image
+from PIL import Image, ImageOps
 
 
 s3 = boto3.client('s3')
@@ -53,6 +53,8 @@ class Upload:
     
     def convert_to_thumbnail(stream):
         image = Image.open(stream)
+        image = ImageOps.exif_transpose(image)
+
         width, height = image.size
 
         image = image.convert('RGB')
