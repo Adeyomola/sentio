@@ -58,8 +58,9 @@
                 </g>
             </svg>
             {% endif %}
-            {% if session['profile_picture'] %}
-            <img src="{{ session['profile_picture'] }}" height="40" width="40" style="border-radius: 50%;">
+            <!-- {% if session['profile_picture'] %} -->
+            {% if g.get('user')[6]] %}
+            <img src="{{ g.get('user')[6]] }}" height="40" width="40" style="border-radius: 50%;">
             {% endif %}
             <div id="profile-list" class="noshow">
                 <a href="{{ url_for ('profile.profile') }}" title="profile">Profile</a>
