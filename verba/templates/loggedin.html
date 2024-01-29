@@ -20,7 +20,7 @@
                     stroke-linejoin="round" />
             </svg>All Posts</a>
         <div id="profile">
-            {% if not session['profile_picture'] %}
+            {% if not g.get('user')[6] %}
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="35" width="35"
                 version="1.1" id="Capa_1" viewBox="0 0 500 500" xml:space="preserve">
                 <g>
