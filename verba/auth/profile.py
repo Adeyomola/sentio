@@ -32,7 +32,6 @@ def profile():
 					connection.execute(statement)
 					connection.commit()
 					error = "Profile Picture Updated"
-					session['profile_picture'] = image_url
 					return redirect(url_for('profile.profile'))
 				finally:
 					connection.close()
@@ -79,7 +78,6 @@ def profile():
 					connection.execute(statement)
 					connection.commit()
 					error = "Your details have been updated"
-					session['firstname'] = firstname
 					return redirect(url_for('profile.profile'))
 				except IntegrityError as ie:
 					error = ie._message()

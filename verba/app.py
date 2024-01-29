@@ -35,9 +35,8 @@ def create_app(test_config=None):
 
     @app.route('/', methods=['GET', 'POST'])
     def home():
-        if 'firstname' in session:
-            firstname = session['firstname']
-            return render_template('home.html', firstname=firstname, posts=blog.author_posts())
+        if session:
+            return render_template('home.html', posts=blog.author_posts())
         elif not session:
             return render_template('index.html', posts=blog.front_posts())
     
