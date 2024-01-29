@@ -90,7 +90,7 @@ def update_post(post_id):
             if request.files['file'] and post_row[6]:
                 Upload.delete_file(post_row[6])
                 image_url = Upload.upload_file(Upload)
-            elif request.files['file'] and (post_row[6] is None):
+            elif request.files['file'] and not post_row[6]:
                 image_url = Upload.upload_file(Upload)
             elif post_row[6]:
                 image_url = post_row[6]
