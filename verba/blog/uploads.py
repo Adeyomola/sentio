@@ -59,7 +59,7 @@ class Upload:
 
         width, height = image.size
 
-        image = image.resize((3417, 4712))
+        image = image.resize((575, 695))
         image = image.convert('RGB')
 
         left = (width - (width * 0.7))/2
