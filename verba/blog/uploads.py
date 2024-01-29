@@ -63,7 +63,7 @@ class Upload:
 
         left = (width - (width * 0.7))/2
         right = (width + (width * 0.4))/2
-        top = (height - (height * 0.7))/2
+        top = (height - (height * 0.5))/2
         down = (height + (height * 0.4))/2
         image = image.crop((left, top, right, down))
         
