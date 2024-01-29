@@ -46,7 +46,7 @@
             </svg>
             {% endif %}
             {% if session['profile_picture'] %}
-            <img src="{{ session['profile_picture'] }}" height="35" width="35" style="border-radius: 50%;">
+            <img src="{{ session['profile_picture'] }}" height="35" width="40" style="border-radius: 50%;">
             {% endif %}
             <div id="profile-list" class="noshow">
                 <a href="{{ url_for ('blog.write') }}" title="write">Write</a>
