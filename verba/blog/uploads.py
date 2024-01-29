@@ -45,6 +45,8 @@ class Upload:
 
     def convert_to_webp(stream):
         image = Image.open(stream)
+        image = ImageOps.exif_transpose(image)
+        
         image = image.convert('RGB')
         image = image.resize((428, 239))
         image_byte = io.BytesIO()
