@@ -64,9 +64,11 @@ class Upload:
 
         # left = (width - (width * 0.7))/2
         # right = (width + (width * 0.7))/2
-        # top = (height - (height * 0.7))/2
-        # down = (height + (height * 0.4))/2
-        # image = image.crop((left, top, right, down))
+        left = 0
+        right = 0
+        top = (height - (height * 0.7))/2
+        down = (height + (height * 0.4))/2
+        image = image.crop((left, top, right, down))
         
         image = image.resize((575, 695))
         image_byte = io.BytesIO()
