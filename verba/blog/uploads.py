@@ -61,9 +61,9 @@ class Upload:
 
         image = image.convert('RGB')
 
-        left = (width - (width * 0.7))/2
+        left = (width - (width * 0.4))/2
         right = (width + (width * 0.4))/2
-        top = (height - (height * 0.5))/2
+        top = (height - (height * 0.4))/2
         down = (height + (height * 0.4))/2
         image = image.crop((left, top, right, down))
         
