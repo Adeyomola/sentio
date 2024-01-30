@@ -16,11 +16,10 @@ def send_email(email, otp):
     msg['To'] = email
     msg.attach(MIMEText(f'''Welcome to Verba. Please confirm your email address using the OTP: {otp}''', 'plain'))
     
-    server = smtplib.SMTP(smtp_server, 587)  
-    try:
-        server.starttls()
-        server.login(address, password)
-        server.sendmail(address, email, msg.as_string())
-    finally:
-        server.quit()
+    server = smtplib.SMTP(smtp_server, 587)
+    server.connect()
+    server.starttls()
+    server.login(address, password)
+    server.sendmail(address, email, msg.as_string())
+    server.quit()
         
