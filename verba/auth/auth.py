@@ -113,7 +113,7 @@ def register():
                     error = 'username has already been taken'
                     flash(error)
             else:
-                send_email(email, totp.now())
+                send_email(email, totp.now(), firstname)
                 connection.close()
                 return redirect(url_for('auth.verify', unverified_email=email))
         flash(error)

@@ -10,11 +10,11 @@ smtp_server=os.environ.get('SMTP_SERVER')
 
 msg = MIMEMultipart()
 
-def send_email(email, otp):
+def send_email(email, otp, firstname):
     msg['Subject'] = 'Welcome to Verba'
     msg['From'] = email
     msg['To'] = email
-    msg.attach(MIMEText(f'''Welcome to Verba. Please confirm your email address using the OTP: {otp}''', 'plain'))
+    msg.attach(MIMEText(f'''Hello {firstname}, Welcome to Verba. Please confirm your email address using the OTP: {otp}. Thank you. Verba. ''', 'plain'))
     
     server = smtplib.SMTP(smtp_server, 587)  
     try:
