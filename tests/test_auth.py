@@ -3,6 +3,8 @@ from flask import g, session
 from verba.db import get_db
 from sqlalchemy import select, Result
 from verba.metadata import metadata
+from unittest.mock import patch
+from verba.auth.email_auth import send_email
 
 def test_login(client, auth):
     assert client.get('/login').status_code == 200
@@ -23,8 +25,10 @@ def test_login_validation(client, email, password, message):
 
 def test_register(client, app):
     assert client.get('/register').status_code == 200
-    result = client.post('/register', data={'username': 'register', 'password': 'register', 'confirm_password': 'register', 'firstname': 'verba', 'lastname': 'registrar', 'email': 'registrar@test.com'})
-    assert result.headers['Location'] == '/verify'
+    with patch('verba.auth.email_auth.send_email') as mock_send_email:
+        result = client.post('/register', data={'username': 'register', 'password': 'register', 'confirm_password': 'register', 'firstname': 'verba', 'lastname': 'registrar', 'email': 'registrar@test.com'})
+        assert mock_send_email.called
+        assert result.headers['Location'] == '/verify?unverified_email=registrar@test.com'
 
     with app.app_context():
         users = metadata().tables['users']

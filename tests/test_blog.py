@@ -1,8 +1,6 @@
 import pytest
 from verba.db import get_db
 from verba.blog.uploads import Upload
-import tempfile
-import os
 
 def test_index(client):
     result = client.get('/')
