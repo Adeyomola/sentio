@@ -55,8 +55,6 @@ form>* {
 }
 
 #edit-delete-wrapper {
-    /* position: fixed;
-    bottom: 0; */
     display: flex;
     align-self: center;
     justify-content: center;
