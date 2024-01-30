@@ -19,3 +19,7 @@ jobs:
       - run: pip install -r test_requirements.txt
       - name: Run Unit Tests
         run: pytest -vv
+        env:
+          E_PASSWORD: ${{ secrets.E_PASSWORD }}
+          ADDRESS: ${{ secrets.ADDRESS }}
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
