@@ -7,10 +7,13 @@ from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
 import re
 import functools
-
+from verba.auth.email_auth import send_email
+import pyotp
 
 bp = Blueprint('auth', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
 md = metadata()
+
+totp = pyotp.TOTP('base32secret3232', interval=300)
 
 @bp.before_app_request
 def current_user():
@@ -110,7 +113,33 @@ def register():
                     error = 'username has already been taken'
                     flash(error)
             else:
+                send_email(email, totp.now())
                 connection.close()
-                return redirect("/login")
+                return redirect(url_for('auth.verify', unverified_email=email))
         flash(error)
     return render_template('register.html')
+
+@bp.route('/verify', methods=['GET', 'POST'])
+def verify():
+    email = request.args.get('unverified_email')
+    if g.user is not None or email is None:
+        return redirect('/')
+    if request.method == 'POST':
+        if 'submitotp' in request.form:
+            error = None
+            otp = request.form['otp']
+
+            if totp.verify(otp):
+                return redirect('/login')
+            else:
+                error="Invalid Code"
+                flash(error)
+            return redirect(url_for('auth.verify', unverified_email=email))
+    return render_template('verify.html')
+
+@bp.route('/resend_otp', methods=['POST'])
+def resend():
+    email = request.referrer.split('?unverified_email=')[1]
+    if request.method == 'POST':
+        send_email(email, totp.now())
+        return redirect(url_for('auth.verify'))
