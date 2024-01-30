@@ -18,7 +18,6 @@ def send_email(email, otp):
     
     server = smtplib.SMTP(smtp_server, 587)  
     try:
-        server.connect(smtp_server, 587)
         server.starttls()
         server.login(address, password)
         server.sendmail(address, email, msg.as_string())
