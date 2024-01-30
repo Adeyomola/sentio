@@ -25,6 +25,7 @@ def test_login_validation(client, email, password, message):
 
 def test_register(client, app):
     assert client.get('/register').status_code == 200
+    
     result = client.post('/register', data={'username': 'register', 'password': 'register', 'confirm_password': 'register', 'firstname': 'verba', 'lastname': 'registrar', 'email': 'registrar@test.com'})
     assert result.headers['Location'] == '/verify?unverified_email=registrar@test.com'
 
