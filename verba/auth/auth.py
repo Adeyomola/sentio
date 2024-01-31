@@ -121,7 +121,6 @@ def register():
                     connection.close()
                     return render_template('verify.html')
         if 'submitotp' in request.form:
-            error = None
             otp = request.form['otp']
 
             if session.get('unverified_email') is None:
@@ -138,6 +137,7 @@ def register():
                 return redirect('/login')
             else:
                 error="Invalid Code"
+                flash(error)
                 return render_template('verify.html')
         if 'resend' in request.form:
             if session.get('unverified_email') is None:
