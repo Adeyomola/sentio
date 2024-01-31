@@ -11,11 +11,12 @@ import functools
 from verba.auth.email_auth import send_email
 import pyotp
 import secrets
+import base64
 
 bp = Blueprint('auth', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
 md = metadata()
 
-totp = pyotp.TOTP(secrets.token_hex(), interval=300)
+totp = pyotp.TOTP(base64.b32encode(secrets.token_hex(5)), interval=300)
 
 @bp.before_app_request
 def current_user():
