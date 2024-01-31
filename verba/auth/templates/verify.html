@@ -24,7 +24,7 @@
         <hr style="width: 11vw; max-width: 15%;">
         <div id="edit-delete-wrapper">
             <button type="submit" name="submitotp">Submit </button>
-            <button type="submit" name="resend" id="resend" onclick="sixtySecondsCountdown()">Resend OTP</button>
+            <button type="submit" name="resend" id="resend">Resend OTP</button>
         </div>
         <p style="font-family: 'Nunito'; text-align: center;">Wait <span id="timer"></span> seconds before resending
             OTP</p>
@@ -51,12 +51,7 @@
             }, 1000);
         }
 
-        window.onload = function () {
-            if (!sessionStorage.getItem('countdownRan')) {
-                sixtySecondsCountdown()
-            }
-            sessionStorage.setItem('countdownRan', 'true');
-        }
+        window.onload = sixtySecondsCountdown
 
     </script>
     {% endblock %}
