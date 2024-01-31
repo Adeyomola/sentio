@@ -16,8 +16,6 @@ import base64
 bp = Blueprint('auth', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
 md = metadata()
 
-totp = pyotp.TOTP(base64.b32encode(secrets.token_bytes(5)).decode('utf-8'), interval=60)
-
 @bp.before_app_request
 def current_user():
     user_id = session.get('user_id')
@@ -76,6 +74,7 @@ def register():
     if g.user is not None:
         return redirect('/')
     if request.method == 'POST':
+        totp = pyotp.TOTP(base64.b32encode(secrets.token_bytes(5)).decode('utf-8'), interval=60)
         if 'register' in request.form:
             error = None
             connection = get_db()
