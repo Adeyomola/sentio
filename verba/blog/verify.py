@@ -12,7 +12,7 @@ class Verify:
         row = ResultProxy.fetchone(row)
         if row is None:
             abort(404, f'Post does not exist')
-        if not session:
+        if 'user_id' not in session:
             redirect(url_for('auth.login'))
         elif session['user_id'] != row[1] and session['user_id'] != 1:
             abort(401, f'Unauthorized')

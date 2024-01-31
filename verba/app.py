@@ -35,12 +35,11 @@ def create_app(test_config=None):
 
     @app.route('/', methods=['GET', 'POST'])
     def home():
-        if session:
+        if 'user_id' in session:
             return render_template('home.html', posts=blog.author_posts())
-        elif not session:
-            return render_template('index.html', posts=blog.front_posts())
-    
-
+        else:
+            return render_template('index.html', posts=blog.front_posts())  
+            
     @app.route('/logout')
     def logout():
         session.clear()
