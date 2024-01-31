@@ -122,27 +122,27 @@ def register():
         if 'submitotp' in request.form:
             error = None
             otp = request.form['otp']
-            if session.get('unverified_email'):
-                if totp.verify(otp):
-                    connection = get_db()
-                    table = md.tables['users']
-                    statement = statement = (update(table).where(table.c.email == session.get('unverified_email')).values(isVerified=True))
-                    connection.execute(statement)
-                    connection.commit()
-                    connection.close()
-                    session.clear()
-                    return redirect('/login')
-                else:
-                    error="Invalid Code"
-                    flash(error)
-                    return render_template('verify.html')
-            else:
+
+            if session.get('unverified_email') is None:
                 abort(401, f'Unauthorized')
+
+            if totp.verify(otp):
+                connection = get_db()
+                table = md.tables['users']
+                statement = statement = (update(table).where(table.c.email == session.get('unverified_email')).values(isVerified=True))
+                connection.execute(statement)
+                connection.commit()
+                connection.close()
+                session.clear()
+                return redirect('/login')
+            else:
+                error="Invalid Code"
+                return render_template('verify.html')
         if 'resend' in request.form:
-            if session.get('unverified_email'):
+            if session.get('unverified_email') is None:
+                abort(401, f'Unauthorized')
+            else:
                 send_email(session.get('unverified_email'), totp.now(), session.get('firstname'))
                 return render_template('verify.html')
-            else:
-                abort(401, f'Unauthorized')
         flash(error)
     return render_template('register.html')
