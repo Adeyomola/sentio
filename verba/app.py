@@ -38,6 +38,7 @@ def create_app(test_config=None):
         if 'user_id' in session:
             return render_template('home.html', posts=blog.author_posts())
         else:
+            session.clear()
             return render_template('index.html', posts=blog.front_posts())  
             
     @app.route('/logout')
