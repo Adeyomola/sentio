@@ -109,10 +109,8 @@ def register():
                     connection.rollback()
                     if re.search('email', error):
                         error = 'account already exists'
-                        flash(error)
                     elif re.search('username', error):
                         error = 'username has already been taken'
-                        flash(error)
                 else:
                     send_email(email, totp.now(), firstname)
                     session['unverified_email'] = email
