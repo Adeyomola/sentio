@@ -119,7 +119,6 @@ def register():
                     session['firstname'] = firstname
                     connection.close()
                     return render_template('verify.html')
-        flash(error)
         if 'submitotp' in request.form:
             error = None
             otp = request.form['otp']
@@ -140,4 +139,5 @@ def register():
         if 'resend' in request.form:
             send_email(session.get('unverified_email'), totp.now(),session.get('firstname'))
             return render_template('verify.html')
+        flash(error)
     return render_template('register.html')
