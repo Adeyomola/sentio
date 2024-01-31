@@ -1,7 +1,7 @@
 from verba.db import get_db
 from verba.metadata import metadata
 from flask import request, session, render_template, flash, redirect, Blueprint, g, url_for
-from sqlalchemy.sql import select, insert
+from sqlalchemy.sql import select, insert, update
 from sqlalchemy.engine import Result
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -73,73 +73,71 @@ def register():
     if g.user is not None:
         return redirect('/')
     if request.method == 'POST':
-        error = None
-        connection = get_db()
+        if 'register' in request.form:
+            error = None
+            connection = get_db()
+            table = md.tables['users']
 
-        username = request.form['username']
-        password = request.form['password']
-        confirm_password=request.form['confirm_password']
-        firstname = request.form['firstname']
-        lastname = request.form['lastname']
-        email = request.form['email']
-        table = md.tables['users']
+            username = request.form['username']
+            password = request.form['password']
+            confirm_password=request.form['confirm_password']
+            firstname = request.form['firstname']
+            lastname = request.form['lastname']
+            email = request.form['email']
+            
 
-        if not username:
-            error = "Username required"
-        elif not password:
-            error = "Password required"
-        elif not confirm_password:
-            error = "Enter your password again"
-        elif not firstname:
-            error = "This field is required"
-        elif not lastname:
-            error = "This field is required"
-        elif not email:
-            error = "This field is required"
-        if password != confirm_password:
-            error = "Passwords do not match"
-        if error is None:
-            try:
-                statement = (insert(table).values(username=username, password=generate_password_hash(password), firstname=firstname, lastname=lastname, email=email))
-                connection.execute(statement)
-                connection.commit()
-            except IntegrityError as ie:
-                error = ie._message()
-                connection.rollback()
-                if re.search('email', error):
-                    error = 'account already exists'
-                    flash(error)
-                elif re.search('username', error):
-                    error = 'username has already been taken'
-                    flash(error)
-            else:
-                send_email(email, totp.now(), firstname)
-                connection.close()
-                return redirect(url_for('auth.verify', unverified_email=email))
-        flash(error)
-    return render_template('register.html')
-
-@bp.route('/verify', methods=['GET', 'POST'])
-def verify():
-    email = request.args.get('unverified_email')
-    if g.user is not None or email is None:
-        return redirect('/')
-    if request.method == 'POST':
+            if not username:
+                error = "Username required"
+            elif not password:
+                error = "Password required"
+            elif not confirm_password:
+                error = "Enter your password again"
+            elif not firstname:
+                error = "This field is required"
+            elif not lastname:
+                error = "This field is required"
+            elif not email:
+                error = "This field is required"
+            if password != confirm_password:
+                error = "Passwords do not match"
+            if error is None:
+                try:
+                    statement = (insert(table).values(username=username, password=generate_password_hash(password), firstname=firstname, lastname=lastname, email=email))
+                    connection.execute(statement)
+                    connection.commit()
+                except IntegrityError as ie:
+                    error = ie._message()
+                    connection.rollback()
+                    if re.search('email', error):
+                        error = 'account already exists'
+                        flash(error)
+                    elif re.search('username', error):
+                        error = 'username has already been taken'
+                        flash(error)
+                else:
+                    send_email(email, totp.now(), firstname)
+                    session['unverified_email'] = email
+                    session['firstname'] = firstname
+                    connection.close()
+                    return render_template('verify.html')
         if 'submitotp' in request.form:
             error = None
             otp = request.form['otp']
 
             if totp.verify(otp):
+                connection = get_db()
+                table = md.tables['users']
+                statement = statement = (update(table).where(table.c.email == session.get('unverified_email')).values(isVerified=True))
+                connection.execute(statement)
+                connection.commit()
+                connection.close()
+                session.clear()
                 return redirect('/login')
             else:
                 error="Invalid Code"
                 flash(error)
-            return redirect(url_for('auth.verify', unverified_email=email))
-    return render_template('verify.html')
-
-@bp.route('/resend_otp', methods=['POST'])
-def resend():
-    email = request.referrer.split('?unverified_email=')[1]
-    if request.method == 'POST':
-        send_email(email, totp.now())
-        return redirect(url_for('auth.verify'))
+                return render_template('verify.html')
+        if 'resend' in request.form:
+            send_email(session.get('unverified_email'), totp.now(),session.get('firstname'))
+            return render_template('verify.html')
+    return render_template('register.html')

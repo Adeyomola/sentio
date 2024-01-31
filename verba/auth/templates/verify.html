@@ -19,13 +19,12 @@
     <div class="flash">{{ message }}</div>
     {% endfor %}
     <form method="post">
-        <label for="otp">Enter the OTP Sent to Your Email Address:</label>
-        <input type="text" name="otp" id="otp" autocomplete="off">
-        <hr>
+        <label for="otp" style="text-align: center;">Enter the OTP Sent to Your Email Address:</label>
+        <input type="text" name="otp" id="otp" autocomplete="off" style="text-align: center;">
+        <hr style="width: 11vw; max-width: 15%;">
         <div id="edit-delete-wrapper">
             <button type="submit" name="submitotp">Submit </button>
-            <button type="submit"
-                onclick="{fetch('/resend_otp', { method: 'POST' }).catch(error => {console.error('Resend OTP failed')})}">Resend OTP</button>
+            <button type="submit" name="resend">Resend OTP</button>
         </div>
     </form>
     {% endblock %}

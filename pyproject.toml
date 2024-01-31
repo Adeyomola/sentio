@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "verba"
-description = "content management system"
+description = "content publishing platform"
 version = "1.0.0"
 dependencies = ["flask==3.0.0", "mysqlclient", "SQLAlchemy==2.0.23", "python-dotenv==1.0.0"]
 requires-python = ">= 3.8"

@@ -1,4 +1,4 @@
-from sqlalchemy import MetaData, Table, Column, Integer, String, TIMESTAMP, Text, ForeignKey, NVARCHAR
+from sqlalchemy import MetaData, Table, Column, Integer, String, TIMESTAMP, Text, ForeignKey, NVARCHAR, Boolean
 import datetime
 
 def metadata():
@@ -13,6 +13,7 @@ def metadata():
     Column('password', String(255)),
     Column('email', String(255), unique=True),
     Column('image_url', NVARCHAR),
+    Column('isVerified', Boolean, default=False)
         )
     post = Table(
     'post', md,
