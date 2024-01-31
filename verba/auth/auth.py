@@ -85,7 +85,6 @@ def register():
             lastname = request.form['lastname']
             email = request.form['email']
             
-
             if not username:
                 error = "Username required"
             elif not password:
@@ -120,6 +119,7 @@ def register():
                     session['firstname'] = firstname
                     connection.close()
                     return render_template('verify.html')
+        flash(error)
         if 'submitotp' in request.form:
             error = None
             otp = request.form['otp']
