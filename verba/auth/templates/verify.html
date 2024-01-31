@@ -24,8 +24,32 @@
         <hr style="width: 11vw; max-width: 15%;">
         <div id="edit-delete-wrapper">
             <button type="submit" name="submitotp">Submit </button>
-            <button type="submit" name="resend">Resend OTP</button>
+            <button type="submit" name="resend" id="resend">Resend OTP</button>
         </div>
+        <p style="font-family: 'Nunito'; text-align: center;">Wait <span id="timer">60</span> seconds before resending
+            OTP</p>
     </form>
+    <script>
+        window.onload = function () {
+            const button = document.getElementById("resend");
+            button.disabled = true;
+            button.style.backgroundColor = "darkgrey"
+
+            const timer = document.getElementById("timer");
+            let timeLeft = 60;
+
+            setInterval(function () {
+                timeLeft--;
+                timer.textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    button.disabled = false;
+                    button.style.backgroundColor = "transparent"
+                    timer.textContent = '60';
+                }
+            }, 1000);
+        }
+    </script>
     {% endblock %}
 </body>
