@@ -52,10 +52,10 @@
         }
 
         window.onload = function () {
-            if (!localStorage.getItem('countdownRan')) {
+            if (!sessionStorage.getItem('countdownRan')) {
                 sixtySecondsCountdown()
             }
-            localStorage.setItem('countdownRan', 'true');
+            sessionStorage.setItem('countdownRan', 'true');
         }
 
     </script>
