@@ -74,7 +74,7 @@ def register():
     if g.user is not None:
         return redirect('/')
     if request.method == 'POST':
-        totp = pyotp.TOTP(base64.b32encode(secrets.token_bytes(5)).decode('utf-8'), interval=60)
+        totp = pyotp.TOTP(base64.b32encode(secrets.token_bytes(5)).decode('utf-8'), interval=120)
         if 'register' in request.form:
             error = None
             connection = get_db()
