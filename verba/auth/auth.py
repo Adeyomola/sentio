@@ -74,7 +74,7 @@ def register():
     if g.user is not None:
         return redirect('/')
     if request.method == 'POST':
-        totp = pyotp.TOTP(base64.b32encode(secrets.token_bytes(5)).decode('utf-8'), interval=120)
+        totp = pyotp.TOTP(base64.b32encode(secrets.token_bytes(5)).decode('utf-8'), interval=30)
         if 'register' in request.form:
             error = None
             connection = get_db()
@@ -137,7 +137,7 @@ def register():
             else:
                 error="Invalid Code"
                 flash(error)
-                return
+                return render_template('verify.html')
         if 'resend' in request.form:
             if session.get('unverified_email') is None:
                 abort(401, f'Unauthorized')
