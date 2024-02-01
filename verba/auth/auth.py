@@ -119,15 +119,12 @@ def register():
                     session['firstname'] = firstname
                     connection.close()
                     return render_template('verify.html')
-        if 'submitotp' in request.form:
+        if 'submitotp' in request.form and session.get('unverified_email') is not None:
             otp = request.form['otp']
-
-            if session.get('unverified_email') is None:
-                abort(401, f'Unauthorized')
+            connection = get_db()
+            table = md.tables['users']
 
             if totp.verify(otp):
-                connection = get_db()
-                table = md.tables['users']
                 statement = statement = (update(table).where(table.c.email == session.get('unverified_email')).values(isVerified=True))
                 connection.execute(statement)
                 connection.commit()
