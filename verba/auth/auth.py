@@ -137,12 +137,12 @@ def register():
             elif not totp.verify(otp):
                 error="Invalid Code"
                 flash(error)
-            return render_template('verify.html')
+                return render_template('verify.html')
         if 'resend' in request.form:
             if session.get('unverified_email') is None:
                 abort(401, f'Unauthorized')
             else:
                 send_email(session.get('unverified_email'), totp.now(), session.get('firstname'))
-            return render_template('verify.html')
+                return render_template('verify.html')
         flash(error)
     return render_template('register.html')
