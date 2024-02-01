@@ -131,7 +131,7 @@ def register():
                 connection.close()
                 session.clear()
                 return redirect('/login')
-            elif not totp.verify(otp):
+            else:
                 error="Invalid Code"
                 flash(error)
                 return render_template('verify.html')
