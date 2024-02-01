@@ -17,7 +17,7 @@ load_dotenv('./')
 bp = Blueprint('auth', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
 md = metadata()
 secret = os.environ.get('TOTP_SECRET')
-totp = pyotp.TOTP(secret, interval=45)
+totp = pyotp.TOTP(secret)
 
 @bp.before_app_request
 def current_user():
