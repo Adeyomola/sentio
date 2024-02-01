@@ -137,7 +137,7 @@ def register():
             else:
                 error="Invalid Code"
                 flash(error)
-                pass
+                return
         if 'resend' in request.form:
             if session.get('unverified_email') is None:
                 abort(401, f'Unauthorized')
