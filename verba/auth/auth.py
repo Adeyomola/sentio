@@ -15,7 +15,7 @@ import base64
 
 bp = Blueprint('auth', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
 md = metadata()
-totp = pyotp.TOTP(base64.b32encode(secrets.token_bytes(5)).decode('utf-8'), interval=30)
+totp = pyotp.TOTP(base64.b32encode(secrets.token_bytes(5)).decode('utf-8'), interval=120)
 
 @bp.before_app_request
 def current_user():
@@ -137,12 +137,12 @@ def register():
             else:
                 error="Invalid Code"
                 flash(error)
-                return render_template('verify.html')
+            return render_template('verify.html')
         if 'resend' in request.form:
             if session.get('unverified_email') is None:
                 abort(401, f'Unauthorized')
             else:
                 send_email(session.get('unverified_email'), totp.now(), session.get('firstname'))
-                return render_template('verify.html')
+            return render_template('verify.html')
         flash(error)
     return render_template('register.html')
