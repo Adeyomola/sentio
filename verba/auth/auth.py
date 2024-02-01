@@ -114,7 +114,7 @@ def register():
                     elif re.search('username', error):
                         error = 'username has already been taken'
                 else:
-                    send_email(email, totp.generate_otp(), firstname)
+                    send_email(email, totp.now(), firstname)
                     session['unverified_email'] = email
                     session['firstname'] = firstname
                     connection.close()
