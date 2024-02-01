@@ -30,7 +30,7 @@
             OTP</p>
     </form>
     <script>
-        function thirtySecondsCountdown() {
+        window.onload = function () {
             const button = document.getElementById("resend");
             button.disabled = true;
             button.style.backgroundColor = "darkgrey"
@@ -50,9 +50,6 @@
                 }
             }, 1000);
         }
-
-        window.onload = thirtySecondsCountdown
-
     </script>
     {% endblock %}
 </body>
