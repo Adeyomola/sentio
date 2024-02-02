@@ -29,6 +29,4 @@ if (email && confirm_email) {
   }
   email.onchange = validateEmail;
   confirm_email.onkeyup = validateEmail;
-} else {
-  return;
 }
