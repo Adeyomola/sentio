@@ -15,14 +15,16 @@ from dotenv import load_dotenv
 load_dotenv('./')
 
 bp = Blueprint('auth', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
+
 md = metadata()
+table = md.tables['users']
+
 secret = os.environ.get('TOTP_SECRET')
 totp = pyotp.TOTP(secret, interval=60)
 
 @bp.before_app_request
 def current_user():
     user_id = session.get('user_id')
-    table = md.tables['users']
     connection = get_db()
 
     if user_id is None:
@@ -48,7 +50,6 @@ def login():
     if request.method == 'POST':
         error = None
         connection = get_db()
-        table = md.tables['users']
 
         email = request.form['email']
         password = request.form['password']
@@ -80,7 +81,6 @@ def register():
         if 'register' in request.form:
             error = None
             connection = get_db()
-            table = md.tables['users']
 
             username = request.form['username']
             password = request.form['password']
@@ -124,7 +124,6 @@ def register():
         if 'submitotp' in request.form and session.get('unverified_email') is not None:
             otp = request.form['otp']
             connection = get_db()
-            table = md.tables['users']
 
             if totp.verify(otp):
                 statement = statement = (update(table).where(table.c.email == session.get('unverified_email')).values(isVerified=True))

@@ -1,5 +1,5 @@
 import pytest
-from verba.db import get_db, init_db, close_db
+from verba.db import get_db
 from verba.metadata import metadata
 from sqlalchemy import select, exc
 

@@ -2,7 +2,6 @@ from verba.db import get_db
 from verba.metadata import metadata
 from flask import request, session, render_template, flash, redirect, Blueprint, g, url_for, send_file
 from sqlalchemy.sql import update, delete
-from sqlalchemy.engine import ResultProxy
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash
 from verba.auth.auth import login_required
