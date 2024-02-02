@@ -22,21 +22,21 @@
         <label for="otp" style="text-align: center;">Enter the OTP Sent to Your Email Address:</label>
         <input type="text" name="otp" id="otp" autocomplete="off" style="text-align: center;">
         <hr style="width: 11vw; max-width: 15%;">
-        <div id="edit-delete-wrapper">
-            <button type="submit" name="submitotp">Submit </button>
-            <button type="submit" name="resend" id="resend">Resend OTP</button>
-        </div>
-        <p style="font-family: 'Nunito'; text-align: center;">Wait <span id="timer">30</span> seconds before resending
-            OTP</p>
+        <button type="submit" name="submitotp">Submit </button>
     </form>
+    <button type="submit" name="resend" id="resend" onclick="resendOTP()"
+        style="align-self: center; margin-top: -2.5rem;">Resend OTP</button>
+    <p style="font-family: 'Nunito'; text-align: center;">Wait <span id="timer">60</span> seconds before resending
+        OTP</p>
+
     <script>
-        window.onload = function () {
+        function thirtySecondTimer() {
             const button = document.getElementById("resend");
             button.disabled = true;
             button.style.backgroundColor = "darkgrey"
 
             const timer = document.getElementById("timer");
-            let timeLeft = 30;
+            let timeLeft = 60;
 
             setInterval(function () {
                 timeLeft--;
@@ -46,9 +46,22 @@
                     clearInterval(timer);
                     button.disabled = false;
                     button.style.backgroundColor = "transparent"
-                    timer.textContent = '30';
+                    timer.textContent = '60';
                 }
             }, 1000);
+        }
+
+        function resendOTP() {
+            fetch('/resend_otp', { method: 'POST' }).catch(error => { console.error('Resend OTP failed') })
+            thirtySecondTimer()
+            sessionStorage.clear()
+        }
+
+        window.onload = function () {
+            if (!sessionStorage.getItem('firstLoad')) {
+                thirtySecondTimer()
+                sessionStorage.setItem('firstLoad', 'true');
+            }
         }
     </script>
     {% endblock %}

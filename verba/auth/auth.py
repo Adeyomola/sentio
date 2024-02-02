@@ -17,7 +17,7 @@ load_dotenv('./')
 bp = Blueprint('auth', __name__, template_folder='templates', static_folder='static', static_url_path='/auth/static')
 md = metadata()
 secret = os.environ.get('TOTP_SECRET')
-totp = pyotp.TOTP(secret)
+totp = pyotp.TOTP(secret, interval=60)
 
 @bp.before_app_request
 def current_user():
@@ -48,10 +48,10 @@ def login():
     if request.method == 'POST':
         error = None
         connection = get_db()
+        table = md.tables['users']
 
         email = request.form['email']
         password = request.form['password']
-        table = md.tables['users']
         statement = (
             select(table).where(table.c.email == email)
         )
@@ -137,11 +137,13 @@ def register():
                 error="Invalid Code"
                 flash(error)
                 return render_template('verify.html')
-        if 'resend' in request.form:
-            if session.get('unverified_email') is None:
-                abort(401, f'Unauthorized')
-            else:
-                send_email(session.get('unverified_email'), totp.now(), session.get('firstname'))
-                return render_template('verify.html')
         flash(error)
     return render_template('register.html')
+
+@bp.route('/resend_otp', methods=['POST'])
+def resend_otp():
+    if session.get('unverified_email') is None:
+        abort(401, f'Unauthorized')
+    else:
+        send_email(session.get('unverified_email'), totp.now(), session.get('firstname'))
+    return render_template('verify.html')

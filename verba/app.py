@@ -32,6 +32,8 @@ def create_app(test_config=None):
     from verba.auth import profile
     app.register_blueprint(profile.bp)
 
+    from verba.auth import forgotpassword
+    app.register_blueprint(forgotpassword.bp)
 
     @app.route('/', methods=['GET', 'POST'])
     def home():
