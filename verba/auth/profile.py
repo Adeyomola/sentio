@@ -91,9 +91,11 @@ def profile():
 		if 'deleteaccount' in request.form:
 			error = None
 			connection = get_db()
+			image_url = g.get('user')[6]
 
 			if error is None:
 				try:
+					Upload.delete_file(image_url=image_url)
 					statement = (delete(table).where(table.c.id == g.get('user')[0]))
 					connection.execute(statement)
 					connection.commit()
