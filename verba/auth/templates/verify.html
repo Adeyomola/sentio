@@ -30,13 +30,13 @@
         OTP</p>
 
     <script>
+        let timeLeft = 60;
         function thirtySecondTimer() {
             const button = document.getElementById("resend");
             button.disabled = true;
             button.style.backgroundColor = "darkgrey"
 
             const timer = document.getElementById("timer");
-            let timeLeft = 60;
 
             setInterval(function () {
                 timeLeft--;

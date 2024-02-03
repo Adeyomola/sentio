@@ -95,7 +95,8 @@ def profile():
 
 			if error is None:
 				try:
-					Upload.delete_file(image_url=image_url)
+					if image_url is not None:
+						Upload.delete_file(image_url=image_url)
 					statement = (delete(table).where(table.c.id == g.get('user')[0]))
 					connection.execute(statement)
 					connection.commit()
