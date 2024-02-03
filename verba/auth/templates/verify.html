@@ -24,8 +24,7 @@
         <hr style="width: 11vw; max-width: 15%;">
         <button type="submit" name="submitotp">Submit </button>
     </form>
-    <button type="submit" name="resend" id="resend" onclick="resendOTP()"
-        style="align-self: center; margin-top: -2.5rem;">Resend OTP</button>
+    <button type="submit" name="resend" id="resend" style="align-self: center; margin-top: -2.5rem;">Resend OTP</button>
     <p style="font-family: 'Nunito'; text-align: center;">Wait <span id="timer">60</span> seconds before resending
         OTP</p>
 
@@ -52,18 +51,22 @@
             }, 1000);
         }
 
-        function resendOTP() {
-            fetch('/resend_otp', { method: 'POST' }).catch(error => { console.error('Resend OTP failed') })
-            thirtySecondTimer()
-            sessionStorage.clear()
-        }
-
         window.onload = function () {
             if (!sessionStorage.getItem('firstLoad')) {
                 thirtySecondTimer()
                 sessionStorage.setItem('firstLoad', 'true');
             }
         }
+
+        const resend = document.getElementById('resend');
+
+        resend.addEventListener('click', () => {
+            fetch('/resend_otp', { method: 'POST' }).catch(error => { console.error('Resend OTP failed') })
+            thirtySecondTimer()
+            sessionStorage.clear()
+
+        },
+            { once: true })
     </script>
     {% endblock %}
 </body>
