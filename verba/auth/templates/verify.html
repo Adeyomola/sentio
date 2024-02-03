@@ -26,7 +26,7 @@
     </form>
     <button type="submit" name="resend" id="resend" onclick="resendOTP()"
         style="align-self: center; margin-top: -2.5rem;">Resend OTP</button>
-    <p style="font-family: 'Nunito'; text-align: center;">Wait <span id="timer"></span> seconds before resending
+    <p style="font-family: 'Nunito'; text-align: center;">Wait <span id="timer">60</span> seconds before resending
         OTP</p>
 
     <script>
@@ -36,6 +36,7 @@
             button.style.backgroundColor = "darkgrey"
 
             const timer = document.getElementById("timer");
+            timer.textContent = '60';
             let timeLeft = 60;
 
             setInterval(function () {
@@ -46,7 +47,6 @@
                     clearInterval(timer);
                     button.disabled = false;
                     button.style.backgroundColor = "transparent"
-                    timer.textContent = '60';
                 }
             }, 1000);
         }
