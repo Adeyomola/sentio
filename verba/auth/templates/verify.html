@@ -36,18 +36,18 @@
             button.style.backgroundColor = "darkgrey"
 
             const timer = document.getElementById("timer");
-            timer.textContent = '60';
             let timeLeft = 60;
 
             setInterval(function () {
-                timeLeft--;
-                timer.textContent = timeLeft;
 
                 if (timeLeft <= 0) {
                     clearInterval(timer);
                     button.disabled = false;
                     button.style.backgroundColor = "transparent"
-                    return undefined
+                    timer.textContent = '60';
+                } else {
+                    timeLeft--;
+                    timer.textContent = timeLeft;
                 }
             }, 1000);
         }
