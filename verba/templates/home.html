@@ -18,7 +18,11 @@
     {% extends 'loggedin.html' %}
     {% block content %}
     <div id="welcome">
-        Hi! {{ g.get('user')[1] }} <br>
+        {% if g.get('user')[1] and g.get('user')[7] %}
+        Hi! {{ g.get('user')[1] }} <span title="This user is verified"> &#10004; </span> <br>
+        {% elif g.get('user')[1] %}
+        Hi! {{ g.get('user')[1] }}<br>
+        {% endif %}
         <hr>
     </div>
     <div id="link-container">

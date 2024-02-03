@@ -135,7 +135,7 @@ def register():
             else:
                 error="Invalid Code"
                 flash(error)
-                return render_template('verify.html')
+            return render_template('verify.html')
         flash(error)
     return render_template('register.html')
 
