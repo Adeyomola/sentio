@@ -18,6 +18,6 @@ WORKDIR /verba/verba
 RUN ["/bin/bash", "-c", "pip install -r requirements.txt && sudo chmod +x /usr/local/bin/conf_editor.sh"]
 
 WORKDIR /verba
-ENTRYPOINT ["/bin/bash", "-c", "sudo conf_editor.sh && sudo flask db-init \
-    && sudo mod_wsgi-express start-server wsgi.py --user $USERNAME --group $USERNAME --port 80 --processes 2 --envvars .env \
+ENTRYPOINT ["/bin/bash", "-c", "conf_editor.sh && flask db-init \
+    && mod_wsgi-express start-server wsgi.py --user $USERNAME --group $USERNAME --port 80 --processes 2 --envvars .env \
     && tail -f /dev/null"]
