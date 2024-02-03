@@ -13,7 +13,7 @@ RUN ["/bin/bash", "-c", "adduser $USERNAME && apt update -y && apt install apach
     && echo 'adeyomola ALL=(ALL) NOPASSWD: /bin/chmod, /usr/local/bin/conf_editor.sh, /usr/local/bin/flask, /usr/local/bin/mod_wsgi-express' > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME"]
 
-USER $USERNAME
+# USER $USERNAME
 WORKDIR /verba/verba
 RUN ["/bin/bash", "-c", "pip install -r requirements.txt && sudo chmod +x /usr/local/bin/conf_editor.sh"]
 
