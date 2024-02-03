@@ -10,7 +10,7 @@ COPY ./wsgi.py /verba
 ARG USERNAME=adeyomola
 
 RUN ["/bin/bash", "-c", "adduser $USERNAME && apt update -y && apt install apache2 apache2-dev sudo -y \
-    && echo 'adeyomola ALL=(ALL) NOPASSWD: /bin/chmod /usr/local/bin/conf_editor.sh' > /etc/sudoers.d/$USERNAME && chmod 0440 /etc/sudoers.d/$USERNAME"]
+    && echo 'adeyomola ALL=(ALL) NOPASSWD: /bin/chmod, /usr/local/bin/conf_editor.sh' > /etc/sudoers.d/$USERNAME && chmod 0440 /etc/sudoers.d/$USERNAME"]
 
 USER $USERNAME
 WORKDIR /verba/verba
