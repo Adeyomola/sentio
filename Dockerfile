@@ -7,6 +7,8 @@ COPY verba /verba/verba
 COPY ./scripts/conf_editor.sh /usr/local/bin
 COPY ./wsgi.py /verba
 
+ARG USERNAME=adeyomola
+
 RUN ["/bin/bash", "-c", "adduser adeyomola && apt update -y && apt install apache2 apache2-dev sudo -y"]
 RUN echo "$USERNAME ALL=(ALL) NOPASSWD: /bin/chmod, /usr/local/bin/conf_editor.sh, /usr/local/bin/flask, /usr/local/bin/mod_wsgi-express" > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
