@@ -60,8 +60,9 @@
             }
         }
 
-        resend.addEventListener('click', (e) => {
+        resend.addEventListener('onmouseup', (e) => {
             e.preventDefault()
+
             fetch('/resend_otp', { method: 'POST' }).catch(error => { console.error('Resend OTP failed') })
 
             resend.disabled = true;
