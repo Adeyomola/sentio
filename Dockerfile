@@ -3,7 +3,7 @@ EXPOSE 80
 
 ARG USERNAME=adeyomola
 
-RUN adduser $USERNAME && apt update -y \
+RUN adduser $adeyomola && apt update -y \
     && apt install apache2 apache2-dev --prefix=/home/$USERNAME/.local/bin -y
 RUN mkdir -p /verba/verba
 
