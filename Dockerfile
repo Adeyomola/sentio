@@ -11,14 +11,15 @@ ARG USERNAME=adeyomola
 
 RUN ["/bin/bash", "-c", "adduser adeyomola && apt update -y && apt install apache2 apache2-dev sudo -y"]
 RUN echo "$USERNAME ALL=(ALL) NOPASSWD: /usr/local/bin/conf_editor.sh" > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME && chmod +x /usr/local/bin/conf_editor.sh
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
+    && chmod +x /usr/local/bin/conf_editor.sh \
+    && export PATH=/home/$USERNAME/.local/bin:$PATH
 
 USER $USERNAME
 WORKDIR /verba/verba
-RUN pip install -r requirements.txt -t /usr/local/bin
+RUN pip install -r requirements.txt
 
 WORKDIR /verba
-ENTRYPOINT export PATH=/home/$USERNAME:$PATH \
-    && sudo conf_editor.sh && flask db-init \
+ENTRYPOINT  sudo conf_editor.sh && flask db-init \
     && mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env \
     && tail -f /dev/null
