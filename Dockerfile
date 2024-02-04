@@ -17,6 +17,6 @@ RUN echo "$USERNAME ALL=(ALL) NOPASSWD: /usr/local/bin/conf_editor.sh, /usr/loca
 WORKDIR /verba/verba
 RUN pip install -r requirements.txt
 
-USER $USERNAME
+# USER $USERNAME
 WORKDIR /verba
 ENTRYPOINT ["/bin/bash", "-c", "sudo conf_editor.sh && sudo flask db-init && sudo mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env && tail -f /dev/null"]
