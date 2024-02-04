@@ -13,9 +13,12 @@ COPY ./wsgi.py /verba
 
 RUN chmod +x /usr/local/bin/conf_editor.sh 
 
-USER $USERNAME
+
 WORKDIR /verba/verba
-RUN python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+RUN python -m venv .venv && source .venv/bin/activate 
+
+USER $USERNAME
+RUN pip install -r requirements.txt
 
 WORKDIR /verba
 ENTRYPOINT ["/bin/bash", "-c", "export PATH=$PATH:/home/adeyomola/.local/bin \
