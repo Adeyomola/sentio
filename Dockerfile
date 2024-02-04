@@ -4,22 +4,17 @@ EXPOSE 80
 ARG USERNAME=adeyomola
 
 RUN adduser $USERNAME && apt update -y && apt install apache2 apache2-dev sudo -y \
-    && echo "$USERNAME ALL=(ALL) NOPASSWD: /usr/sbin/apache2, /usr/local/bin/conf_editor.sh " > /etc/sudoers.d/$USERNAME \
+    && echo "$USERNAME ALL=(ALL) NOPASSWD: ALL " > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME && mkdir -p /verba/verba
 
 COPY verba /verba/verba
 COPY ./scripts/conf_editor.sh /usr/local/bin
 COPY ./wsgi.py /verba
 
-RUN chmod +x /usr/local/bin/conf_editor.sh 
-
-
 WORKDIR /verba/verba
-RUN python -m venv .venv && source .venv/bin/activate 
+RUN chmod +x /usr/local/bin/conf_editor.sh && pip install -r requirements.txt
 
 USER $USERNAME
-RUN pip install -r requirements.txt
-
 WORKDIR /verba
 ENTRYPOINT ["/bin/bash", "-c", "export PATH=$PATH:/home/adeyomola/.local/bin \
     && sudo conf_editor.sh \
