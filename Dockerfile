@@ -10,7 +10,7 @@ COPY ./wsgi.py /verba
 ARG USERNAME=adeyomola
 
 RUN ["/bin/bash", "-c", "adduser adeyomola && apt update -y && apt install apache2 apache2-dev sudo -y"]
-RUN echo "$USERNAME ALL=(ALL) NOPASSWD: /usr/local/bin/conf_editor.sh" > /etc/sudoers.d/$USERNAME \
+RUN echo "$USERNAME ALL=(ALL) NOPASSWD: /usr/local/bin/conf_editor.sh, /home/$USERNAME/.local/bin/mod_wsgi-express" > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME && chmod +x /usr/local/bin/conf_editor.sh
 
 USER $USERNAME
