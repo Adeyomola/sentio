@@ -15,8 +15,9 @@ RUN echo "$USERNAME ALL=(ALL) NOPASSWD: /usr/local/bin/conf_editor.sh" > /etc/su
 
 USER $USERNAME
 WORKDIR /verba
-ENTRYPOINT ["/bin/bash", "-c", "pip install -r verba/requirements.txt \
-    && export PATH=$PATH:/home/adeyomola/.local/bin && sudo conf_editor.sh \
+RUN pip install -r verba/requirements.txt
+ENTRYPOINT ["/bin/bash", "-c", "export PATH=$PATH:/home/adeyomola/.local/bin \
+    && sudo conf_editor.sh \
     && flask db-init \
     && mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env \
     && tail -f /dev/null"]
