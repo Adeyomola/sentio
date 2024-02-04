@@ -13,10 +13,12 @@ RUN ["/bin/bash", "-c", "adduser adeyomola && apt update -y && apt install apach
 RUN echo "$USERNAME ALL=(ALL) NOPASSWD: /usr/local/bin/conf_editor.sh" > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME && chmod +x /usr/local/bin/conf_editor.sh
 
-# USER $USERNAME
+USER $USERNAME
 WORKDIR /verba/verba
-RUN pip install -r requirements.txt \
-    && export PATH=/home/$USERNAME/.local/bin:$PATH
+RUN pip install -r requirements.txt
 
 WORKDIR /verba
-ENTRYPOINT ["/bin/bash", "-c", "sudo conf_editor.sh && flask db-init && mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env && tail -f /dev/null"]
+ENTRYPOINT export PATH=/home/$USERNAME/.local/bin:$PATH \
+    && sudo conf_editor.sh && flask db-init \
+    && mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env \
+    && tail -f /dev/null
