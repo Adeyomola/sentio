@@ -11,7 +11,7 @@ ARG USERNAME=adeyomola
 
 RUN ["/bin/bash", "-c", "adduser adeyomola && apt update -y && apt install apache2 apache2-dev sudo -y"]
 RUN echo "$USERNAME ALL=(ALL) NOPASSWD: /bin/chmod, /usr/local/bin/conf_editor.sh, /usr/local/bin/flask, /usr/local/bin/mod_wsgi-express start-server" > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME && pgrep --help && kill -HUP $(pgrep sudo)
+    && chmod 0440 /etc/sudoers.d/$USERNAME
 
 USER $USERNAME
 WORKDIR /verba/verba
