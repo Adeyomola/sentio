@@ -15,7 +15,7 @@ RUN echo "$USERNAME ALL=(ALL) NOPASSWD: /usr/local/bin/conf_editor.sh" > /etc/su
 
 USER $USERNAME
 WORKDIR /verba/verba
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt && which flask && which mod_wsgi-express
 
 WORKDIR /verba
 ENTRYPOINT export PATH=/home/$USERNAME/.local/bin:$PATH \
