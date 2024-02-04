@@ -18,6 +18,6 @@ USER $USERNAME
 WORKDIR /verba
 ENTRYPOINT ["/bin/bash", "-c", "export PATH=$PATH:/home/adeyomola/.local/bin \
     && sudo conf_editor.sh \
-    && flask db-init \
+    && sudo flask db-init \
     && sudo mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env \
     && tail -f /dev/null"]
