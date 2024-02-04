@@ -15,10 +15,10 @@ RUN echo "$USERNAME ALL=(ALL) NOPASSWD: /usr/local/bin/conf_editor.sh" > /etc/su
 
 USER $USERNAME
 WORKDIR /verba/verba
-RUN pip install -r requirements.txt && which flask && which mod_wsgi-express
+RUN pip install -r requirements.txt -t /usr/local/bin
 
 WORKDIR /verba
-ENTRYPOINT export PATH=/home/$USERNAME/.local/bin:$PATH \
+ENTRYPOINT export PATH=/home/$USERNAME:$PATH \
     && sudo conf_editor.sh && flask db-init \
     && mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env \
     && tail -f /dev/null
