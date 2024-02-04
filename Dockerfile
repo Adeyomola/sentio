@@ -16,8 +16,7 @@ RUN chmod +x /usr/local/bin/conf_editor.sh && pip install -r requirements.txt
 
 USER $USERNAME
 WORKDIR /verba
-ENTRYPOINT ["/bin/bash", "-c", "export PATH=$PATH:/home/adeyomola/.local/bin \
-    && sudo conf_editor.sh \
+ENTRYPOINT sudo conf_editor.sh \
     && sudo flask db-init \
     && sudo mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env \
-    && tail -f /dev/null"]
+    && tail -f /dev/null
