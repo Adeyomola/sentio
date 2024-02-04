@@ -19,6 +19,4 @@ RUN pip install -r requirements.txt
 
 USER $USERNAME
 WORKDIR /verba
-ENTRYPOINT sudo conf_editor.sh && sudo flask db-init \
-    && sudo mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env \
-    && tail -f /dev/null
+ENTRYPOINT ["/bin/bash", "-c", "sudo conf_editor.sh && sudo flask db-init && sudo mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env && tail -f /dev/null"]
