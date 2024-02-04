@@ -15,7 +15,8 @@ RUN echo "$USERNAME ALL=(ALL) NOPASSWD: /bin/chmod, /usr/local/bin/conf_editor.s
 
 USER $USERNAME
 WORKDIR /verba/verba
-RUN ["/bin/bash", "-c", "pip install -r requirements.txt && sudo chmod +x /usr/local/bin/conf_editor.sh"]
+RUN pip install -r requirements.txt && sudo chmod +x /usr/local/bin/conf_editor.sh\
+    && export PATH="/home/$USERNAME/.local/bin:$PATH"
 
 WORKDIR /verba
 ENTRYPOINT ["/bin/bash", "-c", "sudo conf_editor.sh && flask db-init && mod_wsgi-express start-server wsgi.py --user adeyomola --group adeyomola --port 80 --processes 2 --envvars .env && tail -f /dev/null"]
