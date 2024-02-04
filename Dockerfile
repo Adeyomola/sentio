@@ -1,13 +1,11 @@
 FROM python:3.10-bullseye
 EXPOSE 80
 
-RUN mkdir -p /verba/verba
+RUN mkdir -p /verba/verba && adduser adeyomola && apt update -y && apt install apache2 apache2-dev -y
 
 COPY verba /verba/verba
 COPY ./scripts/conf_editor.sh /usr/local/bin
 COPY ./wsgi.py /verba
-
-RUN adduser adeyomola && apt update -y && apt install apache2 apache2-dev -y
 
 WORKDIR /verba/verba
 RUN pip install -r requirements.txt && chmod +x /usr/local/bin/conf_editor.sh
