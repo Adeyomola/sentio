@@ -30,7 +30,9 @@ To run Verba locally, follow these steps:
 
 ## Endpoints
 ### User Management
-- Feature not published yet.
+- `POST /register`: Create a new user.
+- `GET /profile`: Get current user profile.
+- `POST /profile`: Update current user profile.
 
 ### Content Management
 - `GET /post`: Get a list of all contents.
@@ -42,7 +44,6 @@ To run Verba locally, follow these steps:
 ### Authentication
 - `POST /login`: Authenticate a user and obtain a session token.
 - `POST /logout`: Log out the current user and invalidate the session token.
-- `POST /register`: Register a user.
 
 ## Customization
 Verba can be customized in the following ways:
