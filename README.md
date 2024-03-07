@@ -1,4 +1,4 @@
-# Verba Documentation
+# Verba
 
 ## Introduction
 Verba is a web application designed to facilitate the creation, management, and publishing of content. This documentation provides guidance on how to use and extend the platform, including installation instructions, API endpoints, and customization options.
