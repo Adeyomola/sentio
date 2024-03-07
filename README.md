@@ -1,4 +1,4 @@
-# Verba
+# Verba Documentation
 
 ## Introduction
 Verba is a web application designed to facilitate the creation, management, and publishing of content. This documentation provides guidance on how to use and extend the platform, including installation instructions, API endpoints, and customization options.
@@ -7,7 +7,7 @@ Verba is a web application designed to facilitate the creation, management, and 
 To run Verba locally, follow these steps:
 
 1. Clone the repository from GitHub: [verba](https://github.com/adeyomola/verba).
-2. Install verba using `pip install .`.
+2. Install it using `pip install .`.
 3. Set the following environment variables accordingly:
     - `DB_PASSWORD` - Local Database Password
     - `DB_USER` - Local Database User
