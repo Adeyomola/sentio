@@ -41,7 +41,7 @@ To run Verba locally, follow these steps:
 - `POST /logout`: Log out the current user and invalidate the access token.
 
 ## Customization
-The Flask Content Publishing Platform can be customized in the following ways:
+Verba can be customized in the following ways:
 - Customizing templates and stylesheets to match branding requirements.
 - Extending functionality by adding custom routes and views.
 - Integrating with third-party services such as email providers or analytics platforms.
@@ -54,11 +54,5 @@ To deploy the Flask Content Publishing Platform to a production environment, fol
 4. Set up SSL/TLS certificates for secure communication.
 5. Monitor server logs and performance metrics for optimal operation.
 
-## Contributing
-Contributions to the Flask Content Publishing Platform are welcome! Please follow the guidelines outlined in the [CONTRIBUTING.md](link_to_contributing_file) file in the repository.
-
 ## Support
-For questions, bug reports, or feature requests, please open an issue on the [GitHub repository](https://github.com/example/repository).
-
-## License
-The Flask Content Publishing Platform is open-source software licensed under the [MIT License](https://opensource.org/licenses/MIT).
+For questions, bug reports, or feature requests, please open an issue on the [GitHub repository](https://github.com/adeyomola/verba).
