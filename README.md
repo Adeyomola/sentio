@@ -16,29 +16,27 @@ To run Verba locally, follow these steps:
 ## Features
 - User authentication and authorization.
 - Content creation, editing, and deletion.
+- Image uploads and downloads.
+- Account Management
 - Categorization and tagging of content.
 - Role-based access control for users.
 - RESTful API for programmatic access to platform functionality.
-- Customizable templates and themes.
 
 ## Endpoints
 ### User Management
-- `GET /users`: Get a list of all users.
-- `GET /users/<user_id>`: Get details of a specific user.
-- `POST /users`: Create a new user.
-- `PUT /users/<user_id>`: Update user information.
-- `DELETE /users/<user_id>`: Delete a user.
+- Feature not published yet.
 
 ### Content Management
-- `GET /content`: Get a list of all content items.
-- `GET /content/<content_id>`: Get details of a specific content item.
-- `POST /content`: Create a new content item.
-- `PUT /content/<content_id>`: Update content information.
-- `DELETE /content/<content_id>`: Delete a content item.
+- `GET /post`: Get a list of all contents.
+- `GET /post/<post_id>`: Get details of a specific content item.
+- `POST /write`: Create a new content item.
+- `PUT /post/update/<post_id>`: Update content information.
+- `DELETE /post/delete/<post_id>`: Delete a content item.
 
 ### Authentication
-- `POST /login`: Authenticate a user and obtain an access token.
-- `POST /logout`: Log out the current user and invalidate the access token.
+- `POST /login`: Authenticate a user and obtain a session token.
+- `POST /logout`: Log out the current user and invalidate the session token.
+- `POST /register`: Register a user.
 
 ## Customization
 Verba can be customized in the following ways:
@@ -47,10 +45,10 @@ Verba can be customized in the following ways:
 - Integrating with third-party services such as email providers or analytics platforms.
 
 ## Deployment
-To deploy the Flask Content Publishing Platform to a production environment, follow these steps:
+To deploy Verba to a production environment, follow these steps:
 1. Set up a web server with Python and a WSGI server such as Gunicorn.
 2. Configure the server to serve the Flask application.
-3. Set environment variables for database connection, secret key, etc.
+3. Set environment variables for database connection and secret key.
 4. Set up SSL/TLS certificates for secure communication.
 5. Monitor server logs and performance metrics for optimal operation.
 
