@@ -7,7 +7,7 @@ Verba is a web application designed to facilitate the creation, management, and 
 To run Verba locally, follow these steps:
 
 1. Clone the repository from GitHub: [verba](https://github.com/adeyomola/verba).
-2. Install the required dependencies using `pip install -r verba/requirements.txt`.
+2. Install verba using `pip install .`.
 3. Set the following environment variables accordingly:
     - `DB_PASSWORD` - Local Database Password
     - `DB_USER` - Local Database User
@@ -17,7 +17,7 @@ To run Verba locally, follow these steps:
     - `TOTP_SECRET` - Secret for TOTP Code Generation
 4. Initialize the database by running `flask db-init`.
 5. Start Verba with `flask run`.
-6. Access the platform in your web browser at `http://localhost:5000`.
+6. Access the platform in your web browser at `http://127.0.0.1:5000`.
 
 ## Features
 - User authentication and authorization.
